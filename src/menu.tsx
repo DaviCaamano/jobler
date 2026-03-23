@@ -1,21 +1,31 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
+import { useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import { SearchEngineType } from './types/search-engine-type';
+import { getSiteNameFromUrl } from './shared/utils/getSearchEngine';
 
 function App() {
-  return (
-    <main style={{ padding: 12, minWidth: 260 }}>
-      <h1>Jobler</h1>
-      <button onClick={() => console.log("Popup clicked")}>
-        Click me
-      </button>
-    </main>
-  );
+    const [siteName, setSiteName] = useState<SearchEngineType>(SearchEngineType.none);
+
+    useEffect(() => {
+        chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+            const activeTab = tabs[0];
+            const detectedSite = getSiteNameFromUrl(activeTab?.url);
+            setSiteName(detectedSite);
+        });
+    }, []);
+
+    return (
+        <main>
+            <h1>Jobler</h1>
+            {siteName && <p>{siteName}</p>}
+        </main>
+    );
 }
 
-const container = document.getElementById("root");
+const rootElement = document.getElementById('root');
 
-if (!container) {
-  throw new Error("Root element not found");
+if (!rootElement) {
+    throw new Error('Root element not found');
 }
 
-createRoot(container).render(<App />);
+createRoot(rootElement).render(<App />);
