@@ -17,7 +17,7 @@
             "@interfaces/*": ["src/interfaces/*"],
             "@utils/*": ["src/utils/*"],
             "@/*": ["src/*"],
-            "#icons/*": ["assets/icons/*"],
+            "#icons/*": ["assets/icons/*"]
         }
     },
     "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.content.ts", "vite.config.main.ts"]
