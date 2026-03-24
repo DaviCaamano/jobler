@@ -8,14 +8,14 @@ export default defineManifest({
     description:
         'Job Crawler that reads your LinkedIn, Ziprecruiter, and Indeed search results, runs them through your filters, and turns what remains into an excel sheet.',
     icons: {
-        '16': 'assets/icons/logo/logo 16.png',
-        '32': 'assets/icons/logo/logo 32.png',
-        '48': 'assets/icons/logo/logo 48.png',
-        '128': 'assets/icons/logo/logo 128.png',
+        '16': 'assets/icons/logos/logo 16.png',
+        '32': 'assets/icons/logos/logo 32.png',
+        '48': 'assets/icons/logos/logo 48.png',
+        '128': 'assets/icons/logos/logo 128.png',
     },
     action: {
         default_title: 'Open Menu',
-        default_icon: 'assets/icons/logo/logo 16.png',
+        default_icon: 'assets/icons/logos/logo 16.png',
     },
     background: {
         service_worker: 'src/backgrounds/background.ts',
@@ -29,6 +29,12 @@ export default defineManifest({
                 'https://www.ziprecruiter.com/*',
             ],
             js: ['src/contents/content.tsx'],
+        },
+    ],
+    web_accessible_resources: [
+        {
+            resources: ['assets/*', 'assets/**/*'],
+            matches: ['<all_urls>'],
         },
     ],
 });

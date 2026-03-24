@@ -7,6 +7,8 @@ import { TabType } from '@interfaces/tab-messages';
 import { SearchEngine } from '@interfaces/search-engine';
 import { getSearchEngine } from '@utils/getSearchEngine';
 import { JobSummary } from '@interfaces/job-list';
+import titleLogo from '#logos/title.png';
+import { getAssetUrl } from '@utils/getAssetUrl';
 
 const exampleJobList: JobSummary[] = [
     {
@@ -94,7 +96,12 @@ export const Menu = () => {
     return (
         <div id="__jobler__menu_menu">
             <div className="__jobler__menu_title">
-                Jobler <SearchEngineIcon searchEngine={engine} />
+                <img
+                    src={getAssetUrl(titleLogo)}
+                    alt="jobler title"
+                    className="__jobler__menu_logo"
+                />
+                <SearchEngineIcon searchEngine={engine} />
             </div>
             <JobList jobList={exampleJobList} />
             <Play />

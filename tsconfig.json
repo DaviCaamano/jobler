@@ -18,6 +18,8 @@
             "@styles/*": ["src/styles/*"],
             "@utils/*": ["src/utils/*"],
             "#icons/*": ["assets/icons/*"],
+            "#/*": ["assets/icons/*"],
+            "#logos/*": ["assets/logos/*"],
             "@/*": ["src/*"]
         }
     },

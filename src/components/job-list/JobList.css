@@ -3,9 +3,15 @@
     min-height: 21rem;
     overflow-y: auto;
     overflow-x: hidden;
+    scrollbar-width: thin; /* Firefox */
     border-width: 1px 0 1px 0;
     border-style: solid;
     background-color: #85b4cd;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
 }
 
 #__jobler__job_list_job-table {
@@ -28,8 +34,7 @@
     font-size: 1.25rem;
     font-weight: 400;
 
-
-    &:last-child{
+    &:last-child {
         border-width: 1px 0;
         margin-bottom: 0;
     }
@@ -46,15 +51,15 @@
     .__jobler__job__list_title {
         flex: 1;
         margin-right: auto;
-        background: #4b5bb1;
+        background: #2d43a1;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         padding-left: 0.75rem;
         color: white;
     }
-    .__jobler__job__list_job-link{
-        background: #4b5bb1;
+    .__jobler__job__list_job-link {
+        background: #2d43a1;
     }
 
     .__jobler__job__list_job-link-box {
