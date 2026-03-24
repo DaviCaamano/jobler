@@ -9,9 +9,16 @@
         "jsx": "react-jsx",
         "baseUrl": ".",
         "paths": {
-            "@*": ["src/*"],
-            "#*": ["assets/*"]
+            "@components/*": ["src/components/*"],
+            "@backgrounds/*": ["src/backgrounds/*"],
+            "@constants/*": ["src/constants/*"],
+            "@contents/*": ["src/contents/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@interfaces/*": ["src/interfaces/*"],
+            "@utils/*": ["src/utils/*"],
+            "@/*": ["src/*"],
+            "#icons/*": ["assets/icons/*"],
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "vite.config.*.ts"]
+    "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.content.ts", "vite.config.main.ts"]
 }

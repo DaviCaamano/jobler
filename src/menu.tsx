@@ -1,4 +1,4 @@
-import styles from '@menu.module.css';
+import styles from '@/menu.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { JobList } from '@components/job-list/JobList';
 import { Play } from '@components/play/Play';

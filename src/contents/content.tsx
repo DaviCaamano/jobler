@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from '@menu.module.css';
+import styles from '@/menu.module.css';
 import { createRoot } from 'react-dom/client';
-import { Menu } from '@menu';
+import { Menu } from '@/menu';
 
 const container = document.createElement('div');
 container.id = 'jobler-menu-root-container';
