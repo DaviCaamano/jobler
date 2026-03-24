@@ -1,23 +1,40 @@
-import { SearchEngineType } from '../types/search-engine-type';
+import { SearchEnginePath, SearchEngine } from '@interfaces/search-engine-type';
 
-
-function getDomain(url: string): string {
+function getDomainPath(url: string): { domain: string; pathname: string } {
     try {
-        const hostname = new URL(url).hostname;
-
-        return hostname
+        const urlObj = new URL(url);
+        const domain = urlObj.hostname
             .replace(/^www\./, '') // remove "www."
-            .split('.')[0]; // take only the domain part
+            .split('.')[0]
+            .toLowerCase();
+        return { domain, pathname: urlObj.pathname?.toLowerCase() };
     } catch {
-        return '';
+        return { domain: '', pathname: '' };
     }
 }
 
-export const getSiteNameFromUrl = (url?: string): SearchEngineType => {
-    if (!url) return SearchEngineType.none;
-    const domain = getDomain(url);
-    if (!url.startsWith(SearchEngineType.linkedIn)) return SearchEngineType.linkedIn;
-    if (!url.startsWith(SearchEngineType.ziprecruiter)) return SearchEngineType.ziprecruiter;
-    if (!url.startsWith(SearchEngineType.indeed)) return SearchEngineType.indeed;
-    return SearchEngineType.none;
+export const getSearchEngine = (): SearchEngine => {
+    const url = window.location.href;
+    if (!url) return SearchEngine.none;
+
+    const { domain, pathname } = getDomainPath(url);
+    if (
+        domain === SearchEnginePath.indeed.domain &&
+        pathname === SearchEnginePath.indeed.pathname
+    ) {
+        return SearchEngine.indeed;
+    }
+    if (
+        domain === SearchEnginePath.linkedin.domain &&
+        pathname === SearchEnginePath.linkedin.pathname
+    ) {
+        return SearchEngine.linkedin;
+    }
+    if (
+        domain === SearchEnginePath.ziprecruiter.domain &&
+        pathname === SearchEnginePath.ziprecruiter.pathname
+    ) {
+        return SearchEngine.ziprecruiter;
+    }
+    return SearchEngine.none;
 };

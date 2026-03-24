@@ -12,7 +12,6 @@ export default defineConfig({
             input: {
                 menu: resolve(__dirname, 'menu.html'),
                 background: resolve(__dirname, 'src/backgrounds/background.ts'),
-                content: resolve(__dirname, 'src/contents/content.ts'),
             },
             output: {
                 entryFileNames: '[name].js',

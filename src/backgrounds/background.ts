@@ -1,5 +1,14 @@
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === 'GET_DATA') {
-        sendResponse({ text: 'Hello from background' });
+import { TabType } from '@interfaces/tab-messages';
+
+chrome.action.onClicked.addListener(async (tab) => {
+    if (!tab.id) return;
+
+    try {
+        await chrome.tabs.sendMessage(tab.id, {
+            type: TabType.iconClicked,
+        });
+    } catch {
+        console.error('Jobler: No content script in this tab.');
     }
 });
+

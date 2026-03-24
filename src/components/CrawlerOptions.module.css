@@ -1,0 +1,124 @@
+.optionsContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.optionsTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.playButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 12rem;
+    width: 12rem;
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: 50%;
+    font-weight: 700;
+    margin: 0 auto;
+    border: none;
+    transition: background-color 0.5s ease;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        filter: brightness(0.95);
+    }
+
+    &:active {
+        transform: translateY(1px);
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    &.paused {
+        background-color: #a5d8a5;
+
+        &:hover {
+            background-color: #e1b0be;
+        }
+    }
+
+    &:not(.paused) {
+        background-color: #b2df65;
+
+        &:hover {
+            background-color: #94c83a;
+        }
+    }
+
+    .playIcon {
+        width: 75%;
+        height: 75%;
+    }
+}
+
+.icon {
+    padding: 0.25rem;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+
+    &.indeedLogoContainer {
+        width: 5rem;
+        height: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        border-color: #000000;
+        padding-right: 5px;
+
+        .indeed {
+            color: #000000;
+            position: relative;
+            left: -1px;
+            top: -2px;
+        }
+    }
+
+    &.linkedinLogoContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        border-color: #0a66c2;
+        color: #0a66c2;
+        padding: 5px;
+        height: 5rem;
+        width: 5rem;
+
+        .linkedin {
+            color: #0a66c2;
+            border: 0;
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+    }
+
+
+    &.ziprecruiterLogoContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        border-color: #adda1e;
+        color: #0a66c2;
+        padding: 5px;
+        height: 5rem;
+        width: 5rem;
+
+        .ziprecruiter {
+            background: #f0f0f3;
+            border: 0;
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+    }
+}

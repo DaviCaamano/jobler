@@ -1,22 +1,38 @@
-import { createRoot } from 'react-dom/client';
-import { useSearchEngine } from './hooks/useSearchEngine';
-import { SearchEngineType } from './types/search-engine-type';
+import styles from '@/menu.module.css';
+import { CrawlerOptions } from '@components/CrawlerOptions';
+import { useEffect, useRef, useState } from 'react';
+import { TabType } from '@interfaces/tab-messages';
+import { SearchEngineIcon } from '@components/SearchEngineIcon';
+import { SearchEngine } from '@interfaces/search-engine-type';
+import { getSearchEngine } from '@utils/getSearchEngine';
 
-function App() {
-    const searchEngine = useSearchEngine();
+export const Menu = () => {
+    const [opened, setOpened] = useState(false);
+    const engine = useRef<SearchEngine>(getSearchEngine()).current;
 
+    useEffect(() => {
+        const listener = (message: any) => {
+            if (message.type === TabType.iconClicked) {
+                setOpened((prev) => !prev);
+            }
+        };
+
+        chrome.runtime.onMessage.addListener(listener);
+
+        return () => {
+            chrome.runtime.onMessage.removeListener(listener);
+        };
+    }, []);
+
+    if (!opened || engine === SearchEngine.none) {
+        return null;
+    }
     return (
-        <main>
-            <h1>Jobler</h1>
-            {searchEngine !== SearchEngineType.none && <p>{searchEngine}</p>}
-        </main>
+        <div id="jobler-menu" className={styles.menu}>
+            <div className={styles.title}>
+                Jobler <SearchEngineIcon searchEngine={engine} />
+            </div>
+            <CrawlerOptions />
+        </div>
     );
-}
-
-const rootElement = document.getElementById('root');
-
-if (!rootElement) {
-    throw new Error('Root element not found');
-}
-
-createRoot(rootElement).render(<App />);
+};

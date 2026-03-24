@@ -5,7 +5,12 @@
     "license": "MIT",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build:main": "vite build --config vite.config.main.ts",
+        "build:content": "vite build --config vite.config.content.ts",
+        "build": "yarn build:main && yarn build:content",
+        "watch:main": "vite build --watch --config vite.config.main.ts",
+        "watch:content": "vite build --watch --config vite.config.content.ts",
+        "watch": "concurrently \"yarn watch:main\" \"yarn watch:content\"",
         "format": "prettier --write .",
         "format:check": "prettier --check ."
     },
@@ -15,11 +20,16 @@
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^6.0.1",
+        "concurrently": "^9.2.1",
         "prettier": "^3.8.1",
         "typescript": "^6.0.2",
         "vite": "^8.0.2"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^7.2.0",
+        "@fortawesome/free-brands-svg-icons": "^7.2.0",
+        "@fortawesome/free-solid-svg-icons": "^7.2.0",
+        "@fortawesome/react-fontawesome": "^3.3.0",
         "react": "^19.2.4",
         "react-dom": "^19.2.4"
     }
