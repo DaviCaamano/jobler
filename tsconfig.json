@@ -7,10 +7,11 @@
         "lib": ["ES2022", "DOM"],
         "types": ["chrome", "vite/client"],
         "jsx": "react-jsx",
+        "baseUrl": ".",
         "paths": {
             "@*": ["src/*"],
             "#*": ["assets/*"]
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]
+    "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "vite.config.*.ts"]
 }
