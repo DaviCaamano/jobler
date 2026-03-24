@@ -1,5 +1,5 @@
 import styles from '@components/job-list/JobList.module.css';
 
 export const JobList = () => {
-    return <div className={styles.jobListContainer}>bosssssobs</div>;
+    return <div className={styles.jobListContainer}>boobs</div>;
 };

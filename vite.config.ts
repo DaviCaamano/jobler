@@ -19,4 +19,9 @@ export default defineConfig({
             '#icons': resolve(__dirname, 'assets/icons'),
         },
     },
+    server: {
+        cors: {
+            origin: /^chrome-extension:\/\/.*/,
+        },
+    },
 });
