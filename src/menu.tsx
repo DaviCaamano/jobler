@@ -1,5 +1,6 @@
 import styles from '@menu.module.css';
 import { useEffect, useRef, useState } from 'react';
+import { JobList } from '@components/job-list/JobList';
 import { Play } from '@components/play/Play';
 import { SearchEngineIcon } from '@components/SearchEngineIcon';
 import { TabType } from '@interfaces/tab-messages';
@@ -33,6 +34,7 @@ export const Menu = () => {
                 Jobler <SearchEngineIcon searchEngine={engine} />
             </div>
             <Play />
+            <JobList />
         </div>
     );
 };

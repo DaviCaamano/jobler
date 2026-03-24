@@ -5,16 +5,12 @@
     "license": "MIT",
     "scripts": {
         "dev": "vite",
-        "build:main": "vite build --config vite.config.main.ts",
-        "build:content": "vite build --config vite.config.content.ts",
-        "build": "yarn build:main && yarn build:content",
-        "watch:main": "vite build --watch --config vite.config.main.ts",
-        "watch:content": "vite build --watch --config vite.config.content.ts",
-        "watch": "concurrently \"yarn watch:main\" \"yarn watch:content\"",
+        "build": "vite build",
         "format": "prettier --write .",
         "format:check": "prettier --check ."
     },
     "devDependencies": {
+        "@crxjs/vite-plugin": "^2.4.0",
         "@types/chrome": "^0.1.38",
         "@types/node": "^25.5.0",
         "@types/react": "^19.2.14",
