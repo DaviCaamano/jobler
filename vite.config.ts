@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { crx } from '@crxjs/vite-plugin';
+import manifest from './manifest.config';
 
 export default defineConfig({
-    plugins: [react()],
+    plugins: [react(), crx({ manifest })],
     resolve: {
         alias: {
             '@components': resolve(__dirname, 'src/components'),
@@ -16,18 +18,5 @@ export default defineConfig({
             '@': resolve(__dirname, 'src'),
             '#icons': resolve(__dirname, 'assets/icons'),
         },
-    },
-    build: {
-        outDir: 'dist',
-        emptyOutDir: false,
-        rollupOptions: {
-            input: resolve(__dirname, 'src/contents/content.tsx'),
-            output: {
-                entryFileNames: 'content.js',
-                format: 'iife',
-                inlineDynamicImports: true,
-            },
-        },
-        minify: false,
     },
 });
