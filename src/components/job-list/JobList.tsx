@@ -1,5 +1,38 @@
-import styles from '@components/job-list/JobList.module.css';
+import '@components/job-list/JobList.css';
+import { JobSummary } from '@interfaces/job-list';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const JobList = () => {
-    return <div className={styles.jobListContainer}></div>;
+interface JobListProps {
+    jobList: JobSummary[];
+}
+export const JobList = ({ jobList }: JobListProps) => {
+    return (
+        <div id={'__jobler__job_list_container'}>
+            <div id={'__jobler__job_list_job-table'}>
+                {jobList.map(({ companyName, title, url }: JobSummary, index: number) => (
+                    <JobListItem
+                        companyName={companyName}
+                        title={title}
+                        url={url}
+                        key={`${companyName}-${title}-${index}`}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export const JobListItem = ({ companyName, title, url }: JobSummary) => {
+    return (
+        <div className="__jobler__job__list_job">
+            <div className="__jobler__job__list_company-name">{companyName}</div>
+            <div className="__jobler__job__list_title">{title}</div>
+            <a href={url} target="_blank" className="__jobler__job__list_job-link">
+                <div className="__jobler__job__list_job-link-box">
+                    <FontAwesomeIcon className="__jobler__job__list_job-link-icon" icon={faLink} />
+                </div>
+            </a>
+        </div>
+    );
 };

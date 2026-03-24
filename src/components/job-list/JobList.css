@@ -1,0 +1,76 @@
+#__jobler__job_list_container {
+    width: 100%;
+    min-height: 21rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    background-color: #85b4cd;
+}
+
+#__jobler__job_list_job-table {
+    width: 100%;
+    min-height: 21rem;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.__jobler__job__list_job {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+
+
+    &:last-child{
+        border-width: 1px 0;
+        margin-bottom: 0;
+    }
+
+    .__jobler__job__list_company-name {
+        width: 35%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-left: 0.75rem;
+        background: #d9eef8;
+    }
+
+    .__jobler__job__list_title {
+        flex: 1;
+        margin-right: auto;
+        background: #4b5bb1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-left: 0.75rem;
+        color: white;
+    }
+    .__jobler__job__list_job-link{
+        background: #4b5bb1;
+    }
+
+    .__jobler__job__list_job-link-box {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 0.25rem;
+        background: #b7d6e3;
+        border-radius: 50%;
+
+        .__jobler__job__list_job-link-icon {
+            font-size: 2.25rem;
+            line-height: 2.25rem;
+            font-weight: bolder;
+        }
+    }
+}

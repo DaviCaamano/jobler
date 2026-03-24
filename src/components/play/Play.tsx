@@ -1,4 +1,4 @@
-import styles from '@components/play/Play.module.css';
+import '@components/play/Play.css';
 import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
@@ -8,7 +8,7 @@ export const Play = () => {
     const togglePause = () => setPaused(!paused);
 
     return (
-        <div className={styles.optionsContainer}>
+        <div className="__jobler__play_options-container">
             <PlayButton paused={paused} callback={togglePause} />
         </div>
     );
@@ -21,10 +21,10 @@ interface PlayButtonProps {
 const PlayButton = ({ callback, paused }: PlayButtonProps) => {
     return (
         <button
-            className={`${styles.playButton} ${paused ? styles.paused : ''}`}
+            className={`__jobler__play_play-button ${paused ? 'paused' : ''}`}
             onClick={callback}
         >
-            <FontAwesomeIcon icon={paused ? faPause : faPlay} className={styles.playIcon} />
+            <FontAwesomeIcon icon={paused ? faPause : faPlay} className="__jobler__play_icon" />
         </button>
     );
 };

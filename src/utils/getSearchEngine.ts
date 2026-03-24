@@ -1,4 +1,4 @@
-import { SearchEnginePath, SearchEngine } from '@interfaces/search-engine-type';
+import { SearchEnginePath, SearchEngine } from '@interfaces/search-engine';
 
 function getDomainPath(url: string): { domain: string; pathname: string } {
     try {

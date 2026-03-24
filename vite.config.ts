@@ -8,15 +8,16 @@ export default defineConfig({
     plugins: [react(), crx({ manifest })],
     resolve: {
         alias: {
-            '@components': resolve(__dirname, 'src/components'),
             '@backgrounds': resolve(__dirname, 'src/backgrounds'),
+            '@components': resolve(__dirname, 'src/components'),
             '@constants': resolve(__dirname, 'src/constants'),
             '@contents': resolve(__dirname, 'src/contents'),
             '@hooks': resolve(__dirname, 'src/hooks'),
             '@interfaces': resolve(__dirname, 'src/interfaces'),
+            '@styles': resolve(__dirname, 'src/styles'),
             '@utils': resolve(__dirname, 'src/utils'),
-            '@': resolve(__dirname, 'src'),
             '#icons': resolve(__dirname, 'assets/icons'),
+            '@': resolve(__dirname, 'src'),
         },
     },
     server: {
