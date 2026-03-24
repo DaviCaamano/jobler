@@ -1,8 +1,8 @@
-import styles from '@/menu.module.css';
-import { CrawlerOptions } from '@components/CrawlerOptions';
+import styles from '@menu.module.css';
 import { useEffect, useRef, useState } from 'react';
-import { TabType } from '@interfaces/tab-messages';
+import { Play } from '@components/play/Play';
 import { SearchEngineIcon } from '@components/SearchEngineIcon';
+import { TabType } from '@interfaces/tab-messages';
 import { SearchEngine } from '@interfaces/search-engine-type';
 import { getSearchEngine } from '@utils/getSearchEngine';
 
@@ -32,7 +32,7 @@ export const Menu = () => {
             <div className={styles.title}>
                 Jobler <SearchEngineIcon searchEngine={engine} />
             </div>
-            <CrawlerOptions />
+            <Play />
         </div>
     );
 };

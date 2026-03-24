@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@menu.module.css'
+import styles from '@menu.module.css';
 import { createRoot } from 'react-dom/client';
 import { Menu } from '@menu';
 
@@ -10,4 +10,3 @@ document.body.appendChild(container);
 
 const root = createRoot(container);
 root.render(<Menu />);
-

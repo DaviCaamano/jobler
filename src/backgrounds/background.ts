@@ -11,4 +11,3 @@ chrome.action.onClicked.addListener(async (tab) => {
         console.error('Jobler: No content script in this tab.');
     }
 });
-

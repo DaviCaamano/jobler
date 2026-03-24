@@ -1,5 +1,4 @@
-import styles from '@components/CrawlerOptions.module.css';
-
+import styles from '@components/play/Play.module.css';
 import { SearchEngine } from '@interfaces/search-engine-type';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';

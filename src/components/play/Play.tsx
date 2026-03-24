@@ -1,13 +1,9 @@
-import styles from './CrawlerOptions.module.css';
-import { SearchEngine } from '@interfaces/search-engine-type';
+import styles from '@components/play/Play.module.css';
 import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 
-interface CrawlerOptionsProps {
-    engine: SearchEngine
-}
-export const CrawlerOptions = () => {
+export const Play = () => {
     const [paused, setPaused] = useState<boolean>(false);
     const togglePause = () => setPaused(!paused);
 
@@ -24,12 +20,11 @@ interface PlayButtonProps {
 }
 const PlayButton = ({ callback, paused }: PlayButtonProps) => {
     return (
-        <button className={`${styles.playButton} ${paused ? styles.paused: ''}`} onClick={callback}>
-            {paused ? (
-                <FontAwesomeIcon icon={faPause} className={styles.playIcon} />
-            ) : (
-                <FontAwesomeIcon icon={faPlay} className={styles.playIcon} />
-            )}
+        <button
+            className={`${styles.playButton} ${paused ? styles.paused : ''}`}
+            onClick={callback}
+        >
+            <FontAwesomeIcon icon={paused ? faPause : faPlay} className={styles.playIcon} />
         </button>
     );
 };

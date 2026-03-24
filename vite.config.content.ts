@@ -15,5 +15,6 @@ export default defineConfig({
                 inlineDynamicImports: true,
             },
         },
+        minify: false,
     },
 });
