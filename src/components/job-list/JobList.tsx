@@ -8,8 +8,8 @@ interface JobListProps {
 }
 export const JobList = ({ jobList }: JobListProps) => {
     return (
-        <div id={'__jobler__job_list_container'}>
-            <div id={'__jobler__job_list_job-table'}>
+        <div id={'__jobler__job-list_container'}>
+            <div id={'__jobler__job-list_job-table'}>
                 {jobList.map(({ companyName, title, url }: JobSummary, index: number) => (
                     <JobListItem
                         companyName={companyName}
@@ -25,12 +25,12 @@ export const JobList = ({ jobList }: JobListProps) => {
 
 export const JobListItem = ({ companyName, title, url }: JobSummary) => {
     return (
-        <div className="__jobler__job__list_job">
-            <div className="__jobler__job__list_company-name">{companyName}</div>
-            <div className="__jobler__job__list_title">{title}</div>
-            <a href={url} target="_blank" className="__jobler__job__list_job-link">
-                <div className="__jobler__job__list_job-link-box">
-                    <FontAwesomeIcon className="__jobler__job__list_job-link-icon" icon={faLink} />
+        <div className="__jobler__job-list_job">
+            <div className="__jobler__job-list_company-name">{companyName}</div>
+            <div className="__jobler__job-list_title">{title}</div>
+            <a href={url} target="_blank" className="__jobler__job-list_job-link">
+                <div className="__jobler__job-list_job-link-box">
+                    <FontAwesomeIcon className="__jobler__job-list_job-link-icon" icon={faLink} />
                 </div>
             </a>
         </div>

@@ -1,0 +1,36 @@
+.__jobler__filters_item {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+
+    &:last-child {
+        border-width: 1px 0;
+        margin-bottom: 0;
+    }
+
+    .__jobler__filters_name {
+        width: 80%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-left: 0.75rem;
+        background: #d9eef8;
+    }
+
+    .__jobler__filters_delete-button-container {
+        width: 80%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-left: 0.75rem;
+        background: #d9eef8;
+    }
+
+
+}

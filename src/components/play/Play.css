@@ -26,10 +26,10 @@
     margin: 0 auto;
     border: none;
     transition: background-color 0.5s ease;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
 
     &:hover {
-        filter: brightness(0.95);
+        filter: brightness(1.02);
     }
 
     &:active {
@@ -38,24 +38,19 @@
     }
 
     &.paused {
-        background-color: #a5d8a5;
+        background-color: var(--primary);
 
         &:hover {
-            background-color: #e1b0be;
+            background-color: var(--primary-play-button-hovered);
         }
     }
 
     &:not(.paused) {
-        background-color: #b2df65;
+        background-color: var(--primary);
 
         &:hover {
-            background-color: #94c83a;
+            background-color: var(--primary);
         }
-    }
-
-    .playIcon {
-        width: 75%;
-        height: 75%;
     }
 }
 
@@ -71,7 +66,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #ffffff;
         border-color: #000000;
         padding-right: 5px;
 

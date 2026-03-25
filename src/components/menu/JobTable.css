@@ -1,0 +1,24 @@
+#__jobler__job-list_container {
+    width: 100%;
+    height: 21rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin; /* Firefox */
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    background-color: #000000;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+#__jobler__job-list_job-table {
+    width: 100%;
+    height: 21rem;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
