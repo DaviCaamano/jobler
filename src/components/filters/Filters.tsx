@@ -53,7 +53,7 @@ export const Filters = () => {
     );
 
     return (
-        <div className="filters_-container">
+        <div className="filters_container">
             <JobTable style={jobTableStyle}>
                 {filterList.map((item: string, index: number) => (
                     <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />

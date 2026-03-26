@@ -1,5 +1,6 @@
-import '@components/menu/menu.css';
 import '@styles/themes/primary.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import '@components/menu/menu.css';
 import { useRef, useState } from 'react';
 import { JobList } from '@components/job-list/JobList';
 import { Play } from '@components/play/Play';
