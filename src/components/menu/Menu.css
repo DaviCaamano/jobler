@@ -24,3 +24,10 @@
     top: -10px;
     left: -10px;
 }
+
+.__jobler__menu_toggle-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3.75rem;
+}

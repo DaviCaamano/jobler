@@ -58,22 +58,15 @@ export const Menu = () => {
                 />
                 <SearchEngineIcon searchEngine={engine} />
             </div>
-            <JobTable>
-                {jobList === JobTableList.jobList ? (
-                    <JobList jobList={exampleJobList} />
-                ) : (
-                    <Filters />
-                )}
-            </JobTable>
-
-            <JobListOptions />
-            {/*<FilterToggle list={jobList} setList={setJobList} />*/}
-            <Toggle
-                setValue={setJobList}
-                values={{ on: JobTableList.filters, off: JobTableList.jobList }}
-                defaultValue={JobTableList.jobList}
-                labels={{ on: 'Filters', off: 'Job List' }}
-            />
+            {jobList === JobTableList.jobList ? <JobList jobList={exampleJobList} /> : <Filters />}
+            <div className="__jobler__menu_toggle-container">
+                <Toggle
+                    setValue={setJobList}
+                    values={{ on: JobTableList.filters, off: JobTableList.jobList }}
+                    defaultValue={JobTableList.jobList}
+                    labels={{ on: 'Filters', off: 'Job List' }}
+                />
+            </div>
             <Play />
         </div>
     );

@@ -14,7 +14,6 @@
     width: 100%;
 }
 
-
 .__jobler_job-list-options_next-button-container,
 .__jobler_job-list-options_applied-button-container {
     width: 50%;
@@ -58,7 +57,7 @@
 .__jobler_job-list-options_next-button {
     background: var(--primary-light);
     border-left: 1px solid #000000;
-    border-radius: 0 0 35px 0 ;
+    border-radius: 0 0 35px 0;
 }
 
 .__jobler_job-list-options_next-button-shadow,

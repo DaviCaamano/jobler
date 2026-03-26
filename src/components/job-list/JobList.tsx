@@ -2,22 +2,29 @@ import '@components/job-list/JobList.css';
 import { JobSummary } from '@interfaces/job-list';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { JobListOptions } from '@components/job-list/JobListOptions';
+import { JobTable } from '@components/menu/JobTable';
 
 interface JobListProps {
     jobList: JobSummary[];
 }
 export const JobList = ({ jobList }: JobListProps) => {
     return (
-        <div id={'__jobler__job-list_job-table'}>
-            {jobList.map(({ companyName, title, url }: JobSummary, index: number) => (
-                <JobListItem
-                    companyName={companyName}
-                    title={title}
-                    url={url}
-                    key={`${companyName}-${title}-${index}`}
-                />
-            ))}
-        </div>
+        <>
+            <JobTable>
+                <div id={'__jobler__job-list_job-table'}>
+                    {jobList.map(({ companyName, title, url }: JobSummary, index: number) => (
+                        <JobListItem
+                            companyName={companyName}
+                            title={title}
+                            url={url}
+                            key={`${companyName}-${title}-${index}`}
+                        />
+                    ))}
+                </div>
+            </JobTable>
+            <JobListOptions />
+        </>
     );
 };
 

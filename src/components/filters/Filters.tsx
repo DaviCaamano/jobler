@@ -5,6 +5,7 @@ import { useSticky } from '@hooks/useSticky';
 import { Toggle } from '@components/shared/toggle/Toggle';
 import { FilterItem } from '@components/filters/FilterItem';
 import { FilterCategoryButton } from '@components/filters/FilterCategoryButton';
+import { JobTable } from '@components/menu/JobTable';
 
 type FilterType = Storage.blackList | Storage.whiteList;
 
@@ -35,20 +36,20 @@ export const Filters = () => {
 
     return (
         <>
+            <JobTable style={{ width: '39rem', paddingBottom: '3rem', position: 'relative' }}>
+                {filterList.map((item: string, index: number) => (
+                    <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
+                ))}
+                <FilterCategoryButton />
+            </JobTable>
             <div className="__jobler__filters_toggle-container">
                 <Toggle
                     setValue={setFilter}
                     values={{ on: Storage.blackList, off: Storage.whiteList }}
                     defaultValue={Storage.blackList}
                     labels={{ on: 'Black List', off: 'White List' }}
-                    heightRem={2.25}
-                    widthRem={7.25}
                 />
             </div>
-            <FilterCategoryButton />
-            {filterList.map((item: string, index: number) => (
-                <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
-            ))}
         </>
     );
 };
