@@ -31,7 +31,7 @@ const exampleDefaults = [
 type FilterType = Stores.blackList | Stores.whiteList;
 const jobTableStyle: CSSProperties = {
     position: 'relative',
-    padding: '4.5rem 0',
+    padding: '2.75rem 0',
     height: '37.5rem',
     borderTop: '1px solid #000000',
     overflow: 'auto',
