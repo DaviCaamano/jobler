@@ -67,8 +67,8 @@ export const Filters = () => {
                     values={{ on: Stores.whiteList, off: Stores.blackList }}
                     defaultValue={Stores.blackList}
                     labels={{ on: 'White List', off: 'Black List' }}
-                    widthRem={5.3333}
-                    heightRem={2}
+                    widthRem={6}
+                    heightRem={2.25}
                 />
             </div>
         </div>

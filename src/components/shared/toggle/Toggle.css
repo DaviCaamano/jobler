@@ -22,14 +22,15 @@
     width: 8rem;
     height: 3rem;
     border-radius: 999px;
+    border: 1px solid var(--primary-dark);
     background: var(--primary-light);
     transition: background 0.25s ease;
 }
 
 .__jobler__toggle_thumb {
     position: absolute;
-    top: 0.2rem;
-    left: 0.2rem;
+    top: 0.1rem;
+    left: 0.1rem;
     border-radius: 50%;
     background: var(--primary-shadow);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
