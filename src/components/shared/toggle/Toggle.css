@@ -1,10 +1,10 @@
-.__jobler__toggle_container {
+.toggle_container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.__jobler__toggle_toggle {
+.toggle_toggle {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +17,7 @@
     transition: transform 0.25s ease;
 }
 
-.__jobler__toggle_track {
+.toggle_track {
     position: relative;
     width: 8rem;
     height: 3rem;
@@ -27,7 +27,7 @@
     transition: background 0.25s ease;
 }
 
-.__jobler__toggle_thumb {
+.toggle_thumb {
     position: absolute;
     top: 0.1rem;
     left: 0.1rem;
@@ -37,7 +37,7 @@
     transition: transform 0.25s ease;
 }
 
-.__jobler__toggle_label {
+.toggle_label {
     display: inline-block;
     width: 10rem;
     font-size: 2rem;

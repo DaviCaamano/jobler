@@ -53,7 +53,7 @@ export const Filters = () => {
     );
 
     return (
-        <div className="__jobler__filters_-container">
+        <div className="filters_-container">
             <JobTable style={jobTableStyle}>
                 {filterList.map((item: string, index: number) => (
                     <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
@@ -61,7 +61,7 @@ export const Filters = () => {
                 <FilterCategoryButton category={filterCategory} setCategory={setFilterCategory} />
                 <AddFilterButton />
             </JobTable>
-            <div className="__jobler__filters_toggle-container">
+            <div className="filters_toggle-container">
                 <Toggle
                     setValue={setFilter}
                     values={{ on: Stores.whiteList, off: Stores.blackList }}

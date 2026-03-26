@@ -1,4 +1,4 @@
-.__jobler__job-list_job {
+.job-list_job {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -20,7 +20,7 @@
         margin-bottom: 0;
     }
 
-    .__jobler__job-list_company-name {
+    .job-list_company-name {
         width: 35%;
         overflow: hidden;
         white-space: nowrap;
@@ -29,7 +29,7 @@
         background: var(--primary);
     }
 
-    .__jobler__job-list_title {
+    .job-list_title {
         flex: 1;
         margin-right: auto;
         background: #ffffff;
@@ -39,11 +39,11 @@
         padding-left: 0.75rem;
     }
 
-    .__jobler__job-list_job-link {
+    .job-list_job-link {
         background: var(--primary-light);
     }
 
-    .__jobler__job-list_job-link-box {
+    .job-list_job-link-box {
         width: 3rem;
         height: 3rem;
         display: flex;
@@ -53,7 +53,7 @@
         background: var(--primary);
         border-radius: 50% 0 0 50%;
 
-        .__jobler__job-list_job-link-icon {
+        .job-list_job-link-icon {
             font-size: 2.25rem;
             line-height: 2.25rem;
             font-weight: bolder;

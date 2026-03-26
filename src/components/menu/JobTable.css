@@ -1,4 +1,4 @@
-#__jobler__job-list_container {
+#job-list_container {
     width: 100%;
     height: 36rem;
     overflow-y: auto;
@@ -22,7 +22,7 @@
     }
 }
 
-#__jobler__job-list_job-table {
+#job-list_job-table {
     width: 100%;
     min-height: 100%;
     box-sizing: border-box;

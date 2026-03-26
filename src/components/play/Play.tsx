@@ -8,7 +8,7 @@ export const Play = () => {
     const togglePause = () => setPaused(!paused);
 
     return (
-        <div className="__jobler__play_options-container">
+        <div className="play_options-container">
             <PlayButton paused={paused} callback={togglePause} />
         </div>
     );
@@ -20,11 +20,8 @@ interface PlayButtonProps {
 }
 const PlayButton = ({ callback, paused }: PlayButtonProps) => {
     return (
-        <button
-            className={`__jobler__play_play-button ${paused ? 'paused' : ''}`}
-            onClick={callback}
-        >
-            <FontAwesomeIcon icon={paused ? faPause : faPlay} className="__jobler__play_icon" />
+        <button className={`play_play-button ${paused ? 'paused' : ''}`} onClick={callback}>
+            <FontAwesomeIcon icon={paused ? faPause : faPlay} className="play_icon" />
         </button>
     );
 };

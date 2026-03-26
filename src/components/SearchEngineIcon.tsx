@@ -11,21 +11,21 @@ interface SearchEngineIconProps {
 export const SearchEngineIcon = ({ searchEngine }: SearchEngineIconProps) => {
     if (searchEngine === SearchEngine.indeed) {
         return (
-            <div className="__jobler__play_icon indeed-logo-container">
+            <div className="play_icon indeed-logo-container">
                 <img src={indeedLogo} alt="indeed" className="indeed" />
             </div>
         );
     }
     if (searchEngine === SearchEngine.linkedin) {
         return (
-            <div className="__jobler__play_icon linkedin-logo-container">
+            <div className="play_icon linkedin-logo-container">
                 <FontAwesomeIcon icon={faLinkedin} className="linkedin" />
             </div>
         );
     }
     if (searchEngine === SearchEngine.ziprecruiter) {
         return (
-            <div className="__jobler__play_icon ziprecruiter-logo-container">
+            <div className="play_icon ziprecruiter-logo-container">
                 <img src={ziprecruiterLogo} alt="ziprecruiter" className="ziprecruiter" />
             </div>
         );

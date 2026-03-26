@@ -12,7 +12,7 @@ export const JobList = ({ jobList }: JobListProps) => {
     return (
         <>
             <JobTable>
-                <div id={'__jobler__job-list_job-table'}>
+                <div id={'job-list_job-table'}>
                     {jobList.map(({ companyName, title, url }: JobSummary, index: number) => (
                         <JobListItem
                             companyName={companyName}
@@ -30,12 +30,12 @@ export const JobList = ({ jobList }: JobListProps) => {
 
 export const JobListItem = ({ companyName, title, url }: JobSummary) => {
     return (
-        <div className="__jobler__job-list_job">
-            <div className="__jobler__job-list_company-name">{companyName}</div>
-            <div className="__jobler__job-list_title">{title}</div>
-            <a href={url} target="_blank" className="__jobler__job-list_job-link">
-                <div className="__jobler__job-list_job-link-box">
-                    <FontAwesomeIcon className="__jobler__job-list_job-link-icon" icon={faLink} />
+        <div className="job-list_job">
+            <div className="job-list_company-name">{companyName}</div>
+            <div className="job-list_title">{title}</div>
+            <a href={url} target="_blank" className="job-list_job-link">
+                <div className="job-list_job-link-box">
+                    <FontAwesomeIcon className="job-list_job-link-icon" icon={faLink} />
                 </div>
             </a>
         </div>

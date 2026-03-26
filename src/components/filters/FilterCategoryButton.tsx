@@ -14,21 +14,21 @@ export const FilterCategoryButton = ({ category, setCategory }: FilterCategoryBu
         setCategory(selectedCategory);
     };
     return (
-        <div className="__jobler__filters-category-button_container" style={{ border: 'none' }}>
+        <div className="filters-category-button_container" style={{ border: 'none' }}>
             <button
-                className={`__jobler__filters-category-button_button text-filter ${textClass}`}
+                className={`filters-category-button_button text-filter ${textClass}`}
                 onClick={onClick(FilterCategories.text)}
             >
                 <span>Text</span>
             </button>
             <button
-                className={`__jobler__filters-category-button_button title-filter ${titleClass}`}
+                className={`filters-category-button_button title-filter ${titleClass}`}
                 onClick={onClick(FilterCategories.title)}
             >
                 Title
             </button>
             <button
-                className={`__jobler__filters-category-button_button company-filter ${companyClass}`}
+                className={`filters-category-button_button company-filter ${companyClass}`}
                 onClick={onClick(FilterCategories.company)}
             >
                 <span>Company</span>

@@ -47,19 +47,15 @@ export const Menu = () => {
     }
 
     return (
-        <div id="__jobler__menu_menu">
-            <div className="__jobler__menu_title">
-                <img
-                    src={getAssetUrl(titleLogo)}
-                    alt="jobler title"
-                    className="__jobler__menu_logo"
-                />
+        <div id="menu_menu">
+            <div className="menu_title">
+                <img src={getAssetUrl(titleLogo)} alt="jobler title" className="menu_logo" />
                 <SearchEngineIcon searchEngine={engine} />
             </div>
 
             {jobList === JobTableList.jobList ? <JobList jobList={exampleJobList} /> : <Filters />}
 
-            <div className="__jobler__menu_toggle-container">
+            <div className="menu_toggle-container">
                 <Toggle
                     setValue={setJobList}
                     values={{ on: JobTableList.filters, off: JobTableList.jobList }}

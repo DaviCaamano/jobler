@@ -1,9 +1,9 @@
-.__jobler__filters_-container {
+.filters_-container {
     display: flex;
     flex-direction: column-reverse;
 }
 
-.__jobler__filters_toggle-container {
+.filters_toggle-container {
     height: 3.5rem;
     display: flex;
     align-items: center;
@@ -11,7 +11,7 @@
     border-top: 1px solid #000000;
 }
 
-.__jobler__filters_item {
+.filters_item {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -27,7 +27,7 @@
         margin-bottom: 0;
     }
 
-    .__jobler__filters_name {
+    .filters_name {
         width: 80%;
         overflow: hidden;
         white-space: nowrap;
@@ -36,7 +36,7 @@
         background: #d9eef8;
     }
 
-    .__jobler__filters_delete-button-container {
+    .filters_delete-button-container {
         width: 80%;
         overflow: hidden;
         white-space: nowrap;
@@ -46,7 +46,7 @@
     }
 }
 
-.__jobler__filters-category-button_container {
+.filters-category-button_container {
     position: absolute;
     top: 0;
     width: 100%;
@@ -56,7 +56,7 @@
     justify-content: center;
 }
 
-.__jobler__filters-category-button_button {
+.filters-category-button_button {
     position: relative;
     top: -1px;
     width: 33%;
@@ -126,7 +126,7 @@
     }
 }
 
-.__jobler__add-filter-button_container {
+.add-filter-button_container {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -137,7 +137,7 @@
     background-color: var(--primary-shadow);
 }
 
-.__jobler__add-filter-button_button {
+.add-filter-button_button {
     width: 100%;
     height: 100%;
     display: flex;
@@ -150,6 +150,6 @@
     color: white;
 }
 
-.__jobler__add-filter-button_icon {
+.add-filter-button_icon {
     height: 2rem;
 }

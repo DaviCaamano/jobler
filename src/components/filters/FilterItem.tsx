@@ -7,12 +7,9 @@ interface FilterItemProps {
 }
 export const FilterItem = ({ item, onDelete }: FilterItemProps) => {
     return (
-        <div className="__jobler__filters_item">
-            <div className="__jobler__filters_name">{item}</div>
-            <div
-                className="__jobler__filters_delete-button-container"
-                onClick={() => onDelete(item)}
-            >
+        <div className="filters_item">
+            <div className="filters_name">{item}</div>
+            <div className="filters_delete-button-container" onClick={() => onDelete(item)}>
                 <FontAwesomeIcon icon={faTrash} />
             </div>
         </div>

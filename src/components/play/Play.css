@@ -1,4 +1,4 @@
-.__jobler__play_options-container {
+.play_options-container {
     position: absolute;
     top: -2.5rem;
     left: 50%;
@@ -12,7 +12,7 @@
     background: lightblue;
 }
 
-.__jobler__play_play-button {
+.play_play-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +54,7 @@
     }
 }
 
-.__jobler__play_icon {
+.play_icon {
     padding: 0.25rem;
     border-radius: 50%;
     width: 6rem;
