@@ -18,6 +18,8 @@ type FilterType = Stores.blackList | Stores.whiteList;
 const jobTableStyle: CSSProperties = {
     position: 'relative',
     padding: '3rem 0',
+    height: '37.5rem',
+    borderTop: '1px solid #000000',
 };
 export const Filters = () => {
     const [filter, setFilter] = useState<FilterType>(Stores.whiteList);
@@ -51,7 +53,7 @@ export const Filters = () => {
     );
 
     return (
-        <>
+        <div className="__jobler__filters_-container">
             <JobTable style={jobTableStyle}>
                 {filterList.map((item: string, index: number) => (
                     <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
@@ -65,8 +67,10 @@ export const Filters = () => {
                     values={{ on: Stores.whiteList, off: Stores.blackList }}
                     defaultValue={Stores.blackList}
                     labels={{ on: 'White List', off: 'Black List' }}
+                    widthRem={5.3333}
+                    heightRem={2}
                 />
             </div>
-        </>
+        </div>
     );
 };

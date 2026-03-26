@@ -13,7 +13,11 @@ export const JobListOptions = () => {
                             onClick={() => {}}
                         >
                             <span>
-                                Applied <FontAwesomeIcon icon={faClipboardCheck} />
+                                Applied
+                                <FontAwesomeIcon
+                                    className="__jobler_job-list-options_next-button-icon"
+                                    icon={faClipboardCheck}
+                                />
                             </span>
                         </button>
                     </div>
@@ -26,7 +30,10 @@ export const JobListOptions = () => {
                         >
                             <span>
                                 Skip
-                                <FontAwesomeIcon icon={faClipboard} />
+                                <FontAwesomeIcon
+                                    className="__jobler_job-list-options_next-button-icon"
+                                    icon={faClipboard}
+                                />
                             </span>
                         </button>
                     </div>

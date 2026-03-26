@@ -15,13 +15,11 @@ function getDomainPath(url: string): { domain: string; pathname: string } {
 
 export const getSearchEngine = (): { engine: SearchEngine; path: string } => {
     const url = window.location.href;
-    console.log('url', url);
     if (!url) {
         return { engine: SearchEngine.none, path: '' };
     }
 
     const { domain, pathname } = getDomainPath(url);
-    console.log(domain);
     if (domain === SearchEngine.indeed) {
         return { engine: SearchEngine.indeed, path: pathname };
     }

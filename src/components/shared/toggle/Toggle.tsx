@@ -51,18 +51,18 @@ export const Toggle = <T,>({
         width: width + 'rem',
         height: height + 'rem',
     };
-    const thumbDimensions = height - 0.4 + 'rem';
-    const translateX = width - height + 'rem';
+    const thumbDimensions = `${height - 0.4}rem`;
+    const translateX = `${width - height}rem`;
     const toggleStyle: CSSProperties = {
         transform: toggled ? `translateX(${translateX}rem)` : undefined,
     };
     if (fullWidth) {
         toggleStyle.width = '100%';
     }
-    const thumbStyle = {
+    const thumbStyle: CSSProperties = {
         height: thumbDimensions,
         width: thumbDimensions,
-        transform: `translateX(${translateX}rem)`,
+        transform: toggled ? `translateX(${translateX})` : 'translateX(0)',
     };
 
     return (

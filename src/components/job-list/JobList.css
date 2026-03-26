@@ -4,13 +4,19 @@
     width: 100%;
     border-width: 1px 0 0 0;
     border-style: solid;
+    border-color: gray;
     height: 3rem;
     line-height: 3rem;
     font-size: 1.25rem;
     font-weight: 400;
 
+    &:first-child {
+        border-width: 0;
+    }
+
     &:last-child {
-        border-width: 1px 0;
+        border-width: 1px 0 0 0;
+        border-color: gray;
         margin-bottom: 0;
     }
 

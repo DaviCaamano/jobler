@@ -10,12 +10,13 @@
 
 .__jobler__menu_title {
     width: 100%;
-    height: 7.5rem;
+    height: 7.55rem;
     font-size: 3rem;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
     padding: 1.5rem;
+    border-bottom: 1px solid #000000;
 }
 
 .__jobler__menu_logo {
