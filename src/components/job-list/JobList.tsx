@@ -8,17 +8,15 @@ interface JobListProps {
 }
 export const JobList = ({ jobList }: JobListProps) => {
     return (
-        <div id={'__jobler__job-list_container'}>
-            <div id={'__jobler__job-list_job-table'}>
-                {jobList.map(({ companyName, title, url }: JobSummary, index: number) => (
-                    <JobListItem
-                        companyName={companyName}
-                        title={title}
-                        url={url}
-                        key={`${companyName}-${title}-${index}`}
-                    />
-                ))}
-            </div>
+        <div id={'__jobler__job-list_job-table'}>
+            {jobList.map(({ companyName, title, url }: JobSummary, index: number) => (
+                <JobListItem
+                    companyName={companyName}
+                    title={title}
+                    url={url}
+                    key={`${companyName}-${title}-${index}`}
+                />
+            ))}
         </div>
     );
 };

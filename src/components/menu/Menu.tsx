@@ -11,9 +11,9 @@ import titleLogo from '#logos/title.png';
 import { getAssetUrl } from '@utils/getAssetUrl';
 import { JobListOptions } from '@components/job-list/JobListOptions';
 import { useToggleMenu } from '@components/menu/useToggleMenu';
-import { FilterToggle } from '@components/filters/FilterToggle';
 import { JobTable } from '@components/menu/JobTable';
 import { Filters } from '@components/filters/Filters';
+import { Toggle } from '@components/shared/toggle/Toggle';
 
 const exampleJobs = [
     {
@@ -62,12 +62,18 @@ export const Menu = () => {
                 {jobList === JobTableList.jobList ? (
                     <JobList jobList={exampleJobList} />
                 ) : (
-                    <Filters activeFilter={null} />
+                    <Filters />
                 )}
             </JobTable>
 
             <JobListOptions />
-            <FilterToggle list={jobList} setList={setJobList} />
+            {/*<FilterToggle list={jobList} setList={setJobList} />*/}
+            <Toggle
+                setValue={setJobList}
+                values={{ on: JobTableList.filters, off: JobTableList.jobList }}
+                defaultValue={JobTableList.jobList}
+                labels={{ on: 'Filters', off: 'Job List' }}
+            />
             <Play />
         </div>
     );
