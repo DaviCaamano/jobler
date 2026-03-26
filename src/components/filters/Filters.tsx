@@ -11,24 +11,40 @@ import { useSticky } from '@hooks/useSticky';
 import { Toggle } from '@components/shared/toggle/Toggle';
 import { FilterItem } from '@components/filters/FilterItem';
 import { FilterCategoryButton } from '@components/filters/FilterCategoryButton';
-import { JobTable } from '@components/menu/JobTable';
 import { AddFilterButton } from '@components/filters/AddFilterButton';
 
+const exampleDefaults = [
+    'underdog.io',
+    'Crossing Hurdles',
+    'HelixRecruit',
+    'Base44',
+    'Affinitiv',
+    'hypergiant',
+    'Roblox',
+    'bitpay',
+    'imentor',
+    'servicecore',
+    'service core',
+    'Trapp Technology',
+    'Trust & Will',
+];
 type FilterType = Stores.blackList | Stores.whiteList;
 const jobTableStyle: CSSProperties = {
     position: 'relative',
-    padding: '3rem 0',
+    padding: '4.5rem 0',
     height: '37.5rem',
     borderTop: '1px solid #000000',
+    overflow: 'auto',
 };
 export const Filters = () => {
     const [filter, setFilter] = useState<FilterType>(Stores.whiteList);
     const [filterCategory, setFilterCategory] = useState<FilterCategories>(FilterCategories.text);
-    const [filterList, setFilterList] = useState<string[]>([]);
+    const [filterList, setFilterList] = useState<string[]>(exampleDefaults);
 
     const updateOnChange = useCallback(() => {
         loadFromStorage<FilterStore>(filter!).then((store: FilterStore) => {
-            setFilterList(store[filterCategory] || []);
+            // TODO REPLACE exampleDefaults with "store[filterCategory] || exampleDefaults"
+            setFilterList(exampleDefaults);
         });
     }, []);
 
@@ -54,14 +70,16 @@ export const Filters = () => {
 
     return (
         <div className="filters_container">
-            <JobTable style={jobTableStyle}>
-                {filterList.map((item: string, index: number) => (
-                    <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
-                ))}
+            <div id={'job-list_container'} style={jobTableStyle}>
+                <div id={'job-list_job-table'}>
+                    {filterList.map((item: string, index: number) => (
+                        <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
+                    ))}
+                </div>
+            </div>
+            <div className="filters_toggle-container">
                 <FilterCategoryButton category={filterCategory} setCategory={setFilterCategory} />
                 <AddFilterButton />
-            </JobTable>
-            <div className="filters_toggle-container">
                 <Toggle
                     setValue={setFilter}
                     values={{ on: Stores.whiteList, off: Stores.blackList }}

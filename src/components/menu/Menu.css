@@ -29,7 +29,43 @@
 
 .menu_toggle-container {
     position: absolute;
-    bottom: 0;
+    bottom: 0.3rem;
     width: 100%;
     height: 3.75rem;
+}
+
+#job-list_container {
+    width: 100%;
+    height: 36rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-width: 1px 0;
+    border-style: solid;
+    background-color: var(--primary);
+    box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 1);
+        border-radius: 999px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
+
+#job-list_job-table {
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow-y: hidden;
 }
