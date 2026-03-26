@@ -6,7 +6,7 @@ import { Play } from '@components/play/Play';
 import { SearchEngineIcon } from '@components/SearchEngineIcon';
 import { SearchEngine } from '@interfaces/search-engine';
 import { getSearchEngine } from '@utils/getSearchEngine';
-import { JobSummary, JobTableList } from '@interfaces/job-list';
+import { JobTableList } from '@interfaces/job-list';
 import titleLogo from '#logos/title.png';
 import { getAssetUrl } from '@utils/getAssetUrl';
 import { JobListOptions } from '@components/job-list/JobListOptions';
@@ -14,6 +14,7 @@ import { useToggleMenu } from '@components/menu/useToggleMenu';
 import { JobTable } from '@components/menu/JobTable';
 import { Filters } from '@components/filters/Filters';
 import { Toggle } from '@components/shared/toggle/Toggle';
+import { JobSummary } from '@utils/stores';
 
 const exampleJobs = [
     {

@@ -1,9 +1,9 @@
 import '@components/job-list/JobList.css';
-import { JobSummary } from '@interfaces/job-list';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { JobListOptions } from '@components/job-list/JobListOptions';
 import { JobTable } from '@components/menu/JobTable';
+import { JobSummary } from '@utils/stores';
 
 interface JobListProps {
     jobList: JobSummary[];

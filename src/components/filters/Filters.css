@@ -48,6 +48,7 @@
     align-items: start;
     justify-content: center;
 }
+
 .__jobler__filters-category-button_button {
     position: relative;
     top: -1px;
@@ -59,24 +60,42 @@
     font-weight: 500;
 
     &.text-filter {
-        background: var(--primary-bg);
+        &:not(.on) {
+            background: var(--primary-bg);
+        }
 
         span {
             position: relative;
             left: 2px;
         }
+
+        &.on {
+            background-color: var(--primary-play-button-paused);
+        }
     }
 
     &.title-filter {
-        background: var(--primary);
+        &:not(.on) {
+            background: var(--primary-light);
+        }
+
+        &.on {
+            background-color: var(--primary-play-button-paused);
+        }
     }
 
     &.company-filter {
-        background: var(--primary-bg-flipped);
-
         span {
             position: relative;
             right: 2px;
+        }
+
+        &.on {
+            background-color: var(--primary-play-button-paused);
+        }
+
+        &:not(.on) {
+            background: var(--primary-bg-flipped);
         }
     }
 
