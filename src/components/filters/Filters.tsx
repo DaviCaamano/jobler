@@ -1,5 +1,5 @@
 import '@components/filters/Filters.css';
-import { useCallback, useState } from 'react';
+import { CSSProperties, useCallback, useState } from 'react';
 import {
     FilterCategories,
     FilterStore,
@@ -12,9 +12,13 @@ import { Toggle } from '@components/shared/toggle/Toggle';
 import { FilterItem } from '@components/filters/FilterItem';
 import { FilterCategoryButton } from '@components/filters/FilterCategoryButton';
 import { JobTable } from '@components/menu/JobTable';
+import { AddFilterButton } from '@components/filters/AddFilterButton';
 
 type FilterType = Stores.blackList | Stores.whiteList;
-
+const jobTableStyle: CSSProperties = {
+    position: 'relative',
+    padding: '3rem 0',
+};
 export const Filters = () => {
     const [filter, setFilter] = useState<FilterType>(Stores.whiteList);
     const [filterCategory, setFilterCategory] = useState<FilterCategories>(FilterCategories.text);
@@ -48,11 +52,12 @@ export const Filters = () => {
 
     return (
         <>
-            <JobTable style={{ width: '39rem', paddingBottom: '3rem', position: 'relative' }}>
+            <JobTable style={jobTableStyle}>
                 {filterList.map((item: string, index: number) => (
                     <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
                 ))}
                 <FilterCategoryButton category={filterCategory} setCategory={setFilterCategory} />
+                <AddFilterButton />
             </JobTable>
             <div className="__jobler__filters_toggle-container">
                 <Toggle

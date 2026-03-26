@@ -1,4 +1,4 @@
-import { SearchEnginePath, SearchEngine } from '@interfaces/search-engine';
+import { SearchEngine } from '@interfaces/search-engine';
 
 function getDomainPath(url: string): { domain: string; pathname: string } {
     try {
@@ -13,28 +13,26 @@ function getDomainPath(url: string): { domain: string; pathname: string } {
     }
 }
 
-export const getSearchEngine = (): SearchEngine => {
+export const getSearchEngine = (): { engine: SearchEngine; path: string } => {
     const url = window.location.href;
-    if (!url) return SearchEngine.none;
+    console.log('url', url);
+    if (!url) {
+        return { engine: SearchEngine.none, path: '' };
+    }
 
     const { domain, pathname } = getDomainPath(url);
-    if (
-        domain === SearchEnginePath.indeed.domain &&
-        pathname === SearchEnginePath.indeed.pathname
-    ) {
-        return SearchEngine.indeed;
+    console.log(domain);
+    if (domain === SearchEngine.indeed) {
+        return { engine: SearchEngine.indeed, path: pathname };
     }
-    if (
-        domain === SearchEnginePath.linkedin.domain &&
-        pathname === SearchEnginePath.linkedin.pathname
-    ) {
-        return SearchEngine.linkedin;
+    if (domain === SearchEngine.linkedin) {
+        return { engine: SearchEngine.linkedin, path: pathname };
     }
-    if (
-        domain === SearchEnginePath.ziprecruiter.domain &&
-        pathname === SearchEnginePath.ziprecruiter.pathname
-    ) {
-        return SearchEngine.ziprecruiter;
+    if (domain === SearchEngine.ziprecruiter) {
+        return { engine: SearchEngine.ziprecruiter, path: pathname };
     }
-    return SearchEngine.none;
+    if (domain === SearchEngine.sandbox) {
+        return { engine: SearchEngine.sandbox, path: pathname };
+    }
+    return { engine: SearchEngine.none, path: pathname };
 };

@@ -68,19 +68,18 @@ export const Toggle = <T,>({
     return (
         <div className="__jobler__toggle_container">
             <button
-                className={`__jobler__toggle_toggle ${toggled ? 'on' : 'off'}`}
+                className="__jobler__toggle_toggle"
                 onClick={handleToggle}
                 aria-pressed={toggled}
-                style={toggleStyle}
                 type="button"
             >
-                <span className={`__jobler__toggle_label ${toggled ? 'off' : 'on'}`}>
+                <span className={`__jobler__toggle_label left ${toggled ? 'off' : 'on'}`}>
                     {labels?.off ?? 'On'}
                 </span>
                 <span className="__jobler__toggle_track" style={trackStyle}>
                     <span className="__jobler__toggle_thumb" style={thumbStyle} />
                 </span>
-                <span className={`__jobler__toggle_label ${toggled ? 'on' : 'off'}`}>
+                <span className={`__jobler__toggle_label right ${toggled ? 'on' : 'off'}`}>
                     {labels?.on ?? 'Off'}
                 </span>
             </button>

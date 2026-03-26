@@ -3,7 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 2px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
 }
 
 .__jobler__filters_item {
@@ -42,6 +43,8 @@
 }
 
 .__jobler__filters-category-button_container {
+    position: absolute;
+    top: 0;
     width: 100%;
     height: 3rem;
     display: flex;
@@ -117,4 +120,32 @@
     &:hover {
         filter: brightness(0.95);
     }
+}
+
+.__jobler__add-filter-button_container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: #000000;
+    height: 3rem;
+    background-color: var(--primary-shadow);
+}
+
+.__jobler__add-filter-button_button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;
+}
+
+.__jobler__add-filter-button_icon {
+    font-size: 2rem;
 }

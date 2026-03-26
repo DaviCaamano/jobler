@@ -42,9 +42,10 @@ const exampleJobList: JobSummary[] = [
 
 export const Menu = () => {
     const opened = useToggleMenu();
-    const engine = useRef<SearchEngine>(getSearchEngine()).current;
+    const engine = useRef<SearchEngine>(getSearchEngine().engine).current;
     const [jobList, setJobList] = useState<JobTableList>(JobTableList.jobList);
 
+    console.log('engine', engine);
     if (!opened || engine === SearchEngine.none) {
         return null;
     }

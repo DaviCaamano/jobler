@@ -27,6 +27,7 @@ export default defineManifest({
                 'https://www.indeed.com/*',
                 'https://www.linkedin.com/*',
                 'https://www.ziprecruiter.com/*',
+                'https://dnd-binders.vercel.app/*',
             ],
             js: ['src/contents/content.tsx'],
         },
