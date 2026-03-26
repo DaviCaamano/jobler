@@ -1,9 +1,0 @@
-#jobler-menu-root-container {
-    width: 40rem;
-    height: 53rem;
-    position: fixed;
-    top: 13rem;
-    right: 2rem;
-    background-color: transparent;
-    z-index: 1000000;
-}

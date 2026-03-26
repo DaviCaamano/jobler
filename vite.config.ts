@@ -27,4 +27,11 @@ export default defineConfig({
             origin: /^chrome-extension:\/\/.*/,
         },
     },
+    build: {
+        rollupOptions: {
+            input: {
+                menu: resolve(__dirname, 'menu.html'),
+            },
+        },
+    },
 });

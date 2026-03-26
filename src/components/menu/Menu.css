@@ -5,6 +5,7 @@
     border-radius: 25px 25px 25px 25px;
     background: var(--primary-bg);
     box-shadow: 2px 2px 4px var(--primary-shadow);
+    margin-top: 25px;
 }
 
 .__jobler__menu_title {

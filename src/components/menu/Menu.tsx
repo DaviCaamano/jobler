@@ -9,9 +9,6 @@ import { getSearchEngine } from '@utils/getSearchEngine';
 import { JobTableList } from '@interfaces/job-list';
 import titleLogo from '#logos/title.png';
 import { getAssetUrl } from '@utils/getAssetUrl';
-import { JobListOptions } from '@components/job-list/JobListOptions';
-import { useToggleMenu } from '@components/menu/useToggleMenu';
-import { JobTable } from '@components/menu/JobTable';
 import { Filters } from '@components/filters/Filters';
 import { Toggle } from '@components/shared/toggle/Toggle';
 import { JobSummary } from '@utils/stores';
@@ -33,6 +30,7 @@ const exampleJobs = [
         title: 'Charlie Worker',
     },
 ];
+
 const exampleJobList: JobSummary[] = [
     ...exampleJobs,
     ...exampleJobs,
@@ -41,12 +39,10 @@ const exampleJobList: JobSummary[] = [
 ];
 
 export const Menu = () => {
-    const opened = useToggleMenu();
     const engine = useRef<SearchEngine>(getSearchEngine().engine).current;
     const [jobList, setJobList] = useState<JobTableList>(JobTableList.jobList);
 
-    console.log('engine', engine);
-    if (!opened || engine === SearchEngine.none) {
+    if (engine === SearchEngine.none) {
         return null;
     }
 
@@ -60,7 +56,9 @@ export const Menu = () => {
                 />
                 <SearchEngineIcon searchEngine={engine} />
             </div>
+
             {jobList === JobTableList.jobList ? <JobList jobList={exampleJobList} /> : <Filters />}
+
             <div className="__jobler__menu_toggle-container">
                 <Toggle
                     setValue={setJobList}
@@ -69,6 +67,7 @@ export const Menu = () => {
                     labels={{ on: 'Filters', off: 'Job List' }}
                 />
             </div>
+
             <Play />
         </div>
     );

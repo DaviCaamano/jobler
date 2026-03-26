@@ -34,7 +34,7 @@ export default defineManifest({
     ],
     web_accessible_resources: [
         {
-            resources: ['assets/*', 'assets/**/*'],
+            resources: ['menu.html', 'assets/*', 'assets/**/*'],
             matches: ['<all_urls>'],
         },
     ],
