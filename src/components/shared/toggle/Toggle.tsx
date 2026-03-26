@@ -75,13 +75,13 @@ export const Toggle = <T,>({
                 type="button"
             >
                 <span className={`__jobler__toggle_label ${toggled ? 'off' : 'on'}`}>
-                    {labels?.on ?? 'On'}
+                    {labels?.off ?? 'On'}
                 </span>
                 <span className="__jobler__toggle_track" style={trackStyle}>
                     <span className="__jobler__toggle_thumb" style={thumbStyle} />
                 </span>
                 <span className={`__jobler__toggle_label ${toggled ? 'on' : 'off'}`}>
-                    {labels?.off ?? 'Off'}
+                    {labels?.on ?? 'Off'}
                 </span>
             </button>
         </div>

@@ -59,7 +59,7 @@ export const Filters = () => {
                     setValue={setFilter}
                     values={{ on: Stores.whiteList, off: Stores.blackList }}
                     defaultValue={Stores.blackList}
-                    labels={{ on: 'Black List', off: 'White List' }}
+                    labels={{ on: 'White List', off: 'Black List' }}
                 />
             </div>
         </>

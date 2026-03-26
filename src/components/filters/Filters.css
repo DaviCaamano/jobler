@@ -60,6 +60,11 @@
     font-weight: 500;
 
     &.text-filter {
+        &.on {
+            background-color: var(--primary-shadow);
+            color: white;
+        }
+
         &:not(.on) {
             background: var(--primary-bg);
         }
@@ -68,19 +73,16 @@
             position: relative;
             left: 2px;
         }
-
-        &.on {
-            background-color: var(--primary-play-button-paused);
-        }
     }
 
     &.title-filter {
-        &:not(.on) {
-            background: var(--primary-light);
+        &.on {
+            background-color: var(--primary-shadow);
+            color: white;
         }
 
-        &.on {
-            background-color: var(--primary-play-button-paused);
+        &:not(.on) {
+            background: var(--primary-light);
         }
     }
 
@@ -91,7 +93,8 @@
         }
 
         &.on {
-            background-color: var(--primary-play-button-paused);
+            background-color: var(--primary-shadow);
+            color: white;
         }
 
         &:not(.on) {
