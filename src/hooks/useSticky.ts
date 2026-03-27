@@ -1,12 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-export const useSticky = <T>(value: T | T[], callback: () => void) => {
-    const stickyValue = useRef<T | T[]>(value);
+export const useSticky = <T>(value: T, callback: () => void) => {
+    const previousValue = useRef(value);
 
-    // Update the list of filtered items every time the active filter changes.
     useEffect(() => {
-        if (stickyValue.current !== value) {
-            stickyValue.current = value;
+        if (!Object.is(previousValue.current, value)) {
+            previousValue.current = value;
             callback();
         }
     }, [value, callback]);
