@@ -1,7 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Menu } from '@components/menu/Menu';
-import '@styles/themes/primary.css';
 
 const rootEl = document.getElementById('root');
 

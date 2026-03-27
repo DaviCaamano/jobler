@@ -1,15 +1,65 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { CirclePlus } from 'lucide-react';
+import { useSticky } from '@hooks/useSticky';
 
-interface AddFilterButton {}
-export const AddFilterButton = () => {
+const inputName = 'add-filter-button_input';
+interface AddFilterButtonProps {}
+export const AddFilterButton = ({}: AddFilterButtonProps) => {
     const [showInput, setShowInput] = useState<boolean>(false);
+    const [newFilter, setNewFilter] = useState<string>('');
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useSticky(showInput, () => {
+        if (showInput) {
+            inputRef.current?.focus();
+        } else {
+            setNewFilter('');
+        }
+    });
+
+    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const value = formData.get(inputName) as string;
+        if (value) {
+            alert(value);
+
+            // TODO HANDLE INPUT (value var above this line)
+        }
+        setShowInput(false);
+    };
+
     return (
         <div className="add-filter-button_container">
-            <button className="add-filter-button_button" onClick={() => {}}>
-                <FontAwesomeIcon className="add-filter-button_icon" icon={faCirclePlus} />
-            </button>
+            {showInput ? (
+                <form onSubmit={handleSubmit} className="add-filter-button_input-container">
+                    <input
+                        className="add-filter-button_input"
+                        name={inputName}
+                        onBlur={() => setShowInput(false)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setNewFilter(e.target.value)
+                        }
+                        placeholder="New Text Blacklist"
+                        ref={inputRef}
+                        value={newFilter}
+                    />
+                    <button type="submit" onMouseDown={(e) => e.preventDefault()}>
+                        <CirclePlus className="add-filter-button_submit-button" />
+                    </button>
+                </form>
+            ) : (
+                <button
+                    className="add-filter-button_button button-lighting"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setShowInput(true);
+                    }}
+                >
+                    <CirclePlus className="add-filter-button_icon" />
+                </button>
+            )}
         </div>
     );
 };

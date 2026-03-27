@@ -1,27 +1,28 @@
 import '@components/job-list/JobList.css';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { CircleDashed, BadgeCheck } from 'lucide-react';
 import { JobListOptions } from '@components/job-list/JobListOptions';
 import { JobSummary } from '@utils/stores';
+import { startTransition, useOptimistic } from 'react';
 
 interface JobListProps {
     jobList: JobSummary[];
 }
 export const JobList = ({ jobList }: JobListProps) => {
+    const markApplied = (jobId: string) => {
+        // TODO Make this function mark the job as applied
+    };
+
     return (
         <>
             <div id={'job-list_container'}>
-                <div id={'job-list_job-table'}>
-                    <div id={'job-list_job-table'}>
-                        {jobList.map(({ companyName, title, url }: JobSummary, index: number) => (
-                            <JobListItem
-                                companyName={companyName}
-                                title={title}
-                                url={url}
-                                key={`${companyName}-${title}-${index}`}
-                            />
-                        ))}
-                    </div>
+                <div className={'job-list_job-table'}>
+                    {jobList.map((job: JobSummary, index: number) => (
+                        <JobListItem
+                            {...job}
+                            key={`${job.title}-${index}`}
+                            markApplied={markApplied}
+                        />
+                    ))}
                 </div>
             </div>
             <JobListOptions />
@@ -29,16 +30,36 @@ export const JobList = ({ jobList }: JobListProps) => {
     );
 };
 
-export const JobListItem = ({ companyName, title, url }: JobSummary) => {
+interface JobListItemProps extends JobSummary {
+    markApplied: (jobId: string) => void;
+}
+export const JobListItem = ({
+    applied,
+    companyName,
+    jobId,
+    markApplied,
+    title,
+    url,
+    source,
+}: JobListItemProps) => {
+    const [optimisticallyApplied, setOptimisticallyApplied] = useOptimistic<boolean>(false);
+    const onClick = () => {
+        startTransition(() => {
+            setOptimisticallyApplied(true);
+            markApplied(jobId);
+        });
+    };
     return (
-        <div className="job-list_job">
-            <div className="job-list_company-name">{companyName}</div>
-            <div className="job-list_title">{title}</div>
-            <a href={url} target="_blank" className="job-list_job-link">
-                <div className="job-list_job-link-box">
-                    <FontAwesomeIcon className="job-list_job-link-icon" icon={faLink} />
-                </div>
-            </a>
+        <div className="job-list_item">
+            <div className="job-list_name">{companyName}</div>
+            <div className="job-list_title">{companyName}</div>
+            <div className="job-list_delete-button-container" onClick={onClick}>
+                {optimisticallyApplied ? (
+                    <BadgeCheck height={18} width={18} />
+                ) : (
+                    <CircleDashed height={18} width={18} />
+                )}
+            </div>
         </div>
     );
 };

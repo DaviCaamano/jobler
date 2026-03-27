@@ -1,3 +1,5 @@
+import { SearchEngine } from '@interfaces/search-engine';
+
 export enum Stores {
     blackList = 'blackList',
     jobList = 'jobList',
@@ -37,8 +39,11 @@ export const storageDefaults: LocalStore = {
 };
 
 export interface JobSummary {
+    applied?: boolean;
     companyName: string;
+    jobId: string;
     title: string;
+    source: SearchEngine;
     url: string;
 }
 

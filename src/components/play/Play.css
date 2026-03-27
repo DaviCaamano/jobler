@@ -13,13 +13,39 @@
 }
 
 .play_play-button {
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 2px 1px 2px 0px var(--secondary-light);
+    background-color: var(--primary);
+
+    &:active {
+        box-shadow: 0 1px 1px 0 var(--secondary-light);
+    }
+}
+
+.play_icon {
+    padding: 0.3rem;
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+    color: var(--secondary);
+}
+
+.play_load-icon {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     height: 8rem;
+    min-height: 8rem;
     width: 8rem;
+    min-width: 8rem;
     padding: 1rem;
     font-size: 2rem;
     border-radius: 50%;
@@ -27,102 +53,19 @@
     margin: 0 auto;
     border: none;
     transition: background-color 0.5s ease;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-        filter: brightness(1.02);
-    }
 
     &:active {
         transform: translateY(1px);
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
-    &.paused {
-        background-color: var(--primary);
-
-        &:hover:not(.recently-clicked) {
-            background-color: var(--primary-play-button-hovered);
-        }
-    }
-
-    &:not(.paused) {
-        background-color: var(--primary);
-
-        &:hover {
-            background-color: var(--primary);
-        }
-    }
-}
-
-.play_icon {
-    padding: 0.3rem;
-    border-radius: 50%;
-    width: 6rem;
-    height: 6rem;
-    color: var(--primary-dark);
-
-    &.hovered:not(.recently-clicked) {
+    &:hover:not(.recently-clicked) {
+        background-color: var(--primary-play-button-hovered);
         opacity: 0.5;
     }
-
-    &.indeed-logo-container {
-        width: 5rem;
-        height: 5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-color: #000000;
-        padding-right: 5px;
-
-        .indeed {
-            color: #000000;
-            position: relative;
-            left: -1px;
-            top: -2px;
-        }
-    }
-
-    &.linkedin-logo-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #ffffff;
-        border: 1px solid #0a66c2;
-        color: #0a66c2;
-        padding: 5px;
-        height: 4rem;
-        width: 4rem;
-
-        .linkedin {
-            color: #0a66c2;
-            border: 0;
-            width: 3rem;
-            height: 3rem;
-        }
-    }
-
-    &.ziprecruiter-logo-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #ffffff;
-        border-color: #adda1e;
-        color: #0a66c2;
-        padding: 5px;
-        height: 5rem;
-        width: 5rem;
-
-        .ziprecruiter {
-            background: #f0f0f3;
-            border: 0;
-            width: 3.5rem;
-            height: 3.5rem;
-        }
-    }
 }
 
-.pause-icon {
+.play_pause-icon {
     width: 3rem;
     height: 3rem;
     position: absolute;

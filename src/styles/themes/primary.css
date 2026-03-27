@@ -1,9 +1,10 @@
 :root {
     --primary: #c2e7f3;
     --primary-light: #f4f6ff;
-    --primary-shadow: #2c6483;
-    --primary-dark: #2c3e50;
-    --secondary: #1ecbe1;
+    --primary-dark: #a3c1cc;
+    --secondary: #376fa6;
+    --secondary-light: #5082b1;
+
     --primary-bg: linear-gradient(45deg, var(--primary), var(--primary-light));
     --primary-bg-flipped: linear-gradient(45deg, var(--primary-light), var(--primary));
     --primary-play-button-paused: #a5d8a5;

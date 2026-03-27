@@ -1,5 +1,5 @@
 import '@components/filters/Filters.css';
-import { CSSProperties, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
     FilterCategories,
     FilterStore,
@@ -29,13 +29,7 @@ const exampleDefaults = [
     'Trust & Will',
 ];
 type FilterType = Stores.blackList | Stores.whiteList;
-const jobTableStyle: CSSProperties = {
-    position: 'relative',
-    padding: '2.8rem 0',
-    height: '37.5rem',
-    borderTop: '1px solid #000000',
-    overflow: 'auto',
-};
+
 export const Filters = () => {
     const [filter, setFilter] = useState<FilterType>(Stores.whiteList);
     const [filterCategory, setFilterCategory] = useState<FilterCategories>(FilterCategories.text);
@@ -70,16 +64,16 @@ export const Filters = () => {
 
     return (
         <div className="filters_container">
-            <div id={'job-list_container'} style={jobTableStyle}>
-                <div id={'job-list_job-table'}>
+            <div className={'filters_job-list-container'}>
+                <div className={'filters_job-table'}>
                     {filterList.map((item: string, index: number) => (
                         <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
                     ))}
                 </div>
             </div>
+            <AddFilterButton />
             <div className="filters_toggle-container">
                 <FilterCategoryButton category={filterCategory} setCategory={setFilterCategory} />
-                <AddFilterButton />
                 <Toggle
                     setValue={setFilter}
                     values={{ on: Stores.whiteList, off: Stores.blackList }}

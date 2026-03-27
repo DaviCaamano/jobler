@@ -1,0 +1,29 @@
+/* global */
+.spin {
+    animation: spin 1s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.lucide-solid {
+    fill: currentColor;
+    stroke: none;
+}
+
+.button-lighting {
+    &:hover {
+        filter: brightness(1.05);
+    }
+
+    &:active {
+        filter: brightness(0.97);
+    }
+}

@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { OctagonX } from 'lucide-react';
 
 interface FilterItemProps {
     item: string;
@@ -10,7 +9,7 @@ export const FilterItem = ({ item, onDelete }: FilterItemProps) => {
         <div className="filters_item">
             <div className="filters_name">{item}</div>
             <div className="filters_delete-button-container" onClick={() => onDelete(item)}>
-                <FontAwesomeIcon icon={faTrash} />
+                <OctagonX height={18} width={18} />
             </div>
         </div>
     );

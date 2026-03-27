@@ -1,62 +1,55 @@
-.job-list_job {
-    display: flex;
-    flex-direction: row;
+.job-list_item {
     width: 100%;
     border-width: 1px 0 0 0;
+    display: flex;
+    flex-direction: row;
     border-style: solid;
-    border-color: gray;
+    border-color: var(--primary-dark);
     height: 3rem;
     line-height: 3rem;
     font-size: 1.3rem;
     font-weight: 400;
-
-    &:first-child {
-        border-width: 0;
-    }
+    cursor: pointer;
 
     &:last-child {
-        border-width: 1px 0 0 0;
-        border-color: gray;
+        border-width: 1px 0;
         margin-bottom: 0;
     }
 
-    .job-list_company-name {
-        width: 35%;
+    .job-list_name,
+    .job-list_title {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         padding-left: 0.8rem;
-        background: var(--primary);
+        background: #d9eef8;
+        text-transform: capitalize;
+    }
+
+    .job-list_name {
+        width: 33%;
     }
 
     .job-list_title {
         flex: 1;
-        margin-right: auto;
-        background: #ffffff;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        padding-left: 0.8rem;
     }
 
-    .job-list_job-link {
-        background: var(--primary-light);
-    }
-
-    .job-list_job-link-box {
-        width: 3rem;
-        height: 3rem;
+    .job-list_delete-button-container {
+        height: 2.2rem;
+        width: 2.2rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-right: 0.3rem;
-        background: var(--primary);
-        border-radius: 50% 0 0 50%;
+        margin-left: 0.8rem;
+        margin-right: 0.8rem;
+        background: #d9eef8;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: background-color 0.33s ease;
 
-        .job-list_job-link-icon {
-            font-size: 2.3rem;
-            line-height: 2.3rem;
-            font-weight: bolder;
+        &:hover {
+            background-color: var(--secondary);
+            color: white;
         }
     }
 }

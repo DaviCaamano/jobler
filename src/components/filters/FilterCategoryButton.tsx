@@ -16,19 +16,19 @@ export const FilterCategoryButton = ({ category, setCategory }: FilterCategoryBu
     return (
         <div className="filters-category-button_container" style={{ border: 'none' }}>
             <button
-                className={`filters-category-button_button text-filter ${textClass}`}
+                className={`filters-category-button_button button-lighting text-filter ${textClass}`}
                 onClick={onClick(FilterCategories.text)}
             >
                 <span>Text</span>
             </button>
             <button
-                className={`filters-category-button_button title-filter ${titleClass}`}
+                className={`filters-category-button_button button-lighting title-filter ${titleClass}`}
                 onClick={onClick(FilterCategories.title)}
             >
                 Title
             </button>
             <button
-                className={`filters-category-button_button company-filter ${companyClass}`}
+                className={`filters-category-button_button button-lighting company-filter ${companyClass}`}
                 onClick={onClick(FilterCategories.company)}
             >
                 <span>Company</span>

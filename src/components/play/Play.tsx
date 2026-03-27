@@ -1,10 +1,10 @@
 import '@components/play/Play.css';
-import { faCircleNotch, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useCallback, useRef, useState } from 'react';
+import { useState } from 'react';
+import { LoaderCircle, Play as PlayIcon, Pause } from 'lucide-react';
+import clsx from 'clsx';
 
 export const Play = () => {
-    const [paused, setPaused] = useState<boolean>(false);
+    const [paused, setPaused] = useState<boolean>(true);
     const togglePause = () => setPaused(!paused);
 
     return (
@@ -33,27 +33,29 @@ const PlayButton = ({ callback, paused }: PlayButtonProps) => {
         }
     };
 
-    const buttonClass =
-        `play_play-button ${paused ? 'paused' : ''}` +
-        ` ${recentlyClicked ? 'recently-clicked' : ''}`;
-    const pausedButtonClass =
-        `play_icon ${hovered ? 'hovered' : ''}` + ` ${recentlyClicked ? 'recently-clicked' : ''}`;
     return (
         <button
-            className={buttonClass}
+            className="play_play-button button-lighting"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={onMouseLeave}
             onClick={onClick}
         >
             {paused ? (
+                <PlayIcon className="play_icon lucide-solid" />
+            ) : (
                 <>
-                    <FontAwesomeIcon icon={faCircleNotch} className={pausedButtonClass} spin />
+                    <LoaderCircle
+                        className={clsx(
+                            `play_load-icon spin`,
+                            { hovered },
+                            recentlyClicked && 'recently-clicked'
+                        )}
+                        strokeWidth={2}
+                    />
                     {hovered && !recentlyClicked && (
-                        <FontAwesomeIcon icon={faPause} className="pause-icon" />
+                        <Pause className="play_pause-icon lucide-solid" />
                     )}
                 </>
-            ) : (
-                <FontAwesomeIcon icon={faPlay} className="play_icon" />
             )}
         </button>
     );

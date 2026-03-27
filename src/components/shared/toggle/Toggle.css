@@ -22,7 +22,7 @@
     width: 8rem;
     height: 3rem;
     border-radius: 999px;
-    border: 1px solid var(--primary-dark);
+    border: 1px solid var(--secondary);
     background: var(--primary-light);
     transition: background 0.25s ease;
 }
@@ -32,7 +32,7 @@
     top: 0.1rem;
     left: 0.1rem;
     border-radius: 50%;
-    background: var(--primary-shadow);
+    background: var(--secondary);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     transition: transform 0.25s ease;
 }

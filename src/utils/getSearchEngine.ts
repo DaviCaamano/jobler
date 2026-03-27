@@ -4,22 +4,25 @@ function getDomainPath(url: string): { domain: string; pathname: string } {
     try {
         const urlObj = new URL(url);
         const domain = urlObj.hostname
-            .replace(/^www\./, '') // remove "www."
+            .replace(/^www\./, '')
             .split('.')[0]
             .toLowerCase();
+
         return { domain, pathname: urlObj.pathname?.toLowerCase() };
     } catch {
         return { domain: '', pathname: '' };
     }
 }
 
-export const getSearchEngine = (): { engine: SearchEngine; path: string } => {
-    const url = window.location.href;
+export const getSearchEngine = (urlOverride?: string): { engine: SearchEngine; path: string } => {
+    const url = urlOverride ?? window.location.href;
+
     if (!url) {
         return { engine: SearchEngine.none, path: '' };
     }
 
     const { domain, pathname } = getDomainPath(url);
+
     if (domain === SearchEngine.indeed) {
         return { engine: SearchEngine.indeed, path: pathname };
     }
@@ -32,5 +35,6 @@ export const getSearchEngine = (): { engine: SearchEngine; path: string } => {
     if (domain === SearchEngine.sandbox) {
         return { engine: SearchEngine.sandbox, path: pathname };
     }
+
     return { engine: SearchEngine.none, path: pathname };
 };
