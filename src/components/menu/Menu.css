@@ -10,7 +10,7 @@
 
 .menu_title {
     width: 100%;
-    height: 7.85rem;
+    height: 7.9rem;
     font-size: 3rem;
     font-weight: bold;
     display: flex;
@@ -21,7 +21,7 @@
 
 .menu_logo {
     width: 13.91rem;
-    height: 6.25rem;
+    height: 6.3rem;
     position: relative;
     top: -10px;
     left: -10px;
@@ -31,7 +31,7 @@
     position: absolute;
     bottom: 0.3rem;
     width: 100%;
-    height: 3.75rem;
+    height: 3.8rem;
 }
 
 #job-list_container {

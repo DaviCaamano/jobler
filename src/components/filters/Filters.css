@@ -20,7 +20,7 @@
     border-style: solid;
     height: 3rem;
     line-height: 3rem;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 400;
     cursor: pointer;
 
@@ -34,7 +34,7 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        padding-left: 0.75rem;
+        padding-left: 0.8rem;
         background: #d9eef8;
         text-transform: capitalize;
     }
@@ -45,8 +45,8 @@
         width: 2.5rem;
         justify-content: center;
         align-items: center;
-        margin-left: 0.75rem;
-        margin-right: 0.75rem;
+        margin-left: 0.8rem;
+        margin-right: 0.8rem;
         background: #d9eef8;
         cursor: pointer;
         border-radius: 50%;
@@ -60,7 +60,7 @@
 
 .filters-category-button_container {
     position: absolute;
-    top: 3.65rem;
+    top: 3.7rem;
     width: 100%;
     height: 3rem;
     display: flex;
@@ -72,7 +72,7 @@
     position: relative;
     top: -1px;
     width: 33%;
-    height: calc(100% - 0.25rem);
+    height: calc(100% - 0.3rem);
     border: 1px solid #000000;
     box-shadow: 1px 1px 0px var(--primary-shadow);
     font-size: 1.5rem;
