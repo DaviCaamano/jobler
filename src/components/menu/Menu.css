@@ -66,4 +66,5 @@
     margin: 0;
     border: none;
     overflow-y: hidden;
+    border-collapse: collapse;
 }

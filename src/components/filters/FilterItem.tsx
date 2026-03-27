@@ -9,7 +9,9 @@ export const FilterItem = ({ item, onDelete }: FilterItemProps) => {
         <div className="filters_item">
             <div className="filters_name">{item}</div>
             <div className="filters_delete-button-container" onClick={() => onDelete(item)}>
-                <OctagonX height={18} width={18} />
+                <div className="filters_delete-button-framer">
+                    <OctagonX height={18} width={18} />
+                </div>
             </div>
         </div>
     );

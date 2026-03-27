@@ -1,10 +1,8 @@
 .job-list_item {
-    width: 100%;
-    border-width: 1px 0 0 0;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    border-width: 1px 0 0 0;
     border-style: solid;
     border-color: var(--primary-dark);
     height: 3rem;
@@ -12,11 +10,6 @@
     font-size: 1.3rem;
     font-weight: 400;
     cursor: pointer;
-
-    &:last-child {
-        border-width: 1px 0;
-        margin-bottom: 0;
-    }
 
     .job-list_name,
     .job-list_title {
@@ -36,22 +29,32 @@
         flex: 1;
     }
 
-    .job-list_delete-button-container {
-        height: 2.2rem;
-        width: 2.2rem;
+    .job-list_delete-button-framer {
+        height: 100%;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+        width: 2.2rem;
         margin-left: 0.8rem;
         margin-right: 0.8rem;
-        background: #d9eef8;
-        cursor: pointer;
-        border-radius: 50%;
-        transition: background-color 0.33s ease;
 
-        &:hover {
-            background-color: var(--secondary);
-            color: white;
+        .job-list_delete-button-container {
+            height: 2.2rem;
+            width: 2.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 0.8rem;
+            margin-right: 0.8rem;
+            background: #d9eef8;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.33s ease;
+
+            &:hover {
+                background-color: var(--secondary);
+                color: white;
+            }
         }
     }
 }

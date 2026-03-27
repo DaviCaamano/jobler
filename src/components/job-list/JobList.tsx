@@ -55,11 +55,13 @@ export const JobListItem = ({
             <div className="job-list_name">{companyName}</div>
             <div className="job-list_title">{companyName}</div>
             <div className="job-list_delete-button-container" onClick={onClick}>
-                {optimisticallyApplied ? (
-                    <BadgeCheck height={18} width={18} />
-                ) : (
-                    <CircleDashed height={18} width={18} />
-                )}
+                <div className="job-list_delete-button-framer">
+                    {optimisticallyApplied ? (
+                        <BadgeCheck height={18} width={18} />
+                    ) : (
+                        <CircleDashed height={18} width={18} />
+                    )}
+                </div>
             </div>
         </div>
     );
