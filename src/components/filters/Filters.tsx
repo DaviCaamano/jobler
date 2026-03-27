@@ -1,77 +1,64 @@
 import '@components/filters/Filters.css';
-import { useCallback, useState } from 'react';
-import {
-    FilterCategories,
-    FilterStore,
-    loadFromStorage,
-    saveToStorage,
-    Stores,
-} from '@utils/stores';
+import { useCallback, useEffect, useState } from 'react';
 import { useSticky } from '@hooks/useSticky';
 import { Toggle } from '@components/shared/toggle/Toggle';
 import { FilterItem } from '@components/filters/FilterItem';
 import { FilterCategoryButton } from '@components/filters/FilterCategoryButton';
 import { AddFilterButton } from '@components/filters/AddFilterButton';
+import { Stores } from '@stores/store';
+import { FilterCategories } from '@stores/filter-store';
+import { filterStorage } from '@/store/filter.store';
 
-const exampleDefaults = [
-    'underdog.io',
-    'Crossing Hurdles',
-    'HelixRecruit',
-    'Base44',
-    'Affinitiv',
-    'hypergiant',
-    'Roblox',
-    'bitpay',
-    'imentor',
-    'servicecore',
-    'service core',
-    'Trapp Technology',
-    'Trust & Will',
-];
 type FilterType = Stores.blackList | Stores.whiteList;
 
 export const Filters = () => {
-    const [filter, setFilter] = useState<FilterType>(Stores.whiteList);
+    const [filter, setFilter] = useState<FilterType>(Stores.blackList);
     const [filterCategory, setFilterCategory] = useState<FilterCategories>(FilterCategories.text);
-    const [filterList, setFilterList] = useState<string[]>(exampleDefaults);
+    const [filterList, setFilterList] = useState<string[]>([]);
 
-    const updateOnChange = useCallback(() => {
-        loadFromStorage<FilterStore>(filter!).then((store: FilterStore) => {
-            // TODO REPLACE exampleDefaults with "store[filterCategory] || exampleDefaults"
-            setFilterList(exampleDefaults);
-        });
-    }, []);
+    const loadFilters = useCallback(async () => {
+        const nextList = await filterStorage.getList(filter, filterCategory);
+        setFilterList(nextList);
+    }, [filter, filterCategory]);
 
-    useSticky(filter, updateOnChange);
-    useSticky(filterCategory, updateOnChange);
+    useEffect(() => {
+        void loadFilters();
+    }, [loadFilters]);
 
-    // Delete an entry from the filter
+    useSticky(filter, loadFilters);
+    useSticky(filterCategory, loadFilters);
+
     const onDelete = useCallback(
         async (deletedFilter: string) => {
-            const newFilters = filterList.filter((item) => item !== deletedFilter);
-            setFilterList(newFilters);
-            loadFromStorage<FilterStore>(filter!).then((store: FilterStore) => {
-                const newStore = { ...store };
-                newStore[filterCategory] = newFilters;
-                saveToStorage(
-                    filter === Stores.blackList ? Stores.blackList : Stores.whiteList,
-                    newStore
-                );
-            });
+            await filterStorage.remove(filter, filterCategory, deletedFilter);
+            await loadFilters();
         },
-        [filter]
+        [filter, filterCategory, loadFilters]
+    );
+
+    const onAdd = useCallback(
+        async (value: string) => {
+            await filterStorage.add(filter, filterCategory, value);
+            await loadFilters();
+        },
+        [filter, filterCategory, loadFilters]
     );
 
     return (
         <div className="filters_container">
-            <div className={'filters_job-list-container'}>
-                <div className={'filters_job-table'}>
+            <div className="filters_job-list-container">
+                <div className="filters_job-table">
                     {filterList.map((item: string, index: number) => (
                         <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
                     ))}
                 </div>
             </div>
-            <AddFilterButton />
+
+            <AddFilterButton
+                onSubmit={onAdd}
+                placeholder={`New ${filterCategory} ${filter === Stores.blackList ? 'blacklist' : 'whitelist'} item`}
+            />
+
             <div className="filters_toggle-container">
                 <FilterCategoryButton category={filterCategory} setCategory={setFilterCategory} />
                 <Toggle

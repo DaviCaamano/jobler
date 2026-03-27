@@ -14,6 +14,7 @@ export default defineConfig({
             '@contents': resolve(__dirname, 'src/contents'),
             '@hooks': resolve(__dirname, 'src/hooks'),
             '@interfaces': resolve(__dirname, 'src/interfaces'),
+            '@stores': resolve(__dirname, 'src/stores'),
             '@styles': resolve(__dirname, 'src/styles'),
             '@utils': resolve(__dirname, 'src/utils'),
             '#icons': resolve(__dirname, 'assets/icons'),

@@ -7,21 +7,21 @@
         "lib": ["ES2022", "DOM"],
         "types": ["chrome", "vite/client"],
         "jsx": "react-jsx",
-        "baseUrl": ".",
         "paths": {
-            "@backgrounds/*": ["src/backgrounds/*"],
-            "@components/*": ["src/components/*"],
-            "@constants/*": ["src/constants/*"],
-            "@contents/*": ["src/contents/*"],
-            "@hooks/*": ["src/hooks/*"],
-            "@interfaces/*": ["src/interfaces/*"],
-            "@styles/*": ["src/styles/*"],
-            "@utils/*": ["src/utils/*"],
-            "#icons/*": ["assets/icons/*"],
-            "#/*": ["assets/icons/*"],
-            "#logos/*": ["assets/logos/*"],
-            "@/*": ["src/*"]
+            "@backgrounds/*": ["./src/backgrounds/*"],
+            "@components/*": ["./src/components/*"],
+            "@constants/*": ["./src/constants/*"],
+            "@contents/*": ["./src/contents/*"],
+            "@hooks/*": ["./src/hooks/*"],
+            "@interfaces/*": ["./src/interfaces/*"],
+            "@stores/*": ["./src/stores/*"],
+            "@styles/*": ["./src/styles/*"],
+            "@utils/*": ["./src/utils/*"],
+            "#icons/*": ["../assets/icons/*"],
+            "#/*": ["./assets/icons/*"],
+            "#logos/*": ["../assets/logos/*"],
+            "@/*": ["./src/*"]
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.content.ts", "vite.config.main.ts"]
+    "include": ["./src/**/*.ts", "./src/**/*.tsx", "vite.config.content.ts", "vite.config.main.ts"]
 }

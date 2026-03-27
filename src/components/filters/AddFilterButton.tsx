@@ -3,8 +3,13 @@ import { CirclePlus } from 'lucide-react';
 import { useSticky } from '@hooks/useSticky';
 
 const inputName = 'add-filter-button_input';
-interface AddFilterButtonProps {}
-export const AddFilterButton = ({}: AddFilterButtonProps) => {
+
+interface AddFilterButtonProps {
+    onSubmit: (value: string) => void | Promise<void>;
+    placeholder?: string;
+}
+
+export const AddFilterButton = ({ onSubmit, placeholder }: AddFilterButtonProps) => {
     const [showInput, setShowInput] = useState<boolean>(false);
     const [newFilter, setNewFilter] = useState<string>('');
     const inputRef = useRef<HTMLInputElement>(null);
@@ -17,16 +22,18 @@ export const AddFilterButton = ({}: AddFilterButtonProps) => {
         }
     });
 
-    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
-        const value = formData.get(inputName) as string;
-        if (value) {
-            alert(value);
+        const value = String(formData.get(inputName) ?? '').trim();
 
-            // TODO HANDLE INPUT (value var above this line)
+        if (!value) {
+            setShowInput(false);
+            return;
         }
+
+        await onSubmit(value);
         setShowInput(false);
     };
 
@@ -41,7 +48,7 @@ export const AddFilterButton = ({}: AddFilterButtonProps) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             setNewFilter(e.target.value)
                         }
-                        placeholder="New Text Blacklist"
+                        placeholder={placeholder ?? 'Add filter'}
                         ref={inputRef}
                         value={newFilter}
                     />
