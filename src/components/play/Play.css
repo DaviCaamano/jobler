@@ -54,6 +54,7 @@
     margin: 0 auto;
     border: none;
     transition: background-color 0.5s ease;
+    color: var(--secondary);
 
     &:active {
         transform: translateY(1px);

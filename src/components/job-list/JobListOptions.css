@@ -1,20 +1,18 @@
 .job-list-options_container {
     position: relative;
-    margin-top: 0.8rem;
-    padding: 0 1rem;
+    padding: 1.5rem 1rem 0 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.2rem;
 }
 
-.job-list-options_applied-button,
-.job-list-options_next-button {
+.job-list-options_applied-button {
     position: relative;
+    top: -2px;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: -1px;
     width: 100%;
     height: 4.5rem;
     padding: 0;
@@ -46,21 +44,4 @@
         cursor: not-allowed;
         opacity: 0.5;
     }
-}
-
-.job-list-options_next-button {
-    color: var(--secondary);
-    background: var(--primary-light);
-
-    &:disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
-    }
-}
-
-.job-list-options_next-button-icon {
-    height: 2rem;
-    display: inline;
-    position: relative;
-    margin-left: 0.5rem;
 }

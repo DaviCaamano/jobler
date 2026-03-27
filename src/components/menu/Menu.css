@@ -35,14 +35,13 @@
 
 #job-list_container {
     width: 100%;
-    height: 30rem;
+    height: 33rem;
     overflow-y: auto;
     overflow-x: hidden;
-    border-width: 1px 0;
+    border-width: 0 0 1px 0;
     border-style: solid;
     background-color: var(--primary);
     box-sizing: border-box;
-    border-bottom: 1px solid var(--secondary-light);
 
     &::-webkit-scrollbar {
         width: 6px;

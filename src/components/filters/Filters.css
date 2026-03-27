@@ -5,16 +5,18 @@
 }
 
 .filters_toggle-container {
-    height: 3.5rem;
+    height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid #000000;
+    border-top: 1px solid var(--primary-dark);
 }
 
 .filters_item {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     border-width: 1px 0 0 0;
     border-style: solid;
@@ -42,8 +44,8 @@
 
     .filters_delete-button-container {
         display: flex;
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 2.2rem;
+        width: 2.2rem;
         justify-content: center;
         align-items: center;
         margin-left: 0.8rem;
@@ -61,7 +63,7 @@
 
 .filters-category-button_container {
     position: absolute;
-    top: 3.7rem;
+    top: 3.1rem;
     width: 100%;
     height: 3rem;
     display: flex;
@@ -73,9 +75,9 @@
     position: relative;
     top: -1px;
     width: 33%;
-    height: calc(100% - 0.3rem);
+    height: 3rem;
     border: 1px solid #000000;
-    box-shadow: 1px 1px 0px var(--secondary);
+    box-shadow: 1px 1px 0 var(--secondary);
     font-size: 1.5rem;
     font-weight: 500;
 
@@ -208,19 +210,17 @@
     border-style: solid;
     background-color: var(--primary);
     box-sizing: border-box;
-    padding: 2.8rem 0 5rem 0;
-    border-top: 1px solid;
-    overflow: auto;
+    padding: 2.9rem 0 5rem 0;
+    overflow: hidden;
 }
 
 .filters_job-table {
     display: flex;
     flex-direction: column;
     padding: 0;
-    margin: 0;
-    border: none;
-    height: 100%;
+    height: 27rem;
     overflow: auto;
+    border-bottom: 1px solid #000000;
 
     &::-webkit-scrollbar {
         width: 6px;
