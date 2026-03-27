@@ -6,8 +6,9 @@ import { startTransition, useOptimistic } from 'react';
 
 interface JobListProps {
     jobList: JobSummary[];
+    crawlerActive: boolean;
 }
-export const JobList = ({ jobList }: JobListProps) => {
+export const JobList = ({ crawlerActive, jobList }: JobListProps) => {
     const markApplied = (jobId: string) => {
         // TODO Make this function mark the job as applied
     };
@@ -25,7 +26,7 @@ export const JobList = ({ jobList }: JobListProps) => {
                     ))}
                 </div>
             </div>
-            <JobListOptions />
+            <JobListOptions locked={crawlerActive || jobList.length === 0} />
         </>
     );
 };

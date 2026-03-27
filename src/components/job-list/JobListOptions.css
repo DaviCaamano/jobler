@@ -11,20 +11,22 @@
 .job-list-options_applied-button,
 .job-list-options_next-button {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     top: -1px;
     width: 100%;
     height: 4.5rem;
     padding: 0;
     font-weight: 550;
     font-size: 2rem;
-    border-radius: 1rem;
-
+    border-radius: 0.5rem;
     filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
 
-    &:hover {
+    &:hover:not(:disabled) {
         filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3)) brightness(1.025);
     }
-    &:active {
+    &:active:not(:disabled) {
         transform: translateY(1px);
         filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3)) brightness(0.9);
     }
@@ -39,11 +41,21 @@
 .job-list-options_applied-button {
     color: var(--primary-light);
     background: var(--secondary);
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 }
 
 .job-list-options_next-button {
     color: var(--secondary);
     background: var(--primary-light);
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 }
 
 .job-list-options_next-button-icon {

@@ -187,11 +187,12 @@
     line-height: 4.5rem;
     font-size: 1.5rem;
     font-weight: 500;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
 }
 
 .add-filter-button_button {
     background-color: var(--secondary);
+    cursor: pointer;
     color: white;
 }
 

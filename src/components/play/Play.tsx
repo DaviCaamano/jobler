@@ -2,23 +2,27 @@ import '@components/play/Play.css';
 import { useState } from 'react';
 import { LoaderCircle, Play as PlayIcon, Pause } from 'lucide-react';
 import clsx from 'clsx';
+import { Setter } from '@interfaces/react-state';
 
-export const Play = () => {
-    const [paused, setPaused] = useState<boolean>(true);
-    const togglePause = () => setPaused(!paused);
+interface PlayProps {
+    crawlerActive: boolean;
+    setCrawlerActive: Setter<boolean>;
+}
+export const Play = ({ crawlerActive, setCrawlerActive }: PlayProps) => {
+    const togglePause = () => setCrawlerActive(!crawlerActive);
 
     return (
         <div className="play_options-container">
-            <PlayButton paused={paused} callback={togglePause} />
+            <PlayButton crawlerActive={crawlerActive} callback={togglePause} />
         </div>
     );
 };
 
 interface PlayButtonProps {
     callback: React.MouseEventHandler<HTMLButtonElement>;
-    paused: boolean;
+    crawlerActive: boolean;
 }
-const PlayButton = ({ callback, paused }: PlayButtonProps) => {
+const PlayButton = ({ callback, crawlerActive }: PlayButtonProps) => {
     const [hovered, setHovered] = useState<boolean>(false);
     const [recentlyClicked, setRecentlyClicked] = useState<boolean>(false);
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,9 +44,7 @@ const PlayButton = ({ callback, paused }: PlayButtonProps) => {
             onMouseLeave={onMouseLeave}
             onClick={onClick}
         >
-            {paused ? (
-                <PlayIcon className="play_icon lucide-solid" />
-            ) : (
+            {crawlerActive ? (
                 <>
                     <LoaderCircle
                         className={clsx(
@@ -56,6 +58,8 @@ const PlayButton = ({ callback, paused }: PlayButtonProps) => {
                         <Pause className="play_pause-icon lucide-solid" />
                     )}
                 </>
+            ) : (
+                <PlayIcon className="play_icon lucide-solid" />
             )}
         </button>
     );

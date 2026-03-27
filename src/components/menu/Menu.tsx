@@ -52,6 +52,7 @@ export const Menu = () => {
     const pageUrl = new URLSearchParams(window.location.search).get('pageUrl') ?? undefined;
     const engine = useRef<SearchEngine>(getSearchEngine(pageUrl).engine).current;
     const [jobList, setJobList] = useState<JobTableList>(JobTableList.jobList);
+    const [crawlerActive, setCrawlerActive] = useState<boolean>(false);
 
     if (engine === SearchEngine.none) {
         return null;
@@ -64,7 +65,11 @@ export const Menu = () => {
                 <SearchEngineIcon searchEngine={engine} />
             </div>
 
-            {jobList === JobTableList.jobList ? <JobList jobList={exampleJobList} /> : <Filters />}
+            {jobList === JobTableList.jobList ? (
+                <JobList jobList={exampleJobList} crawlerActive={crawlerActive} />
+            ) : (
+                <Filters />
+            )}
 
             <div className="menu_toggle-container">
                 <Toggle
@@ -75,7 +80,7 @@ export const Menu = () => {
                 />
             </div>
 
-            <Play />
+            <Play crawlerActive={crawlerActive} setCrawlerActive={setCrawlerActive} />
         </div>
     );
 };
