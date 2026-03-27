@@ -1,7 +1,7 @@
 import { dedupeStrings } from '@utils/dedupeStrings';
 import { storage } from '@utils/chrome/storage';
-import { FilterCategories } from '@stores/filter-store';
-import { Stores } from '@stores/store';
+import { FilterCategories } from '@interfaces/filter-store';
+import { Stores } from '@interfaces/store';
 
 export const filterStorage = {
     async getList(store: Stores.blackList | Stores.whiteList, category: FilterCategories) {

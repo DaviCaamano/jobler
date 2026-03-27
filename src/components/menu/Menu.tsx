@@ -12,8 +12,8 @@ import { Toggle } from '@components/shared/toggle/Toggle';
 import { getSearchEngine } from '@utils/getSearchEngine';
 import { getAssetUrl } from '@utils/getAssetUrl';
 import titleLogo from '#logos/title.png';
-import { jobStorage } from '@/store/job-summary.store';
-import { JobSummary } from '@stores/job-summary-store';
+import { jobStorage } from '@stores/job-summary.store';
+import { JobSummary } from '@interfaces/job-list';
 
 export const Menu = () => {
     const pageUrl = new URLSearchParams(window.location.search).get('pageUrl') ?? undefined;

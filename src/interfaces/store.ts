@@ -1,5 +1,5 @@
-import { FilterStore } from '@stores/filter-store';
-import { JobSummary } from '@stores/job-summary-store';
+import { FilterStore } from '@interfaces/filter-store';
+import { JobSummary } from '@interfaces/job-list';
 
 export enum Stores {
     blackList = 'blackList',

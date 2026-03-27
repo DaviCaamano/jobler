@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Stores } from '@stores/store';
-import { FilterCategories, FilterStore } from '@stores/filter-store';
+import { Stores } from '@interfaces/store';
+import { FilterCategories, FilterStore } from '@interfaces/filter-store';
 
 export const useStorage = (keys: Stores[], onChange: () => void | Promise<void>) => {
     useEffect(() => {

@@ -1,5 +1,5 @@
 import { Setter } from '@interfaces/react-state';
-import { FilterCategories } from '@stores/filter-store';
+import { FilterCategories } from '@interfaces/filter-store';
 
 interface FilterCategoryButtonProps {
     category: FilterCategories;

@@ -2,7 +2,7 @@ import '@components/job-list/JobList.css';
 import { CircleDashed, BadgeCheck } from 'lucide-react';
 import { JobListOptions } from '@components/job-list/JobListOptions';
 import { startTransition, useOptimistic } from 'react';
-import { JobSummary } from '@stores/job-summary-store';
+import { JobSummary } from '@interfaces/job-list';
 
 interface JobListProps {
     jobList: JobSummary[];

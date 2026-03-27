@@ -4,9 +4,9 @@ import { Toggle } from '@components/shared/toggle/Toggle';
 import { FilterItem } from '@components/filters/FilterItem';
 import { FilterCategoryButton } from '@components/filters/FilterCategoryButton';
 import { AddFilterButton } from '@components/filters/AddFilterButton';
-import { Stores } from '@stores/store';
-import { FilterCategories } from '@stores/filter-store';
-import { filterStorage } from '@/store/filter.store';
+import { Stores } from '@interfaces/store';
+import { FilterCategories } from '@interfaces/filter-store';
+import { filterStorage } from '@stores/filter.store';
 import { useFilterStorage } from '@hooks/useStorage';
 
 type FilterType = Stores.blackList | Stores.whiteList;

@@ -1,6 +1,6 @@
 import { storage } from '@utils/chrome/storage';
-import { JobSummary } from '@stores/job-summary-store';
-import { Stores } from '@stores/store';
+import { JobSummary } from '@interfaces/job-list';
+import { Stores } from '@interfaces/store';
 
 const dedupeJobSummaries = (jobs: JobSummary[]) => {
     const seen = new Set<string>();

@@ -1,4 +1,4 @@
-import { LocalStore, StoreKey, Stores } from '@stores/store';
+import { LocalStore, StoreKey, Stores } from '@interfaces/store';
 
 export const storageDefaults: LocalStore = {
     [Stores.whiteList]: {
