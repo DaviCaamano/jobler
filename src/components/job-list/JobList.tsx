@@ -5,17 +5,18 @@ import { startTransition, useOptimistic } from 'react';
 import { JobSummary } from '@interfaces/job-list';
 
 interface JobListProps {
-    jobList: JobSummary[];
     crawlerActive: boolean;
+    show: boolean;
+    jobList: JobSummary[];
 }
-export const JobList = ({ crawlerActive, jobList }: JobListProps) => {
+export const JobList = ({ crawlerActive, show, jobList }: JobListProps) => {
     const markApplied = (jobId: string) => {
         // TODO Make this function mark the job as applied
     };
 
     return (
         <>
-            <div id={'job-list_container'}>
+            <div id={'job-list_container'} style={{ display: show ? 'block' : 'none' }}>
                 <div className={'job-list_job-table'}>
                     {jobList.map((job: JobSummary, index: number) => (
                         <JobListItem
@@ -26,7 +27,7 @@ export const JobList = ({ crawlerActive, jobList }: JobListProps) => {
                     ))}
                 </div>
             </div>
-            <JobListOptions locked={crawlerActive || jobList.length === 0} />
+            <JobListOptions show={show} locked={crawlerActive || jobList.length === 0} />
         </>
     );
 };

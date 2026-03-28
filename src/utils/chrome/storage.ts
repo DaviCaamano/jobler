@@ -1,4 +1,6 @@
 import { LocalStore, StoreKey, Stores } from '@interfaces/store';
+import { FilterSettings, SettingsOptions, Tabs } from '@interfaces/settings';
+import { FilterCategories } from '@interfaces/filter-store';
 
 export const storageDefaults: LocalStore = {
     [Stores.whiteList]: {
@@ -12,6 +14,13 @@ export const storageDefaults: LocalStore = {
         company: [],
     },
     [Stores.jobList]: [],
+    [Stores.settings]: {
+        [SettingsOptions.filters]: {
+            [FilterSettings.filterList]: Stores.blackList,
+            [FilterSettings.filterCategory]: FilterCategories.text,
+        },
+        [SettingsOptions.tabs]: Tabs.jobList,
+    },
 };
 
 const getDefaultValue = <K extends StoreKey>(key: K): LocalStore[K] => {

@@ -1,19 +1,17 @@
 import '@components/shared/toggle/Toggle.css';
-import { Setter } from '@interfaces/react-state';
+import { useSticky } from '@hooks/useSticky';
 import { CSSProperties, ReactNode, useState } from 'react';
 
-interface ToggleProps<T> {
+interface ToggleProps<T extends { on: unknown; off: unknown }> {
     // Values which will be passed to the setter based on whether it is toggled on or off
-    values: {
-        on: T;
-        off: T;
-    };
+    values: T;
     // Set setter which runs when the button is pressed
     // if toggled on (right), value will be set to values.on
     // if toggled off (left), value will be set to values.off
-    setValue: Setter<T>;
-    // Initial value of toggle, sets toggle to on if defaultValue === values.on
-    defaultValue?: T;
+    setValue: (value: T['on'] | T['off']) => void;
+    // override internal logic for toggled state.
+    // Expected to match value for either values.on or values.off
+    value?: T['on'] | T['off'];
     // What text is shown on the left and right side of the toggle.
     labels?: {
         on?: ReactNode; // defaults to 'On'
@@ -26,19 +24,20 @@ interface ToggleProps<T> {
     // Set True if you want the entire horizontal space around the toggle to also trigger the toggle.
     fullWidth?: boolean;
 }
-export const Toggle = <T,>({
-    defaultValue,
+export const Toggle = <T extends { on: unknown; off: unknown }>({
     heightRem,
     labels,
+    value,
     values: { on, off },
     setValue,
     widthRem,
     fullWidth,
 }: ToggleProps<T>) => {
-    const [toggled, setToggled] = useState<boolean>(
-        typeof defaultValue !== 'undefined' && defaultValue === on
-    );
+    const [toggled, setToggled] = useState<boolean>(typeof value !== 'undefined' && value === on);
 
+    useSticky(value, () => {
+        setToggled(typeof value !== 'undefined' && value === on);
+    });
     const handleToggle = () => {
         setToggled(!toggled);
         setValue(toggled ? off : on);
