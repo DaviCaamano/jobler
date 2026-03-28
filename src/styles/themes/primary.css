@@ -5,6 +5,7 @@
     --primary-disabled: #64787e;
     --secondary: #376fa6;
     --secondary-light: #5082b1;
+    --secondary-dark: #1b3753;
     --secondary-disabled: #3c5065;
     --primary-bg: linear-gradient(45deg, var(--primary), var(--primary-light));
     --primary-bg-flipped: linear-gradient(45deg, var(--primary-light), var(--primary));

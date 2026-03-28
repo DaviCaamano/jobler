@@ -18,18 +18,11 @@
     border-bottom: 1px solid #000000;
 }
 
-.menu_logo {
-    width: 13.91rem;
-    height: 6.3rem;
-    position: relative;
-    top: -10px;
-    left: -10px;
-}
-
 .menu_toggle-container {
     position: absolute;
     bottom: 0.3rem;
     width: 100%;
     height: 3.8rem;
 }
+
 

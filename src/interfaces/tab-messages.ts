@@ -1,5 +1,3 @@
-export enum TabType {
-    iconClicked = 'iconClicked',
-    SearchEngineRequest = 'SearchEngineRequest',
-    SearchEngineResponse = 'SearchEngineResponse',
+export enum ChromeMessage {
+    toggleMenu = 'toggleMenu',
 }

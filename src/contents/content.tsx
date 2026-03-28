@@ -1,4 +1,4 @@
-import { TabType } from '@interfaces/tab-messages';
+import { ChromeMessage } from '@interfaces/tab-messages';
 
 const CONTAINER_ID = 'jobler-menu-root-container';
 const IFRAME_ID = 'jobler-menu-iframe';
@@ -37,7 +37,7 @@ document.body.appendChild(container);
 let opened = false;
 
 chrome.runtime.onMessage.addListener((message) => {
-    if (message.type === TabType.iconClicked) {
+    if (message.type === ChromeMessage.toggleMenu) {
         opened = !opened;
         container.style.display = opened ? 'block' : 'none';
     }
