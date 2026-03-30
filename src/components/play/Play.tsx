@@ -7,12 +7,13 @@ import { Setter } from '@interfaces/react-state';
 interface PlayProps {
     crawlerActive: boolean;
     setCrawlerActive: Setter<boolean>;
+    style?: React.CSSProperties;
 }
-export const Play = ({ crawlerActive, setCrawlerActive }: PlayProps) => {
+export const Play = ({ crawlerActive, setCrawlerActive, style }: PlayProps) => {
     const togglePause = () => setCrawlerActive(!crawlerActive);
 
     return (
-        <div className="play_options-container">
+        <div className="play_options-container" style={style}>
             <PlayButton crawlerActive={crawlerActive} callback={togglePause} />
         </div>
     );

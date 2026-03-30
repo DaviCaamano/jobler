@@ -15,6 +15,8 @@ import { Settings, SettingsOptions, Tabs } from '@interfaces/settings';
 import { storage } from '@utils/chrome/storage';
 import { Stores } from '@interfaces/store';
 import { Header } from '@components/header/Header';
+import { useSticky } from '@hooks/useSticky';
+import { ChromeMessage } from '@interfaces/tab-messages';
 
 export const Menu = () => {
     const pageUrl = new URLSearchParams(window.location.search).get('pageUrl') ?? undefined;
@@ -23,6 +25,17 @@ export const Menu = () => {
     const [tab, setTab] = useState<Tabs>(Tabs.jobList);
     const [crawlerActive, setCrawlerActive] = useState<boolean>(false);
     const [jobList, setJobList] = useState<JobSummary[]>([]);
+
+    // Active the crawler context script
+    useSticky(crawlerActive, async () => {
+        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+        if (tab?.id) {
+            await chrome.tabs.sendMessage(tab.id, {
+                type: crawlerActive ? ChromeMessage.startCrawler : ChromeMessage.stopCrawler,
+            });
+        }
+    });
 
     useEffect(() => {
         void jobStorage.getAll().then(setJobList);

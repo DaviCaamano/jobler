@@ -1,7 +1,7 @@
 import { ChromeMessage } from '@interfaces/tab-messages';
 
-const CONTAINER_ID = 'jobler-menu-root-container';
-const IFRAME_ID = 'jobler-menu-iframe';
+const CONTAINER_ID = 'jobler-crawler-root-container';
+const IFRAME_ID = 'jobler-crawler-iframe';
 
 document.getElementById(CONTAINER_ID)?.remove();
 
@@ -11,7 +11,8 @@ container.id = CONTAINER_ID;
 Object.assign(container.style, {
     position: 'fixed',
     top: '130px',
-    right: '20px',
+    left: '50%',
+    transform: 'translateX(-50%)',
     width: '400px',
     height: '600px',
     zIndex: '1000000',
@@ -29,16 +30,18 @@ Object.assign(iframe.style, {
 });
 
 const pageUrl = encodeURIComponent(window.location.href);
-iframe.src = `${chrome.runtime.getURL('menu.html')}?pageUrl=${pageUrl}`;
+iframe.src = `${chrome.runtime.getURL('src/views/crawler.html')}?pageUrl=${pageUrl}`;
 
 container.appendChild(iframe);
 document.body.appendChild(container);
 
-let opened = false;
-
 chrome.runtime.onMessage.addListener((message) => {
-    if (message.type === ChromeMessage.toggleMenu) {
-        opened = !opened;
-        container.style.display = opened ? 'block' : 'none';
+    if (message.type === ChromeMessage.startCrawler) {
+        // Starting crawler
+        container.style.display = 'block';
+    }
+    if (message.type === ChromeMessage.stopCrawler) {
+        // Stopping crawler
+        container.style.display = 'none';
     }
 });

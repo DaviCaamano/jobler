@@ -5,11 +5,14 @@
 }
 
 .filters_toggle-container {
-    height: 3rem;
+    height: 6rem;
     display: flex;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid var(--primary-dark);
+    background-color: var(--secondary);
+    border-radius: 12px;
+    margin-bottom: 1.2rem
 }
 
 .filters_item {
@@ -36,7 +39,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         padding-left: 0.8rem;
-        background: #d9eef8;
+        background: var(--primary-light);
         text-transform: capitalize;
     }
 
@@ -55,21 +58,19 @@
             width: 2.2rem;
             justify-content: center;
             align-items: center;
-            background: #d9eef8;
+            background: var(--primary-light);
             cursor: pointer;
             border-radius: 50%;
 
             &:hover {
                 background-color: var(--secondary);
-                color: white;
+                color: var(--primary-light);
             }
         }
     }
 }
 
 .filters-category-button_container {
-    position: absolute;
-    top: 3.1rem;
     width: 100%;
     height: 3rem;
     display: flex;
@@ -79,18 +80,28 @@
 
 .filters-category-button_button {
     position: relative;
-    top: -1px;
-    width: 33%;
+    flex: 1;
     height: 3rem;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 0 var(--secondary);
+    border: 1px solid var(--primary-dark);
     font-size: 1.5rem;
     font-weight: 500;
+    box-shadow: 0 1px 2px var(--secondary-dark);
+
+    &:first-child {
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+    }
+
+
+    &:last-child {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
 
     &.text-filter {
         &.on {
             background-color: var(--secondary);
-            color: white;
+            color: var(--primary-light);
         }
 
         &:not(.on) {
@@ -106,7 +117,7 @@
     &.title-filter {
         &.on {
             background-color: var(--secondary);
-            color: white;
+            color: var(--primary-light);
         }
 
         &:not(.on) {
@@ -122,7 +133,7 @@
 
         &.on {
             background-color: var(--secondary);
-            color: white;
+            color: var(--primary-light);
         }
 
         &:not(.on) {
@@ -131,11 +142,11 @@
     }
 
     &:first-of-type {
-        border-bottom-left-radius: 7px;
+        border-bottom-left-radius: 12px;
     }
 
     &:last-of-type {
-        border-bottom-right-radius: 7px;
+        border-bottom-right-radius: 12px;
     }
 
     &:active {
@@ -144,14 +155,12 @@
 }
 
 .add-filter-button_container {
-    position: absolute;
     bottom: -8px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 6rem;
-    padding: 1.5rem 1rem 0 1rem;
     gap: 0.2rem;
 }
 
@@ -181,7 +190,7 @@
 }
 
 .add-filter-button_input {
-    background-color: #ffffff;
+    background-color: var(--primary-light);
     color: var(--secondary);
     text-align: center;
     padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* space for button */
@@ -199,13 +208,14 @@
     flex-direction: row;
     font-size: 1.5rem;
     font-weight: 500;
-    border-radius: 0.5rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 1px 2px var(--secondary-dark);
 }
 
 .add-filter-button_button {
     background-color: var(--secondary);
     cursor: pointer;
-    color: white;
+    color: var(--primary-light);
 }
 
 .add-filter-button_icon {
@@ -215,24 +225,25 @@
 .filters_job-list-container {
     position: relative;
     width: 100%;
-    height: 35rem;
-    border-width: 1px 0 0 0;
-    border-style: solid;
+    height: 27rem;
     background-color: var(--primary);
     box-sizing: border-box;
-    padding: 2.9rem 0 5rem 0;
     overflow: hidden;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 1px 2px var(--secondary-dark);
+    border-radius: 12px;
 }
 
 .filters_job-table {
     display: flex;
     flex-direction: column;
-    padding: 0;
     height: 27rem;
     overflow: auto;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid var(--primary-dark);
     margin: 0 0 1px 0;
     border-collapse: collapse;
+    background: var(--secondary);
+    border-radius: 1.2rem;
 
     &::-webkit-scrollbar {
         width: 6px;

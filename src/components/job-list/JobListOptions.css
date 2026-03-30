@@ -1,15 +1,14 @@
 .job-list-options_container {
     position: relative;
-    padding: 1.5rem 1rem 0 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.2rem;
 }
 
-.job-list-options_applied-button {
+.job-list-options_start-hunt-button {
     position: relative;
-    top: -2px;
+    top: -1px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,7 +17,8 @@
     padding: 0;
     font-weight: 550;
     font-size: 2rem;
-    border-radius: 0.5rem;
+    border-radius: 12px;
+
     filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
 
     &:hover:not(:disabled) {
@@ -36,7 +36,7 @@
     }
 }
 
-.job-list-options_applied-button {
+.job-list-options_start-hunt-button {
     color: var(--primary-light);
     background: var(--secondary);
 

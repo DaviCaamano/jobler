@@ -2,12 +2,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 3rem;
+    width: 100%;
+    padding: 0 1.6rem;
 }
 
 .toggle_toggle {
     display: inline-flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
     gap: 0.8rem;
     background: transparent;
     border: none;
@@ -33,16 +37,16 @@
     left: 0.1rem;
     border-radius: 50%;
     background: var(--secondary);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 2px var(--secondary-dark);
     transition: transform 0.25s ease;
 }
 
 .toggle_label {
     display: inline-block;
     width: 10rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 500;
-    color: #1f2937;
+    color: var(--secondary-dark);
 
     &:not(.on) {
         opacity: 0.6;

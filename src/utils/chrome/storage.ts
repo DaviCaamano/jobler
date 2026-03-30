@@ -1,7 +1,23 @@
 import { LocalStore, StoreKey, Stores } from '@interfaces/store';
 import { FilterSettings, SettingsOptions, Tabs } from '@interfaces/settings';
 import { FilterCategories } from '@interfaces/filter-store';
+import { SearchEngine } from '@interfaces/search-engine';
 
+export const crawlerProgressDefaults = {
+    index: 0,
+    page: 0,
+    jobId: undefined,
+    currentTitle: undefined,
+    currentCompany: undefined,
+    nextTitle: undefined,
+    nextCompany: undefined,
+    processedCount: 0,
+    skippedCount: 0,
+    ttlCount: 0,
+    elapsedTime: undefined,
+    remainingTime: undefined,
+    isRunning: false,
+};
 export const storageDefaults: LocalStore = {
     [Stores.whiteList]: {
         text: [],
@@ -20,6 +36,11 @@ export const storageDefaults: LocalStore = {
             [FilterSettings.filterCategory]: FilterCategories.text,
         },
         [SettingsOptions.tabs]: Tabs.jobList,
+    },
+    [Stores.crawler]: {
+        [SearchEngine.linkedin]: crawlerProgressDefaults,
+        [SearchEngine.ziprecruiter]: crawlerProgressDefaults,
+        [SearchEngine.indeed]: crawlerProgressDefaults,
     },
 };
 

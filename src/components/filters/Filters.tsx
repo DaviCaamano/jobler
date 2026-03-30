@@ -88,6 +88,11 @@ export const Filters = ({ show }: FiltersProps) => {
 
     return (
         <div className="filters_container" style={{ display: show ? 'flex' : 'none' }}>
+            <AddFilterButton
+                onSubmit={onAdd}
+                placeholder={`New ${filterCategory} ${filter === Stores.blackList ? 'blacklist' : 'whitelist'} item`}
+            />
+
             <div className="filters_job-list-container">
                 <div className="filters_job-table">
                     {filterList.map((item: string, index: number) => (
@@ -95,11 +100,6 @@ export const Filters = ({ show }: FiltersProps) => {
                     ))}
                 </div>
             </div>
-
-            <AddFilterButton
-                onSubmit={onAdd}
-                placeholder={`New ${filterCategory} ${filter === Stores.blackList ? 'blacklist' : 'whitelist'} item`}
-            />
 
             <div className="filters_toggle-container">
                 <FilterCategoryButton
@@ -113,6 +113,7 @@ export const Filters = ({ show }: FiltersProps) => {
                     labels={{ on: 'White List', off: 'Black List' }}
                     widthRem={6}
                     heightRem={2.25}
+                    textStyle={{ color: '#ffffff' }}
                 />
             </div>
         </div>

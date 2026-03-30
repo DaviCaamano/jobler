@@ -500,6 +500,7 @@
 
         // Moves to next page or terminates the crawl if finished.
         const next = () => {
+            // BOOKMARK._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*
             // Move to next page or finish crawl
             const button = document.querySelector(NEXT_PAGE_BUTTON_SELECTOR);
             if (!button) {

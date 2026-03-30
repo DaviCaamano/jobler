@@ -2,10 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Menu } from '@components/menu/Menu';
 
-const rootEl = document.getElementById('root');
+const root = document.getElementById('__jobler__menu-root');
 
-if (!rootEl) {
+if (!root) {
     throw new Error('Missing #root in menu.html');
 }
 
-createRoot(rootEl).render(<Menu />);
+createRoot(root).render(<Menu />);

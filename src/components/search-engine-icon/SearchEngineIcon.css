@@ -11,11 +11,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border-color: #000000;
+        border-color: var(--secondary-dark);
         padding-right: 5px;
 
         .indeed {
-            color: #000000;
+            color: var(--secondary-dark);
             position: relative;
             left: -1px;
             top: -2px;
@@ -27,8 +27,8 @@
         justify-content: center;
         align-items: center;
         background: #ffffff;
-        border: 1px solid #0a66c2;
-        color: #0a66c2;
+        border: 1px solid var(--secondary-light);
+        color: var(--secondary-light);
         padding: 5px;
         height: 4rem;
         width: 4rem;

@@ -1,0 +1,30 @@
+<!doctype html>
+<html style="font-size: 10px">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Jobler</title>
+        <style>
+            html,
+            body,
+            #__jobler__crawler-root {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                background: transparent;
+                overflow: hidden;
+            }
+
+            #__jobler__crawler-root {
+                padding: 2.5rem 0;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="__jobler__crawler-root"></div>
+        <script type="module" src="../views/render/crawler-render.tsx"></script>
+    </body>
+</html>

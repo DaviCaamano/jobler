@@ -17,7 +17,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         padding-left: 0.8rem;
-        background: #d9eef8;
+        background: var(--primary-light);
         text-transform: capitalize;
     }
 
@@ -44,13 +44,13 @@
             width: 2.2rem;
             justify-content: center;
             align-items: center;
-            background: #d9eef8;
+            background: var(--primary-light);
             cursor: pointer;
             border-radius: 50%;
 
             &:hover {
                 background-color: var(--secondary);
-                color: white;
+                color: var(--primary-light);;
             }
         }
     }
@@ -58,13 +58,13 @@
 
 #job-list_container {
     width: 100%;
-    height: 33rem;
+    height: 34.2rem;
     overflow-y: auto;
     overflow-x: hidden;
-    border-width: 0 0 1px 0;
-    border-style: solid;
-    background-color: var(--primary);
+    background-color: var(--secondary-light);
+    border-radius: 12px;
     box-sizing: border-box;
+    margin-bottom: 1.2rem;
 
     &::-webkit-scrollbar {
         width: 6px;
@@ -72,7 +72,7 @@
 
     &::-webkit-scrollbar-thumb {
         background: rgba(0, 0, 0, 1);
-        border-radius: 999px;
+        border-radius: 50%;
     }
 
     &::-webkit-scrollbar-track {

@@ -31,7 +31,8 @@ export default defineConfig({
     build: {
         rollupOptions: {
             input: {
-                menu: resolve(__dirname, 'menu.html'),
+                menu: resolve(__dirname, 'src/views/menu.html'),
+                crawler: resolve(__dirname, 'src/views/crawler.html'),
             },
         },
     },

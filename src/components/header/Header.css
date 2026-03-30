@@ -19,7 +19,7 @@
 }
 
 .header_right-side-container {
-    padding: 0.5rem 0.5rem 0 5rem;
+    padding: 0 0 0 5rem;
 }
 
 .header_logo {
@@ -30,8 +30,8 @@
 
 .header_icon-container {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0;
+    right: 0;
 }
 
 .header_close-button {

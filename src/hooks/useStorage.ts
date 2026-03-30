@@ -1,12 +1,21 @@
 import { useCallback, useEffect } from 'react';
-import { Stores } from '@interfaces/store';
+import { LocalStore, Stores } from '@interfaces/store';
 import { FilterCategories, FilterStore } from '@interfaces/filter-store';
 import { Settings, SettingsOptions } from '@interfaces/settings';
-import { storage } from '@utils/chrome/storage';
 import { deepEqual } from '@utils/deepEqual';
 import { useSticky } from '@hooks/useSticky';
+import { settingsStore } from '@stores/settingsStore';
+import { storage } from '@utils/chrome/storage';
 
-export const useStorage = (key: Stores | Stores[], onChange: () => void | Promise<void>) => {
+type UseStorage = <K extends Stores>(
+    key: K,
+    onChange: (newValue: Partial<LocalStore[K]>) => void | Promise<void>
+) => void | Promise<void>;
+
+export const useStorage: UseStorage = <K extends Stores>(
+    key: K,
+    onChange: (newValue: Partial<LocalStore[K]>) => void | Promise<void>
+) => {
     useEffect(() => {
         const handleStorageChange = (
             changes: { [key: string]: chrome.storage.StorageChange },
@@ -14,12 +23,14 @@ export const useStorage = (key: Stores | Stores[], onChange: () => void | Promis
         ) => {
             if (areaName !== 'local') return;
 
-            const didRelevantKeyChange = Array.isArray(key)
-                ? key.some((key) => changes[key])
-                : !!changes[key];
-            if (!didRelevantKeyChange) return;
+            const change = changes[key];
+            if (!change) return;
 
-            void onChange();
+            const oldValue = change.oldValue;
+            const newValue = change.newValue as Partial<LocalStore[K]>;
+            if (!deepEqual(oldValue, newValue)) {
+                void onChange(newValue);
+            }
         };
 
         chrome.storage.onChanged.addListener(handleStorageChange);
@@ -30,37 +41,25 @@ export const useStorage = (key: Stores | Stores[], onChange: () => void | Promis
     }, [key, onChange]);
 
     useEffect(() => {
-        void onChange();
+        storage.get(key).then((storageInit) => {
+            void onChange(storageInit as Partial<LocalStore[K]>);
+        });
     }, []);
 };
 
 // Hook for running a callback when a specific settings changes.
 export const useSettingStorage = (
-    keys: SettingsOptions | SettingsOptions[],
+    keys: SettingsOptions,
     onChange: (changes: Partial<Settings>) => void | Promise<void>
 ) => {
     const handleStorageChange = useCallback(
         (changes: { [x: string]: chrome.storage.StorageChange }, areaName: string) => {
             if (areaName !== 'local') return;
 
-            if (Array.isArray(keys)) {
-                for (let key of keys) {
-                    if (
-                        changes[key] &&
-                        !deepEqual(
-                            (changes[Stores.settings].newValue as Settings)[key],
-                            (changes[Stores.settings].oldValue as Settings)[key]
-                        )
-                    ) {
-                        return onChange(changes[key].newValue as Partial<Settings>);
-                    }
-                }
-            } else {
-                const newSettings = changes[Stores.settings].newValue as Settings;
-                const oldSettings = changes[Stores.settings].oldValue as Settings;
-                if (!deepEqual(newSettings[keys], oldSettings[keys])) {
-                    onChange(newSettings);
-                }
+            const newSettings = changes[Stores.settings].newValue as Settings;
+            const oldSettings = changes[Stores.settings].oldValue as Settings;
+            if (!deepEqual(newSettings[keys], oldSettings[keys])) {
+                onChange(newSettings);
             }
         },
         []
@@ -75,7 +74,7 @@ export const useSettingStorage = (
 
     // Initialize State from Storage
     useEffect(() => {
-        storage.get(Stores.settings).then((currentSettings) => {
+        settingsStore.get().then((currentSettings: Settings) => {
             void onChange(currentSettings);
         });
     }, []);

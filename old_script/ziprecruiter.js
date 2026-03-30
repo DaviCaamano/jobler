@@ -531,6 +531,7 @@
 
         // Moves to next page or terminates the crawl if finished.
         const next = async () => {
+            // BOOKMARK._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*
             GM_setValue(LOCAL_STORAGE_KEY, {
                 jobData,
                 jobSummaries,

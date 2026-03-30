@@ -549,12 +549,11 @@
     const jobCollector = async () => {
         startTime = performance.now();
         crawlerInProgress = true;
-        let jobList, jobListContainer, maxJobs, ScrollableContainer;
+        let jobList, maxJobs, ScrollableContainer;
         let jobsSkipped = 0;
 
         // Returns elements needed for iterating through list of jobs.
         const getJobListElements = () => {
-            jobListContainer = document.querySelector(JOB_LIST_SELECTOR);
             jobList = Array.from(document.querySelectorAll(JOB_ITEM_SELECTOR));
             jobs_per_page = jobList.length;
             maxJobs = jobs_per_page - 1;
@@ -562,6 +561,7 @@
 
         // Moves to next page or terminates the crawl if finished.
         const next = async () => {
+            // BOOKMARK._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*+._.+*
             GM_setValue(LOCAL_STORAGE_KEY, {
                 jobData,
                 jobSummaries,

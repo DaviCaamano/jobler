@@ -23,6 +23,8 @@ interface ToggleProps<T extends { on: unknown; off: unknown }> {
     heightRem?: number;
     // Set True if you want the entire horizontal space around the toggle to also trigger the toggle.
     fullWidth?: boolean;
+    // Set text style
+    textStyle?: CSSProperties;
 }
 export const Toggle = <T extends { on: unknown; off: unknown }>({
     heightRem,
@@ -32,6 +34,7 @@ export const Toggle = <T extends { on: unknown; off: unknown }>({
     setValue,
     widthRem,
     fullWidth,
+    textStyle,
 }: ToggleProps<T>) => {
     const [toggled, setToggled] = useState<boolean>(typeof value !== 'undefined' && value === on);
 
@@ -43,8 +46,8 @@ export const Toggle = <T extends { on: unknown; off: unknown }>({
         setValue(toggled ? off : on);
     };
 
-    const width = widthRem ?? 8;
-    const height = heightRem ?? 3;
+    const width = widthRem ?? 6;
+    const height = heightRem ?? 2.25;
 
     const trackStyle = {
         width: width + 'rem',
@@ -72,13 +75,13 @@ export const Toggle = <T extends { on: unknown; off: unknown }>({
                 aria-pressed={toggled}
                 type="button"
             >
-                <span className={`toggle_label left ${toggled ? 'off' : 'on'}`}>
+                <span className={`toggle_label left ${toggled ? 'off' : 'on'}`} style={textStyle}>
                     {labels?.off ?? 'On'}
                 </span>
                 <span className="toggle_track" style={trackStyle}>
                     <span className="toggle_thumb" style={thumbStyle} />
                 </span>
-                <span className={`toggle_label right ${toggled ? 'on' : 'off'}`}>
+                <span className={`toggle_label right ${toggled ? 'on' : 'off'}`} style={textStyle}>
                     {labels?.on ?? 'Off'}
                 </span>
             </button>

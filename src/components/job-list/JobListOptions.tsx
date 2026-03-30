@@ -8,7 +8,7 @@ export const JobListOptions = ({ locked = true, show }: JobListOptionsProps) => 
     return (
         <div className="job-list-options_container" style={{ display: show ? 'flex' : 'none' }}>
             <button
-                className="job-list-options_applied-button button-lighting"
+                className="job-list-options_start-hunt-button button-lighting"
                 onClick={() => {}}
                 disabled={locked}
             >
