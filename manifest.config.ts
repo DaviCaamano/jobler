@@ -29,7 +29,11 @@ export default defineManifest({
                 'https://www.ziprecruiter.com/*',
                 'https://dnd-binders.vercel.app/*',
             ],
-            js: ['src/contents/menu-init.tsx', 'src/contents/crawler-init.tsx'],
+            js: [
+                'src/contents/menu-init.tsx',
+                'src/contents/crawler-init.tsx',
+                'src/contents/scripts/run-crawler',
+            ],
         },
     ],
     web_accessible_resources: [

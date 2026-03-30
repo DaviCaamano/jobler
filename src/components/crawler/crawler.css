@@ -1,5 +1,6 @@
 .crawler_popup {
     position: relative;
+    overflow: visible;
     width: 32rem;
     padding: 1.4rem;
     border-radius: 1.6rem;
@@ -10,14 +11,14 @@
     font-family: Inter, Arial, sans-serif;
 }
 
-.crawler_popup__header {
+.crawler_header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 1.2rem;
 }
 
-.crawler_popup__eyebrow {
+.crawler_eyebrow {
     margin: 0 0 0.2rem;
     font-size: 1.1rem;
     color: var(--secondary-dark);
@@ -25,7 +26,7 @@
     letter-spacing: 0.08em;
 }
 
-.crawler_popup__title {
+.crawler_title {
     color: var(--secondary-dark);
     margin: 0;
     font-size: 2rem;
@@ -33,20 +34,20 @@
     line-height: 1.1;
 }
 
-.crawler_popup__current {
+.crawler_current {
     padding: 1.2rem;
     border-radius: 1.2rem;
     background: var(--secondary);
     margin-bottom: 1.2rem;
 }
 
-.crawler_popup__label {
+.crawler_label {
     margin: 0;
     font-size: 1.15rem;
     color: var(--primary);
 }
 
-.crawler_popup__job-title {
+.crawler_job-title {
     margin: 0.5rem 0 0.35rem;
     font-size: 1.45rem;
     font-weight: 600;
@@ -54,59 +55,59 @@
     color: var(--primary-light);
 }
 
-.crawler_popup__company {
+.crawler_company {
     margin: 0;
     font-size: 1.25rem;
     color: var(--primary-light);
 }
 
-.crawler_popup__stats {
+.crawler_stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.8rem;
     margin-bottom: 1.2rem;
 }
 
-.crawler_popup__stat-card {
+.crawler_stat-card {
     padding: 1rem 1.2rem;
     border-radius: 1.2rem;
     background: var(--secondary);
 }
 
-.crawler_popup__value {
+.crawler_value {
     margin: 0.35rem 0 0;
     font-size: 2rem;
     font-weight: 700;
     color: var(--primary-light);
 }
 
-.crawler_popup__timing {
+.crawler_timing {
     padding: 1.2rem;
     border-radius: 1.2rem;
     background: var(--secondary);
 }
 
-.crawler_popup__timing-row {
+.crawler_timing-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.crawler_popup__timing-row + .crawler_popup__timing-row {
+.crawler_timing-row + .crawler_timing-row {
     margin-top: 0.8rem;
 }
 
-.crawler_popup__timing-value {
+.crawler_timing-value {
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--primary-light);
 }
 
-.crawler_popup__progress {
+.crawler_progress {
     margin-top: 1.2rem;
 }
 
-.crawler_popup__progress-bar {
+.crawler_progress-bar {
     width: 100%;
     height: 0.8rem;
     border-radius: 999px;
@@ -114,7 +115,7 @@
     overflow: hidden;
 }
 
-.crawler_popup__progress-fill {
+.crawler_progress-fill {
     width: 56%;
     height: 100%;
     border-radius: 999px;
