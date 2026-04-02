@@ -12,7 +12,7 @@
     justify-content: center;
     background-color: var(--secondary);
     border-radius: 12px;
-    margin-bottom: 1.2rem
+    margin-bottom: 1.2rem;
 }
 
 .filters_item {
@@ -91,7 +91,6 @@
         border-top-left-radius: 12px;
         border-bottom-left-radius: 12px;
     }
-
 
     &:last-child {
         border-top-right-radius: 12px;

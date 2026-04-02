@@ -42,6 +42,13 @@ export const next = async (
         void sendMessage(ChromeMessage.crawlerFinished);
     } else {
         click(button);
+        // TODO ADD ESLINT
+        // TODO ADD ESLINT
+        // TODO ADD ESLINT
+        // TODO ADD ESLINT
+        // TODO ADD ESLINT
+        // TODO ADD ESLINT
+        // TODO ADD ESLINT
         // TODO replace this toast call with an update to the crawler UI
         // TODO replace this toast call with an update to the crawler UI
         // TODO replace this toast call with an update to the crawler UI

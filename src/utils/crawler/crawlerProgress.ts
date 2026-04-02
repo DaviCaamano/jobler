@@ -30,32 +30,32 @@ export const checkFilters = async (
     filters: JobFilters
 ) => {
     const reasons: string[] = [];
-    for (let filter of filters.whiteList.text) {
+    for (const filter of filters.whiteList.text) {
         if (!passesWhiteList(filter, text)) {
             reasons.push(`Missing word: ${filter}`);
         }
     }
-    for (let filter of filters.whiteList.title) {
+    for (const filter of filters.whiteList.title) {
         if (!passesWhiteList(filter, title)) {
             reasons.push(`Missing title: ${filter}`);
         }
     }
-    for (let filter of filters.whiteList.company) {
+    for (const filter of filters.whiteList.company) {
         if (!passesBlackList(filter, companyName)) {
             reasons.push(`Missing company name: ${filter}`);
         }
     }
-    for (let filter of filters.blackList.text) {
+    for (const filter of filters.blackList.text) {
         if (!passesBlackList(filter, text)) {
             reasons.push(`Banned word: ${filter}`);
         }
     }
-    for (let filter of filters.blackList.title) {
+    for (const filter of filters.blackList.title) {
         if (!passesBlackList(filter, title)) {
             reasons.push(`Banned title: ${filter}`);
         }
     }
-    for (let filter of filters.blackList.company) {
+    for (const filter of filters.blackList.company) {
         if (!passesBlackList(filter, companyName)) {
             reasons.push(`Banned company name: ${filter}`);
         }
@@ -103,7 +103,7 @@ export const createCrawler = async ({
             },
         },
         index: index ?? 0,
-        isRunning: !!isRunning,
+        isRunning: isRunning ?? false,
         jobList:
             typeof jobList === 'string'
                 ? ((await csvToJsonArray(jobList)) as unknown as JobSummary[])
@@ -174,7 +174,7 @@ export const addJob = async (job: JobSummary, text: string, progress: EngineCraw
         if (await checkFilters(text, title, companyName, progress.filters)) {
             return updateCrawler(progress.engine, {
                 ...progress,
-                jobList: [...progress?.jobList, job],
+                jobList: [...(progress?.jobList ?? []), job],
                 processedCount: progress.processedCount + 1,
             });
         } else {
