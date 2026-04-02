@@ -4,7 +4,7 @@ export default defineManifest({
     manifest_version: 3,
     name: 'jobler',
     version: '0.0.0',
-    permissions: ['activeTab', 'scripting', 'storage'],
+    permissions: ['activeTab', 'scripting', 'storage', 'unlimitedStorage'],
     description:
         'Job Crawler that reads your LinkedIn, Ziprecruiter, and Indeed search results, runs them through your filters, and turns what remains into an excel sheet.',
     icons: {
@@ -18,7 +18,7 @@ export default defineManifest({
         default_icon: 'assets/icons/logos/logo 16.png',
     },
     background: {
-        service_worker: 'src/backgrounds/open-menu-listener.ts',
+        service_worker: 'src/backgrounds/message-listener.ts',
         type: 'module',
     },
     content_scripts: [

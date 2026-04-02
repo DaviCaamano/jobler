@@ -1,4 +1,4 @@
-import { storage } from '@utils/chrome/storage';
+import { storage } from '@stores/storage';
 import { Stores } from '@interfaces/store';
 import { FilterGroupSettings, Settings, SettingsOptions, Tabs } from '@interfaces/settings';
 

@@ -1,48 +1,5 @@
 import { LocalStore, StoreKey, Stores } from '@interfaces/store';
-import { FilterSettings, SettingsOptions, Tabs } from '@interfaces/settings';
-import { FilterCategories } from '@interfaces/filter-store';
-import { SearchEngine } from '@interfaces/search-engine';
-
-export const crawlerProgressDefaults = {
-    index: 0,
-    page: 0,
-    jobId: undefined,
-    currentTitle: undefined,
-    currentCompany: undefined,
-    nextTitle: undefined,
-    nextCompany: undefined,
-    processedCount: 0,
-    skippedCount: 0,
-    ttlCount: 0,
-    elapsedTime: undefined,
-    remainingTime: undefined,
-    isRunning: false,
-};
-export const storageDefaults: LocalStore = {
-    [Stores.whiteList]: {
-        text: [],
-        title: [],
-        company: [],
-    },
-    [Stores.blackList]: {
-        text: [],
-        title: [],
-        company: [],
-    },
-    [Stores.jobList]: [],
-    [Stores.settings]: {
-        [SettingsOptions.filters]: {
-            [FilterSettings.filterList]: Stores.blackList,
-            [FilterSettings.filterCategory]: FilterCategories.text,
-        },
-        [SettingsOptions.tabs]: Tabs.jobList,
-    },
-    [Stores.crawler]: {
-        [SearchEngine.linkedin]: crawlerProgressDefaults,
-        [SearchEngine.ziprecruiter]: crawlerProgressDefaults,
-        [SearchEngine.indeed]: crawlerProgressDefaults,
-    },
-};
+import { storageDefaults } from '@utils/crawler/crawlerStore';
 
 const getDefaultValue = <K extends StoreKey>(key: K): LocalStore[K] => {
     return structuredClone(storageDefaults[key]);

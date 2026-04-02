@@ -9,7 +9,7 @@ import { FilterCategories } from '@interfaces/filter-store';
 import { filterStorage } from '@stores/filter.store';
 import { useFilterStorage, useSettingStorage } from '@hooks/useStorage';
 import { FilterSettings, Settings, SettingsOptions } from '@interfaces/settings';
-import { storage } from '@utils/chrome/storage';
+import { storage } from '@stores/storage';
 
 type FilterType = Stores.blackList | Stores.whiteList;
 
@@ -22,7 +22,7 @@ export const Filters = ({ show }: FiltersProps) => {
     const [filterList, setFilterList] = useState<string[]>([]);
 
     const loadFilters = useCallback(async () => {
-        const newFilterList = await filterStorage.getList(filter, filterCategory);
+        const newFilterList = await filterStorage.get(filter, filterCategory);
         setFilterList(newFilterList);
     }, [filter, filterCategory]);
 

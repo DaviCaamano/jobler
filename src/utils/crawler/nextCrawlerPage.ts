@@ -1,9 +1,11 @@
 import { SearchEngine } from '@interfaces/search-engine';
 import { jobStorage } from '@stores/job-summary.store';
 import { JobSummary } from '@interfaces/job-list';
-import { CrawlerProgress } from '@interfaces/crawler/crawler';
 import { click } from '@utils/crawler/click';
 import { sleep } from '@utils/sleep';
+import { CrawlerProgress } from '@interfaces/crawler/crawler';
+import { sendMessage } from '@utils/chrome/send-message';
+import { ChromeMessage } from '@interfaces/tab-messages';
 
 // LinkedIn Selectors
 const LI_NEXT_PAGE_BUTTON_SELECTOR = '.jobs-search-pagination__button--next';
@@ -37,9 +39,14 @@ export const next = async (
     // Move to next page or finish crawl
     if (!button || button.disabled) {
         crawler.page += 1;
-        // TODO WRITE LOGIC TO INDICATE THAT THE CRAWLER SHOULD END
+        void sendMessage(ChromeMessage.crawlerFinished);
     } else {
         click(button);
+        // TODO replace this toast call with an update to the crawler UI
+        // TODO replace this toast call with an update to the crawler UI
+        // TODO replace this toast call with an update to the crawler UI
+        // TODO replace this toast call with an update to the crawler UI
+        // TODO replace this toast call with an update to the crawler UI
         // TODO replace this toast call with an update to the crawler UI
         //toast('Moving to next page...');
 

@@ -1,4 +1,4 @@
-import { storage } from '@utils/chrome/storage';
+import { storage } from '@stores/storage';
 import { JobSummary } from '@interfaces/job-list';
 import { Stores } from '@interfaces/store';
 

@@ -1,16 +1,14 @@
-const sendMessage = async (message: unknown) => {
-    const tabs = await chrome.tabs.query({});
+import { ChromeMessage } from '@interfaces/tab-messages';
 
-    await Promise.all(
-        tabs
-            .filter((tab) => typeof tab.id === 'number')
-            .map(
-                (tab) =>
-                    new Promise<void>((resolve) => {
-                        chrome.tabs.sendMessage(tab.id!, message, () => {
-                            resolve();
-                        });
-                    })
-            )
-    );
+export const sendMessage = async (messageType: ChromeMessage, message?: unknown) => {
+    try {
+        return chrome.runtime.sendMessage({
+            type: messageType,
+            message,
+        });
+    } catch (error) {
+        const msg = `sendMessage failed: ${error instanceof Error ? error.message : String(error)}`;
+        console.error(msg);
+        throw new Error(msg);
+    }
 };

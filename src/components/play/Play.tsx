@@ -2,15 +2,17 @@ import '@components/play/Play.css';
 import { useState } from 'react';
 import { LoaderCircle, Play as PlayIcon, Pause } from 'lucide-react';
 import clsx from 'clsx';
-import { Setter } from '@interfaces/react-state';
+import { ChromeMessage } from '@interfaces/tab-messages';
+import { sendMessage } from '@utils/chrome/send-message';
 
 interface PlayProps {
     crawlerActive: boolean;
-    setCrawlerActive: Setter<boolean>;
     style?: React.CSSProperties;
 }
-export const Play = ({ crawlerActive, setCrawlerActive, style }: PlayProps) => {
-    const togglePause = () => setCrawlerActive(!crawlerActive);
+export const Play = ({ crawlerActive, style }: PlayProps) => {
+    const togglePause = async () => {
+        void sendMessage(crawlerActive ? ChromeMessage.stopCrawler : ChromeMessage.startCrawler);
+    };
 
     return (
         <div className="play_options-container" style={style}>

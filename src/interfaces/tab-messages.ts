@@ -1,6 +1,8 @@
 export enum ChromeMessage {
-    toggleMenu = 'toggleMenu',
+    crawlerFinished = 'crawlerFinished',
+    crawlerProgress = 'crawlerProgress',
     startCrawler = 'startCrawler',
     stopCrawler = 'stopCrawler',
+    toggleMenu = 'toggleMenu',
     toast = 'toast',
 }

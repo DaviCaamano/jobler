@@ -5,7 +5,7 @@ import { Settings, SettingsOptions } from '@interfaces/settings';
 import { deepEqual } from '@utils/deepEqual';
 import { useSticky } from '@hooks/useSticky';
 import { settingsStore } from '@stores/settingsStore';
-import { storage } from '@utils/chrome/storage';
+import { storage } from '@stores/storage';
 
 type UseStorage = <K extends Stores>(
     key: K,

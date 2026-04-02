@@ -7,6 +7,7 @@ import { CircleX } from 'lucide-react';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import { ChromeMessage } from '@interfaces/tab-messages';
+import { sendMessage } from '@utils/chrome/send-message';
 
 interface HeaderProps {
     engine: SearchEngine;
@@ -30,9 +31,7 @@ const HeaderIcons = () => {
 
     const onClose = async () => {
         try {
-            const response = await chrome.runtime.sendMessage({
-                type: ChromeMessage.toggleMenu,
-            });
+            void sendMessage(ChromeMessage.toggleMenu);
         } catch (error) {
             console.error('Failed to send message:', error);
         }
@@ -53,5 +52,3 @@ const HeaderIcons = () => {
         </div>
     );
 };
-
-const CloseIcon = () => {};

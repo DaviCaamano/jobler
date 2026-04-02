@@ -12,10 +12,9 @@ import { jobStorage } from '@stores/job-summary.store';
 import { JobSummary } from '@interfaces/job-list';
 import { useSettingStorage } from '@hooks/useStorage';
 import { Settings, SettingsOptions, Tabs } from '@interfaces/settings';
-import { storage } from '@utils/chrome/storage';
+import { storage } from '@stores/storage';
 import { Stores } from '@interfaces/store';
 import { Header } from '@components/header/Header';
-import { useSticky } from '@hooks/useSticky';
 import { ChromeMessage } from '@interfaces/tab-messages';
 
 export const Menu = () => {
@@ -25,17 +24,6 @@ export const Menu = () => {
     const [tab, setTab] = useState<Tabs>(Tabs.jobList);
     const [crawlerActive, setCrawlerActive] = useState<boolean>(false);
     const [jobList, setJobList] = useState<JobSummary[]>([]);
-
-    // Active the crawler context script
-    useSticky(crawlerActive, async () => {
-        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-        if (tab?.id) {
-            await chrome.tabs.sendMessage(tab.id, {
-                type: crawlerActive ? ChromeMessage.startCrawler : ChromeMessage.stopCrawler,
-            });
-        }
-    });
 
     useEffect(() => {
         void jobStorage.getAll().then(setJobList);
@@ -47,6 +35,22 @@ export const Menu = () => {
             setTab(changedTab);
         }
     });
+
+    useEffect(() => {
+        const handleCrawlerEvents = (event: { type: ChromeMessage }) => {
+            if (event?.type === ChromeMessage.stopCrawler) {
+                setCrawlerActive(false);
+            } else if (event?.type === ChromeMessage.startCrawler) {
+                setCrawlerActive(true);
+            }
+        };
+
+        chrome.runtime.onMessage.addListener(handleCrawlerEvents);
+
+        return () => {
+            chrome.runtime.onMessage.removeListener(handleCrawlerEvents);
+        };
+    }, []);
 
     const onTabChange = (newTab: Tabs) => {
         storage.patch(Stores.settings, (currentValue: Settings) => {
@@ -74,7 +78,7 @@ export const Menu = () => {
                     labels={{ on: 'Filters', off: 'Job List' }}
                 />
             </div>
-            <Play crawlerActive={crawlerActive} setCrawlerActive={setCrawlerActive} />
+            <Play crawlerActive={crawlerActive} />
         </div>
     );
 };

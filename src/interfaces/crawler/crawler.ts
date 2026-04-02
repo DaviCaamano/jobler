@@ -1,23 +1,67 @@
+import { JobSummary } from '@interfaces/job-list';
 import { SearchEngine } from '@interfaces/search-engine';
 
+// State used to populate data on the crawler in-progress UI
 export interface CrawlerProgress {
+    elapsedTime: string | undefined;
     index: number;
-    page: number;
-    jobId?: string;
-    currentTitle?: string;
-    currentCompany?: string;
-    nextTitle?: string;
-    nextCompany?: string;
-    processedCount: number;
-    skippedCount: number;
-    ttlCount: number;
-    elapsedTime?: string;
-    remainingTime?: string;
     isRunning: boolean;
+    page: number;
+    processedCount: number;
+    remainingTime: string | undefined;
+    skippedCount: number;
+    ttlCount: number | undefined;
 }
 
-export interface Crawler {
-    [SearchEngine.linkedin]: CrawlerProgress;
-    [SearchEngine.ziprecruiter]: CrawlerProgress;
-    [SearchEngine.indeed]: CrawlerProgress;
+// State used to record data used to run the crawler itself
+export interface EngineCrawler {
+    engine: SearchEngine;
+    filters: JobFilters;
+    index: number;
+    isRunning: boolean;
+    jobList: JobSummary[];
+    page: number;
+    processedCount: number;
+    skippedCount: number;
+    startTime?: Date;
+    ttlCount: number | undefined;
+}
+
+// Serialized version of EngineCrawler saved in Chrome Storage
+export interface EngineCrawlerState {
+    engine: SearchEngine;
+    filters: JobFilters;
+    index: number;
+    isRunning: boolean;
+    jobList: string;
+    page: number;
+    processedCount: number;
+    skippedCount: number;
+    startTime: Date | undefined;
+    ttlCount: number | undefined;
+}
+
+// Storage structure of crawler list saved to chrome storage
+export interface SiteCrawlers {
+    [SearchEngine.linkedin]: EngineCrawlerState | undefined;
+    [SearchEngine.ziprecruiter]: EngineCrawlerState | undefined;
+    [SearchEngine.indeed]: EngineCrawlerState | undefined;
+}
+
+export type FilterEntry = (string | RegExp)[];
+
+export type JobFilter = {
+    text: FilterEntry;
+    title: FilterEntry;
+    company: FilterEntry;
+};
+
+export interface JobFilters {
+    blackList: JobFilter;
+    whiteList: JobFilter;
+}
+
+export interface PartialJobFilters {
+    blackList: Partial<JobFilter>;
+    whiteList: Partial<JobFilter>;
 }

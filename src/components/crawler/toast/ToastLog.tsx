@@ -13,10 +13,10 @@ type ToastEntry = {
     message: string;
     isLeaving: boolean;
 };
-
+type ToastTimers = { leave: ReturnType<typeof setTimeout>; remove: ReturnType<typeof setTimeout> };
 export const ToastLog = () => {
     const [toasts, setToasts] = useState<ToastEntry[]>([]);
-    const toastTimersRef = useRef<Map<number, { leave: number; remove: number }>>(new Map());
+    const toastTimersRef = useRef<Map<number, ToastTimers>>(new Map());
     const toastCounterRef = useRef(0);
 
     const clearToastTimers = useCallback((id: number) => {
