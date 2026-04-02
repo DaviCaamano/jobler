@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { LocalStore, Stores } from '@interfaces/store';
 import { FilterCategories, FilterStore } from '@interfaces/filter-store';
 import { Settings, SettingsOptions } from '@interfaces/settings';
@@ -44,7 +44,7 @@ export const useStorage: UseStorage = <K extends Stores>(
         storage.get(key).then((storageInit) => {
             void onChange(storageInit as Partial<LocalStore[K]>);
         });
-    }, []);
+    }, [key, onChange]);
 };
 
 // Hook for running a callback when a specific settings changes.
@@ -62,7 +62,7 @@ export const useSettingStorage = (
                 onChange(newSettings);
             }
         },
-        []
+        [keys, onChange]
     );
 
     useEffect(() => {
@@ -70,14 +70,18 @@ export const useSettingStorage = (
         return () => {
             chrome.storage.onChanged.removeListener(handleStorageChange);
         };
-    }, [keys, onChange]);
+    }, [handleStorageChange, keys, onChange]);
 
     // Initialize State from Storage
+    const didInit = useRef<boolean>(false);
     useEffect(() => {
-        settingsStore.get().then((currentSettings: Settings) => {
-            void onChange(currentSettings);
-        });
-    }, []);
+        if (!didInit.current) {
+            didInit.current = true;
+            settingsStore.get().then((currentSettings: Settings) => {
+                void onChange(currentSettings);
+            });
+        }
+    }, [onChange]);
 };
 
 export const useFilterStorage = (

@@ -1,5 +1,5 @@
 import '@components/play/Play.css';
-import { useState } from 'react';
+import { useState, CSSProperties, MouseEventHandler, MouseEvent } from 'react';
 import { LoaderCircle, Play as PlayIcon, Pause } from 'lucide-react';
 import clsx from 'clsx';
 import { ChromeMessage } from '@interfaces/tab-messages';
@@ -7,7 +7,7 @@ import { sendMessage } from '@utils/chrome/send-message';
 
 interface PlayProps {
     crawlerActive: boolean;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
 }
 export const Play = ({ crawlerActive, style }: PlayProps) => {
     const togglePause = async () => {
@@ -22,13 +22,13 @@ export const Play = ({ crawlerActive, style }: PlayProps) => {
 };
 
 interface PlayButtonProps {
-    callback: React.MouseEventHandler<HTMLButtonElement>;
+    callback: MouseEventHandler<HTMLButtonElement>;
     crawlerActive: boolean;
 }
 const PlayButton = ({ callback, crawlerActive }: PlayButtonProps) => {
     const [hovered, setHovered] = useState<boolean>(false);
     const [recentlyClicked, setRecentlyClicked] = useState<boolean>(false);
-    const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const onClick = (event: MouseEvent<HTMLButtonElement>) => {
         setRecentlyClicked(true);
         callback(event);
     };

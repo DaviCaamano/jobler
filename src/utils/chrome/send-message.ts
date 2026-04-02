@@ -9,6 +9,6 @@ export const sendMessage = async (messageType: ChromeMessage, message?: unknown)
     } catch (error) {
         const msg = `sendMessage failed: ${error instanceof Error ? error.message : String(error)}`;
         console.error(msg);
-        throw new Error(msg);
+        throw new Error(msg, { cause: error });
     }
 };

@@ -14,7 +14,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 
 const bounceMessage =
-    (messageType: ChromeMessage) => (message: any, sender: MessageSender, sendResponse: any) => {
+    (messageType: ChromeMessage) => (message: { type: string }, sender: MessageSender) => {
         if (message.type === messageType && sender.tab?.id) {
             void chrome.tabs.sendMessage(sender.tab.id, {
                 type: messageType,

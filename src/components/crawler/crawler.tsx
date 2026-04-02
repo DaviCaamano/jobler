@@ -24,18 +24,16 @@ export const Crawler = () => {
         crawlerStorage.get(engine).then((engineCrawlerState: EngineCrawlerState) => {
             createCrawler(engineCrawlerState).then(getCrawlerProgress).then(setProgress);
         });
-    }, []);
+    }, [engine]);
 
     // Update progress state whenever a progress message is emitted
     useEffect(() => {
         const progressUpdateListener = (message: {
             type?: ChromeMessage;
-            data: {
-                progress: CrawlerProgress;
-            };
+            data?: { progress: CrawlerProgress };
         }) => {
-            if (message.type !== ChromeMessage.crawlerProgress) return;
-            setProgress(progress);
+            if (message.type !== ChromeMessage.crawlerProgress || !message.data) return;
+            setProgress(message.data.progress);
         };
 
         chrome.runtime.onMessage.addListener(progressUpdateListener);

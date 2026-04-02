@@ -10,6 +10,7 @@ interface JobListProps {
     jobList: JobSummary[];
 }
 export const JobList = ({ crawlerActive, show, jobList }: JobListProps) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const markApplied = (jobId: string) => {
         // TODO Make this function mark the job as applied
     };
@@ -36,12 +37,20 @@ interface JobListItemProps extends JobSummary {
     markApplied: (jobId: string) => void;
 }
 export const JobListItem = ({
+    // TODO REMOVE COMMENT
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     applied,
     companyName,
     jobId,
     markApplied,
+    // TODO REMOVE COMMENT
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     title,
+    // TODO REMOVE COMMENT
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     url,
+    // TODO REMOVE COMMENT
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     source,
 }: JobListItemProps) => {
     const [optimisticallyApplied, setOptimisticallyApplied] = useOptimistic<boolean>(false);

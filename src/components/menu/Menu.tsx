@@ -1,7 +1,7 @@
 import '@styles/themes/primary.css';
 import '@styles/global.css';
 import '@components/menu/Menu.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchEngine } from '@interfaces/search-engine';
 import { JobList } from '@components/job-list/JobList';
 import { Play } from '@components/play/Play';
@@ -17,10 +17,10 @@ import { Stores } from '@interfaces/store';
 import { Header } from '@components/header/Header';
 import { ChromeMessage } from '@interfaces/tab-messages';
 
-export const Menu = () => {
-    const pageUrl = new URLSearchParams(window.location.search).get('pageUrl') ?? undefined;
-    const engine = useRef<SearchEngine>(getSearchEngine(pageUrl).engine).current;
+const pageUrl = new URLSearchParams(window.location.search).get('pageUrl') ?? undefined;
+const engine = getSearchEngine(pageUrl).engine;
 
+export const Menu = () => {
     const [tab, setTab] = useState<Tabs>(Tabs.jobList);
     const [crawlerActive, setCrawlerActive] = useState<boolean>(false);
     const [jobList, setJobList] = useState<JobSummary[]>([]);
@@ -53,7 +53,7 @@ export const Menu = () => {
     }, []);
 
     const onTabChange = (newTab: Tabs) => {
-        storage.patch(Stores.settings, (currentValue: Settings) => {
+        void storage.patch(Stores.settings, (currentValue: Settings) => {
             return {
                 ...currentValue,
                 [SettingsOptions.tabs]: newTab,

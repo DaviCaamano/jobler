@@ -61,7 +61,7 @@ export const Filters = ({ show }: FiltersProps) => {
     );
 
     const onFilterChange = (newFilter: FilterType) => {
-        storage.patch(Stores.settings, (currentValue: Settings) => {
+        void storage.patch(Stores.settings, (currentValue: Settings) => {
             return {
                 ...currentValue,
                 [SettingsOptions.filters]: {

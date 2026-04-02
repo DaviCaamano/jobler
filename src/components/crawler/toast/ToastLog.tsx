@@ -86,7 +86,9 @@ export const ToastLog = () => {
     );
 
     useEffect(() => {
-        const handleToastMessage = (event: { type: ChromeMessage; message: any }) => {
+        const timersMap = toastTimersRef.current;
+
+        const handleToastMessage = (event: { type: ChromeMessage; message: unknown }) => {
             if (event?.type !== ChromeMessage.toast || typeof event?.message !== 'string') {
                 return;
             }
@@ -97,11 +99,11 @@ export const ToastLog = () => {
 
         return () => {
             chrome.runtime.onMessage.removeListener(handleToastMessage);
-            toastTimersRef.current.forEach((timers) => {
+            timersMap.forEach((timers) => {
                 clearTimeout(timers.leave);
                 clearTimeout(timers.remove);
             });
-            toastTimersRef.current.clear();
+            timersMap.clear();
         };
     }, [post]);
 

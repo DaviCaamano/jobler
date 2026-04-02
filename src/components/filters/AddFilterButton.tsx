@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, SubmitEvent, ChangeEvent } from 'react';
 import { CirclePlus } from 'lucide-react';
 import { useSticky } from '@hooks/useSticky';
 
@@ -22,7 +22,7 @@ export const AddFilterButton = ({ onSubmit, placeholder }: AddFilterButtonProps)
         }
     });
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
@@ -45,7 +45,7 @@ export const AddFilterButton = ({ onSubmit, placeholder }: AddFilterButtonProps)
                         className="add-filter-button_input"
                         name={inputName}
                         onBlur={() => setShowInput(false)}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
                             setNewFilter(e.target.value)
                         }
                         placeholder={placeholder ?? 'Add filter'}

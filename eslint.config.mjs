@@ -6,8 +6,9 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
     { ignores: ['dist', 'node_modules', 'old_script'] },
+    js.configs.recommended,
+    ...tseslint.configs.recommended,
     {
-        extends: [js.configs.recommended, ...tseslint.configs.recommended],
         files: ['**/*.{ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2022,
@@ -20,10 +21,7 @@ export default tseslint.config(
         rules: {
             ...reactHooks.configs.recommended.rules,
             'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+            '@typescript-eslint/no-unused-vars': 'warn',
         },
-    },
-    {
-        // Keep Prettier as source of formatting truth
-        extends: [tseslint.configs.disableTypeChecked],
     }
 );

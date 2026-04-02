@@ -3,8 +3,8 @@
     flex-direction: row;
     width: 100%;
     border-width: 1px 0 0 0;
-    border-style: solid;
     border-color: var(--primary-dark);
+    border-style: solid;
     height: 3rem;
     line-height: 3rem;
     font-size: 1.3rem;
