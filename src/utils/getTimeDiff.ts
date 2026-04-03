@@ -18,14 +18,14 @@ export const formatTimeDiff = (start: Date, end: Date = new Date()) => {
 };
 
 export const getEstimatedFinishTime = (
-    startTime: Date,
+    startTime: number,
     totalJobs: number,
     processedSoFar: number
 ): Date | undefined => {
     if (processedSoFar <= 0) return undefined;
 
     const now = new Date();
-    const elapsedMs = now.getTime() - startTime.getTime();
+    const elapsedMs = now.getTime() - new Date(startTime).getTime();
 
     const msPerJob = elapsedMs / processedSoFar;
     const remainingJobs = Math.max(totalJobs - processedSoFar, 0);

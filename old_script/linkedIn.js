@@ -147,7 +147,7 @@
         return [
             pass,
             foundBlackListedWords.length
-                ? ` <div style="display: inline-block; text-alight: right;">${foundBlackListedWords.join('</div><div style="display: inline-block; text-alight: right;">')}</div>`
+                ? ` <div style="display: inline-block; text-align: right;">${foundBlackListedWords.join('</div><div style="display: inline-block; text-alight: right;">')}</div>`
                 : '',
         ];
     };
@@ -240,8 +240,7 @@
     let crawlerInProgress = false;
     let startTime;
     const SCROLLABLE_JOB_LIST = '.scaffold-layout__list > div:first-of-type';
-    const JOB_LIST_SELECTOR = SCROLLABLE_JOB_LIST + ' > ul';
-    const JOB_ITEM_SELECTOR = JOB_LIST_SELECTOR + ' > li';
+    const JOB_ITEM_SELECTOR = SCROLLABLE_JOB_LIST + ' > ul > li';
     const NEXT_PAGE_BUTTON_SELECTOR = '.jobs-search-pagination__button--next';
     const TITLE_SELECTOR = '.job-details-jobs-unified-top-card__job-title';
     const JOB_INFO_BUTTONS_SELECTOR = '.job-details-fit-level-preferences';

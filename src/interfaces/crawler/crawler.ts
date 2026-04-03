@@ -20,10 +20,11 @@ export interface EngineCrawler {
     index: number;
     isRunning: boolean;
     jobList: JobSummary[];
+    jobsPerPage: number;
     page: number;
     processedCount: number;
     skippedCount: number;
-    startTime?: Date;
+    startTime?: number;
     ttlCount: number | undefined;
 }
 
@@ -34,10 +35,11 @@ export interface EngineCrawlerState {
     index: number;
     isRunning: boolean;
     jobList: string;
+    jobsPerPage: number;
     page: number;
     processedCount: number;
     skippedCount: number;
-    startTime: Date | undefined;
+    startTime: number | undefined;
     ttlCount: number | undefined;
 }
 

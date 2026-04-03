@@ -6,7 +6,7 @@ export default defineManifest({
     version: '0.0.0',
     permissions: ['activeTab', 'scripting', 'storage', 'unlimitedStorage'],
     description:
-        'Job Crawler that reads your LinkedIn, Ziprecruiter, and Indeed search results, runs them through your filters, and turns what remains into an excel sheet.',
+        'Job Crawler that reads your LinkedIn, ZipRecruiter, and Indeed search results, runs them through your filters, and turns what remains into an excel sheet.',
     icons: {
         '16': 'assets/icons/logos/logo 16.png',
         '32': 'assets/icons/logos/logo 32.png',

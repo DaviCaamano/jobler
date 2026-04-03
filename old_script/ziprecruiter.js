@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Ziprecruiter Crawler
+// @name         ZipRecruiter Crawler
 // @namespace    http://tampermonkey.net/
 // @version      1.5
-// @description  Crawls Ziprecruiter and collects data on all jobs.
+// @description  Crawls ZipRecruiter and collects data on all jobs.
 // @match        *://*.ziprecruiter.com/*
 // @grant        GM_setClipboard
 // @grant        GM_setValue
