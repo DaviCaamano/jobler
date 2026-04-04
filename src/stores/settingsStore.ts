@@ -27,18 +27,18 @@ async function getSettings(
     const settings = await storage.get(Stores.settings);
 
     if (store === undefined) {
-        return settings as Settings;
+        return settings;
     }
 
     if (store === SettingsOptions.filters) {
-        return settings[SettingsOptions.filters] as FilterGroupSettings;
+        return settings[SettingsOptions.filters];
     }
 
     if (store === SettingsOptions.tabs) {
-        return settings[SettingsOptions.tabs] as Tabs;
+        return settings[SettingsOptions.tabs];
     }
 
-    throw new Error(`Unsupported settings key: ${store}`);
+    throw new Error('Unsupported settings key');
 }
 
 async function updateSettings(

@@ -5,7 +5,7 @@ import { useSticky } from '@hooks/useSticky';
 const inputName = 'add-filter-button_input';
 
 interface AddFilterButtonProps {
-    onSubmit: (value: string) => void | Promise<void>;
+    onSubmit: (value: string) => void;
     placeholder?: string;
 }
 
@@ -22,18 +22,18 @@ export const AddFilterButton = ({ onSubmit, placeholder }: AddFilterButtonProps)
         }
     });
 
-    const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
-        const value = String(formData.get(inputName) ?? '').trim();
-
+        const entry = formData.get(inputName);
+        const value = (typeof entry === 'string' ? entry : '').trim();
         if (!value) {
             setShowInput(false);
             return;
         }
 
-        await onSubmit(value);
+        onSubmit(value);
         setShowInput(false);
     };
 

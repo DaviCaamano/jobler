@@ -23,18 +23,14 @@ export const getSearchEngine = (urlOverride?: string): { engine: SearchEngine; p
 
     const { domain, pathname } = getDomainPath(url);
 
-    if (domain === SearchEngine.indeed) {
-        return { engine: SearchEngine.indeed, path: pathname };
-    }
-    if (domain === SearchEngine.linkedin) {
-        return { engine: SearchEngine.linkedin, path: pathname };
-    }
-    if (domain === SearchEngine.ziprecruiter) {
-        return { engine: SearchEngine.ziprecruiter, path: pathname };
-    }
-    if (domain === SearchEngine.sandbox) {
-        return { engine: SearchEngine.sandbox, path: pathname };
-    }
+    const domainToEngine: Record<string, SearchEngine> = {
+        indeed: SearchEngine.indeed,
+        linkedin: SearchEngine.linkedin,
+        ziprecruiter: SearchEngine.ziprecruiter,
+        sandbox: SearchEngine.sandbox,
+    };
 
-    return { engine: SearchEngine.none, path: pathname };
+    const engine = domainToEngine[domain] ?? SearchEngine.none;
+
+    return { engine, path: pathname };
 };

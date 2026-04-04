@@ -198,7 +198,7 @@ export const processZipRecruiterJob = async (
     };
     await sendMessage(
         ChromeMessage.crawlerProgress,
-        await serializeCrawler(await addJob(summary, text, updatedCrawler))
+        serializeCrawler(await addJob(summary, text, updatedCrawler))
     );
     if (lastJobOnPage) {
         // Go to next page

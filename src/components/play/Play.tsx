@@ -10,7 +10,7 @@ interface PlayProps {
     style?: CSSProperties;
 }
 export const Play = ({ crawlerActive, style }: PlayProps) => {
-    const togglePause = async () => {
+    const togglePause = () => {
         void sendMessage(crawlerActive ? ChromeMessage.stopCrawler : ChromeMessage.startCrawler);
     };
 

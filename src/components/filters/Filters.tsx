@@ -29,7 +29,7 @@ export const Filters = ({ show }: FiltersProps) => {
     // When either the filter or the filter category changes, reload the filters.
     useFilterStorage(filter, filterCategory, loadFilters);
 
-    useSettingStorage(SettingsOptions.filters, async (changes: Partial<Settings>) => {
+    useSettingStorage(SettingsOptions.filters, (changes: Partial<Settings>) => {
         const changedFilterList = changes?.[SettingsOptions.filters]?.[FilterSettings.filterList];
         const changedCategory = changes?.[SettingsOptions.filters]?.[FilterSettings.filterCategory];
 
@@ -45,17 +45,18 @@ export const Filters = ({ show }: FiltersProps) => {
     });
 
     const onDelete = useCallback(
-        async (deletedFilter: string) => {
-            await filterStorage.remove(filter, filterCategory, deletedFilter);
-            await loadFilters();
+        (deletedFilter: string) => {
+            filterStorage
+                .remove(filter, filterCategory, deletedFilter)
+                .then(loadFilters)
+                .catch(loadFilters);
         },
         [filter, filterCategory, loadFilters]
     );
 
     const onAdd = useCallback(
-        async (value: string) => {
-            await filterStorage.add(filter, filterCategory, value);
-            await loadFilters();
+        (value: string) => {
+            filterStorage.add(filter, filterCategory, value).then(loadFilters).catch(loadFilters);
         },
         [filter, filterCategory, loadFilters]
     );

@@ -1,11 +1,11 @@
-import { ChromeMessage } from '@interfaces/tab-messages';
+import { ChromeMessage, ChromeMessagePayload } from '@interfaces/tab-messages';
 import MessageSender = chrome.runtime.MessageSender;
 
-chrome.action.onClicked.addListener(async (tab) => {
+chrome.action.onClicked.addListener((tab) => {
     if (!tab.id) return;
 
     try {
-        await chrome.tabs.sendMessage(tab.id, {
+        void chrome.tabs.sendMessage(tab.id, {
             type: ChromeMessage.toggleMenu,
         });
     } catch {
@@ -13,7 +13,6 @@ chrome.action.onClicked.addListener(async (tab) => {
     }
 });
 
-type ChromeMessagePayload = Record<string, unknown> & { type: string };
 const bounceMessage =
     (messageType: ChromeMessage) => (message: ChromeMessagePayload, sender: MessageSender) => {
         if (message.type === messageType && sender.tab?.id) {

@@ -21,8 +21,8 @@ export const Crawler = () => {
 
     // initialize crawler & synchronize with state
     useEffect(() => {
-        crawlerStorage.get(engine).then((engineCrawlerState: EngineCrawlerState) => {
-            createCrawler(engineCrawlerState).then(getCrawlerProgress).then(setProgress);
+        void crawlerStorage.get(engine).then((engineCrawlerState: EngineCrawlerState) => {
+            void createCrawler(engineCrawlerState).then(getCrawlerProgress).then(setProgress);
         });
     }, [engine]);
 

@@ -206,7 +206,7 @@ export const processIndeedJob = async (
     };
 
     await sendMessage(ChromeMessage.crawlerProgress, {
-        crawler: await serializeCrawler(await addJob(summary, text, updatedCrawler)),
+        crawler: serializeCrawler(await addJob(summary, text, updatedCrawler)),
     });
     if (lastJobOnPage) {
         // Go to next page

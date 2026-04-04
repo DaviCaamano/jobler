@@ -3,6 +3,7 @@
         "target": "ES2022",
         "module": "ESNext",
         "moduleResolution": "Bundler",
+        "skipLibCheck": true,
         "strict": true,
         "lib": ["ES2022", "DOM"],
         "types": ["chrome", "vite/client", "node"],
@@ -23,5 +24,12 @@
             "@/*": ["./src/*"]
         }
     },
-    "include": ["./src/**/*.ts", "./src/**/*.tsx", "vite.config.content.ts", "vite.config.main.ts"]
+    "include": [
+        "./src/**/*.ts",
+        "./src/**/*.tsx",
+        "env.d.ts",
+        "manifest.config.ts",
+        "vite.config.ts"
+    ],
+    "exclude": ["node_modules", "dist"]
 }

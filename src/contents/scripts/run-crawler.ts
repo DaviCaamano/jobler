@@ -16,9 +16,7 @@ if (engine === SearchEngine.indeed && crawler.isRunning) {
     void sendMessage(ChromeMessage.startCrawler);
 }
 
-// Prep the crawler before starting it
-const crawlerStartListener = async (message: { type?: ChromeMessage }) => {
-    if (message.type !== ChromeMessage.startCrawler) return;
+const handleCrawlerStart = async () => {
     const crawler = await updateCrawler(engine, {
         ...(await createCrawler(await crawlerStorage.get(engine))),
         startTime: performance.now(),
@@ -26,6 +24,12 @@ const crawlerStartListener = async (message: { type?: ChromeMessage }) => {
     });
     console.log('outting crawler', crawler);
     void sendMessage(ChromeMessage.runCrawler, { crawler });
+};
+
+// Prep the crawler before starting it
+const crawlerStartListener = (message: { type?: ChromeMessage }) => {
+    if (message.type !== ChromeMessage.startCrawler) return;
+    void handleCrawlerStart();
 };
 
 // Start the actual crawler after it has been prepped
@@ -49,7 +53,7 @@ const crawlerStopListener = (message: { type?: ChromeMessage }) => {
 // Update crawler as it progresses
 const crawlerProgressedListener = (message: { type?: ChromeMessage; crawler: EngineCrawler }) => {
     if (message.type === ChromeMessage.crawlerProgress && message?.crawler) {
-        createCrawler(message.crawler).then((newCrawler) => {
+        void createCrawler(message.crawler).then((newCrawler) => {
             crawler = newCrawler;
         });
     }

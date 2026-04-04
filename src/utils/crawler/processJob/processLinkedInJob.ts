@@ -226,7 +226,7 @@ export const processLinkedInJob = async (
         ttlCount,
     };
     await sendMessage(ChromeMessage.crawlerProgress, {
-        crawler: await serializeCrawler(await addJob(summary, text, updatedCrawler)),
+        crawler: serializeCrawler(await addJob(summary, text, updatedCrawler)),
     });
     if (lastJobOnPage) {
         // Go to next page

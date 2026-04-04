@@ -2,7 +2,7 @@ import { ChromeMessage } from '@interfaces/tab-messages';
 
 export const sendMessage = async (
     messageType: ChromeMessage,
-    message?: Record<string, unknown>
+    message?: Record<string, any>
 ): Promise<void> => {
     try {
         return chrome.runtime.sendMessage({

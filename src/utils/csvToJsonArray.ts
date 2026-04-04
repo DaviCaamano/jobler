@@ -11,7 +11,7 @@ export const csvToJsonArray = (csv: string): Promise<Row[]> => {
             });
             resolve(result.data);
         } catch (e: unknown) {
-            reject(e);
+            reject(e instanceof Error ? e : new Error(String(e)));
         }
     });
 };

@@ -1,4 +1,4 @@
-import { ChromeMessage } from '@interfaces/tab-messages';
+import { ChromeMessage, ChromeMessagePayload } from '@interfaces/tab-messages';
 
 const CONTAINER_ID = 'jobler-crawler-root-container';
 const IFRAME_ID = 'jobler-crawler-iframe';
@@ -35,7 +35,7 @@ iframe.src = `${chrome.runtime.getURL('src/views/crawler.html')}?pageUrl=${pageU
 container.appendChild(iframe);
 document.body.appendChild(container);
 
-chrome.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener((message: ChromeMessagePayload) => {
     console.log('Received message in crawler-init:', message);
     if (message.type === ChromeMessage.startCrawler) {
         // Starting crawler

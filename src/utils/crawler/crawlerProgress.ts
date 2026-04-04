@@ -203,7 +203,7 @@ export const addJob = async (
 
 // Convert EngineCrawler (an interface used by the crawler content script)
 // to CrawlerProgress (an interface used to display progress in the crawler progress popup)
-export const getCrawlerProgress = async (progress: EngineCrawler): Promise<CrawlerProgress> => {
+export const getCrawlerProgress = (progress: EngineCrawler): CrawlerProgress => {
     const elapsedTime = progress.startTime
         ? new Date(Date.now() - new Date(progress.startTime).getTime())
         : undefined;
@@ -230,14 +230,14 @@ export const getCrawlerProgress = async (progress: EngineCrawler): Promise<Crawl
     };
 };
 
-export const jobListToCsv = (jobList: JobSummary[], includeHeaders: boolean = true) => {
+export const jobListToCsv = (jobList: JobSummary[], includeHeaders: boolean = true): string => {
     return Papa.unparse(jobList, {
         header: includeHeaders,
     });
 };
 
-export const serializeCrawler = async (progress: EngineCrawler): Promise<EngineCrawlerState> => ({
+export const serializeCrawler = (progress: EngineCrawler): EngineCrawlerState => ({
     ...progress,
-    jobList: await jobListToCsv(progress.jobList),
+    jobList: jobListToCsv(progress.jobList),
     startTime: progress.startTime,
 });

@@ -6,17 +6,17 @@ import { createCrawler, serializeCrawler } from '@utils/crawler/crawlerProgress'
 import { SiteCrawlers } from '@interfaces/crawler/crawler';
 
 export const getNewCrawlers = async (): Promise<SiteCrawlers> => ({
-    [SearchEngine.linkedin]: await serializeCrawler(
+    [SearchEngine.linkedin]: serializeCrawler(
         await createCrawler({
             engine: SearchEngine.linkedin,
         })
     ),
-    [SearchEngine.ziprecruiter]: await serializeCrawler(
+    [SearchEngine.ziprecruiter]: serializeCrawler(
         await createCrawler({
             engine: SearchEngine.ziprecruiter,
         })
     ),
-    [SearchEngine.indeed]: await serializeCrawler(
+    [SearchEngine.indeed]: serializeCrawler(
         await createCrawler({
             engine: SearchEngine.indeed,
         })

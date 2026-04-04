@@ -7,3 +7,5 @@ export enum ChromeMessage {
     toggleMenu = 'toggleMenu',
     toast = 'toast',
 }
+
+export type ChromeMessagePayload = Record<string, unknown> & { type: ChromeMessage };

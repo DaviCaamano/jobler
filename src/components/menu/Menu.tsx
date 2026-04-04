@@ -29,7 +29,7 @@ export const Menu = () => {
         void jobStorage.getAll().then(setJobList);
     }, []);
 
-    useSettingStorage(SettingsOptions.tabs, async (changes: Partial<Settings>) => {
+    useSettingStorage(SettingsOptions.tabs, (changes: Partial<Settings>) => {
         const changedTab = changes?.[SettingsOptions.tabs];
         if (changedTab) {
             setTab(changedTab);
