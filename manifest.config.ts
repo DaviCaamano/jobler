@@ -18,7 +18,7 @@ export default defineManifest({
         default_icon: 'assets/icons/logos/logo 16.png',
     },
     background: {
-        service_worker: 'src/backgrounds/message-listener.ts',
+        service_worker: 'src/backgrounds/message-bouncer.ts',
         type: 'module',
     },
     content_scripts: [
@@ -32,7 +32,7 @@ export default defineManifest({
             js: [
                 'src/contents/menu-init.tsx',
                 'src/contents/crawler-init.tsx',
-                'src/contents/scripts/run-crawler',
+                'src/contents/scripts/run-crawler.ts',
             ],
         },
     ],

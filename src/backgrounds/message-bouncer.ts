@@ -13,16 +13,16 @@ chrome.action.onClicked.addListener(async (tab) => {
     }
 });
 
+type ChromeMessagePayload = Record<string, unknown> & { type: string };
 const bounceMessage =
-    (messageType: ChromeMessage) => (message: { type: string }, sender: MessageSender) => {
+    (messageType: ChromeMessage) => (message: ChromeMessagePayload, sender: MessageSender) => {
         if (message.type === messageType && sender.tab?.id) {
             void chrome.tabs.sendMessage(sender.tab.id, {
-                type: messageType,
+                ...message,
             });
         }
     };
 
-chrome.runtime.onMessage.addListener(bounceMessage(ChromeMessage.toggleMenu));
-chrome.runtime.onMessage.addListener(bounceMessage(ChromeMessage.startCrawler));
-chrome.runtime.onMessage.addListener(bounceMessage(ChromeMessage.stopCrawler));
-chrome.runtime.onMessage.addListener(bounceMessage(ChromeMessage.toast));
+for (const message of Object.values(ChromeMessage)) {
+    chrome.runtime.onMessage.addListener(bounceMessage(message));
+}

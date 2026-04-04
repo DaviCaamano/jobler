@@ -1,14 +1,17 @@
-import { parseString } from '@fast-csv/parse';
+import Papa from 'papaparse';
 
 type Row = Record<string, string>;
 
-export const csvToJsonArray = async (csv: string): Promise<Row[]> => {
-    return await new Promise((resolve, reject) => {
-        const rows: Row[] = [];
-
-        parseString(csv, { headers: true })
-            .on('error', reject)
-            .on('data', (row: Row) => rows.push(row))
-            .on('end', () => resolve(rows));
+export const csvToJsonArray = (csv: string): Promise<Row[]> => {
+    return new Promise((resolve, reject) => {
+        try {
+            const result = Papa.parse<Record<string, string>>(csv, {
+                header: true,
+                skipEmptyLines: true,
+            });
+            resolve(result.data);
+        } catch (e: unknown) {
+            reject(e);
+        }
     });
 };

@@ -24,11 +24,15 @@ const crawlerStartListener = async (message: { type?: ChromeMessage }) => {
         startTime: performance.now(),
         isRunning: true,
     });
+    console.log('outting crawler', crawler);
     void sendMessage(ChromeMessage.runCrawler, { crawler });
 };
 
 // Start the actual crawler after it has been prepped
 const crawlerRunnerListener = (message: { type?: ChromeMessage; crawler?: EngineCrawler }) => {
+    if (message.type === ChromeMessage.runCrawler) {
+        console.log('runner', message);
+    }
     if (message.type !== ChromeMessage.runCrawler || !message.crawler) return;
     crawler = message.crawler;
     void processJob(crawler);

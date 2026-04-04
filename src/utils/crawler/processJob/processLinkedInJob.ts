@@ -225,10 +225,9 @@ export const processLinkedInJob = async (
         jobsPerPage,
         ttlCount,
     };
-    await sendMessage(
-        ChromeMessage.crawlerProgress,
-        await serializeCrawler(await addJob(summary, text, updatedCrawler))
-    );
+    await sendMessage(ChromeMessage.crawlerProgress, {
+        crawler: await serializeCrawler(await addJob(summary, text, updatedCrawler)),
+    });
     if (lastJobOnPage) {
         // Go to next page
         const button: HTMLButtonElement | null = document.querySelector(

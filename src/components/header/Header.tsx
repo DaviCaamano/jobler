@@ -29,7 +29,7 @@ export const Header = ({ engine }: HeaderProps) => {
 const HeaderIcons = () => {
     const [hovered, setHovered] = useState<boolean>(true);
 
-    const onClose = async () => {
+    const onClose = () => {
         try {
             void sendMessage(ChromeMessage.toggleMenu);
         } catch (error) {

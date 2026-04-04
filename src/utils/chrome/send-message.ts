@@ -1,10 +1,13 @@
 import { ChromeMessage } from '@interfaces/tab-messages';
 
-export const sendMessage = async (messageType: ChromeMessage, message?: unknown): Promise<void> => {
+export const sendMessage = async (
+    messageType: ChromeMessage,
+    message?: Record<string, unknown>
+): Promise<void> => {
     try {
         return chrome.runtime.sendMessage({
             type: messageType,
-            message,
+            ...message,
         });
     } catch (error) {
         const msg = `sendMessage failed: ${error instanceof Error ? error.message : String(error)}`;

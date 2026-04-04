@@ -1,5 +1,3 @@
-import { SearchEngine } from '@interfaces/search-engine';
-
 export const DEFAULT_JOB_FILTERS = {
     blackList: {
         text: [],

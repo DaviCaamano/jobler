@@ -10,7 +10,7 @@ import {
 import { DEFAULT_JOB_FILTERS } from '@constants/crawler/crawler';
 import { csvToJsonArray } from '@utils/csvToJsonArray';
 import { toast } from '@utils/crawler/toast';
-import { writeToString } from '@fast-csv/format';
+import Papa from 'papaparse';
 
 export const wordExists = (word: string, text: string) =>
     new RegExp(
@@ -231,7 +231,9 @@ export const getCrawlerProgress = async (progress: EngineCrawler): Promise<Crawl
 };
 
 export const jobListToCsv = (jobList: JobSummary[], includeHeaders: boolean = true) => {
-    return writeToString(jobList, { headers: includeHeaders });
+    return Papa.unparse(jobList, {
+        header: includeHeaders,
+    });
 };
 
 export const serializeCrawler = async (progress: EngineCrawler): Promise<EngineCrawlerState> => ({

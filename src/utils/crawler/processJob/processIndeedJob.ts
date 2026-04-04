@@ -154,6 +154,7 @@ export const processIndeedJob = async (
     attempt = 0,
     crawler: EngineCrawler
 ): Promise<void> => {
+    console.log('processing indeed:', iter, attempt, crawler);
     const crawlerOutOfJobs = crawler.jobsPerPage && iter > crawler.jobsPerPage;
     if (isCrawlerTerminated(crawler) || crawlerOutOfJobs) {
         void sendMessage(ChromeMessage.crawlerFinished);
@@ -203,10 +204,10 @@ export const processIndeedJob = async (
         jobsPerPage,
         ttlCount,
     };
-    await sendMessage(
-        ChromeMessage.crawlerProgress,
-        await serializeCrawler(await addJob(summary, text, updatedCrawler))
-    );
+
+    await sendMessage(ChromeMessage.crawlerProgress, {
+        crawler: await serializeCrawler(await addJob(summary, text, updatedCrawler)),
+    });
     if (lastJobOnPage) {
         // Go to next page
         const button: HTMLButtonElement | null = document.querySelector(
