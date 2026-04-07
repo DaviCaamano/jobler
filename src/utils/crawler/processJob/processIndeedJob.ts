@@ -197,17 +197,21 @@ export const processIndeedJob = async (
 
     const lastJobOnPage = jobsPerPage && iter % jobsPerPage === jobsPerPage - 1;
 
-    const updatedCrawler: EngineCrawler = await addJob(summary, text, {
-        ...crawler,
-        index: crawler.index + 1,
-        page: lastJobOnPage ? crawler.page + 1 : crawler.page,
-        jobsPerPage,
-        ttlCount,
-    });
+    await addJob(
+        summary,
+        text,
+        {
+            index: crawler.index + 1,
+            page: lastJobOnPage ? crawler.page + 1 : crawler.page,
+            jobsPerPage,
+            ttlCount,
+        },
+        crawler
+    );
 
-    await crawlerStorage.update(SearchEngine.indeed, serializeCrawler(updatedCrawler));
+    await crawlerStorage.update(SearchEngine.indeed, serializeCrawler(crawler));
     await sendMessage(ChromeMessage.crawlerProgress, {
-        crawler: getCrawlerProgress(updatedCrawler),
+        crawler: getCrawlerProgress(crawler),
     });
     if (lastJobOnPage) {
         // Go to next page

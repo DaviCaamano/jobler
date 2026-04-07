@@ -124,11 +124,12 @@ export const createCrawler = async ({
     };
 };
 
-export type UpdatingCrawler = Partial<Omit<EngineCrawler, 'engine'>> & {
-    jobList: JobSummary[] | string;
-};
+export type UpdatingCrawler = Partial<
+    Omit<EngineCrawler, 'engine'> & {
+        jobList: JobSummary[] | string;
+    }
+>;
 export const updateCrawler = async (
-    engine: SearchEngine,
     {
         filters,
         index,
@@ -140,65 +141,70 @@ export const updateCrawler = async (
         skippedCount,
         startTime,
     }: UpdatingCrawler,
-    current?: EngineCrawler
-): Promise<EngineCrawler> => {
-    const newCrawler = current
-        ? {
-              ...current,
-          }
-        : await createCrawler({ engine });
-
-    return {
-        ...newCrawler,
-        filters: {
-            blackList: {
-                ...DEFAULT_JOB_FILTERS.whiteList,
-                ...newCrawler?.filters?.blackList,
-                ...filters?.blackList,
-            },
-            whiteList: {
-                ...DEFAULT_JOB_FILTERS.whiteList,
-                ...newCrawler?.filters?.whiteList,
-                ...filters?.whiteList,
-            },
+    current: EngineCrawler
+): Promise<void> => {
+    current.filters = {
+        blackList: {
+            ...DEFAULT_JOB_FILTERS.whiteList,
+            ...current?.filters?.blackList,
+            ...filters?.blackList,
         },
-        index: index ?? newCrawler.index ?? 0,
-        isRunning: isRunning ?? newCrawler.isRunning ?? false,
-        jobList: jobList
-            ? typeof jobList === 'string'
-                ? ((await csvToJsonArray(jobList)) as unknown as JobSummary[])
-                : (jobList ?? [])
-            : (newCrawler.jobList ?? []),
-        jobsPerPage: jobsPerPage ?? 0,
-        page: page ?? newCrawler.page ?? 0,
-        processedCount: processedCount ?? newCrawler.processedCount ?? 0,
-        skippedCount: skippedCount ?? newCrawler.page ?? 0,
-        startTime: startTime ?? newCrawler.startTime,
+        whiteList: {
+            ...DEFAULT_JOB_FILTERS.whiteList,
+            ...current?.filters?.whiteList,
+            ...filters?.whiteList,
+        },
     };
+    current.index = index ?? current.index ?? 0;
+    current.isRunning = isRunning ?? current.isRunning ?? false;
+    current.jobList = jobList
+        ? typeof jobList === 'string'
+            ? ((await csvToJsonArray(jobList)) as unknown as JobSummary[])
+            : (jobList ?? [])
+        : (current.jobList ?? []);
+    current.jobsPerPage = jobsPerPage ?? 0;
+    current.page = page ?? current.page ?? 0;
+    current.processedCount = processedCount ?? current.processedCount ?? 0;
+    current.skippedCount = skippedCount ?? current.page ?? 0;
+    current.startTime = startTime ?? current.startTime;
 };
 
 export const addJob = async (
     job: JobSummary,
     text: string,
-    updatedCrawler: EngineCrawler
-): Promise<EngineCrawler> => {
-    const jobExists = updatedCrawler?.jobList?.find(
+    updatedCrawler: Partial<EngineCrawler>,
+    crawler: EngineCrawler
+): Promise<void> => {
+    const jobExists = (updatedCrawler?.jobList ?? crawler.jobList)?.find(
         (currentJob: JobSummary) => currentJob.jobId === job.jobId
     );
+
     if (!jobExists) {
         const { companyName, title } = job;
-        if (await checkFilters({ text, title, companyName, filters: updatedCrawler.filters })) {
-            return updateCrawler(updatedCrawler.engine, {
-                ...updatedCrawler,
-                jobList: [...(updatedCrawler?.jobList ?? []), job],
-                processedCount: updatedCrawler.processedCount + 1,
-            });
+        if (
+            await checkFilters({
+                text,
+                title,
+                companyName,
+                filters: updatedCrawler.filters || crawler.filters,
+            })
+        ) {
+            updateCrawler(
+                {
+                    ...updatedCrawler,
+                    jobList: [...(updatedCrawler?.jobList ?? crawler?.jobList ?? []), job],
+                    processedCount: crawler.processedCount + 1,
+                },
+                crawler
+            );
         }
     }
-    return updateCrawler(updatedCrawler.engine, {
-        ...updatedCrawler,
-        skippedCount: updatedCrawler.skippedCount + 1,
-    });
+    updateCrawler(
+        {
+            skippedCount: crawler.skippedCount + 1,
+        },
+        crawler
+    );
 };
 
 // Convert EngineCrawler (an interface used by the crawler content script)

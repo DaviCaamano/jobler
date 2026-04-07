@@ -84,31 +84,31 @@ export const useSettingStorage = (
     }, [onChange]);
 };
 
+export const handleFilterChange =
+    (onChange: () => void | Promise<void>) =>
+    (changes: { [key: string]: chrome.storage.StorageChange }, areaName: string) => {
+        if (areaName !== 'local') return;
+
+        const change = changes[Stores.settings];
+        if (!change) return;
+
+        const oldValue = (change.oldValue as Settings)?.[SettingsOptions.filters] as
+            | FilterGroupSettings
+            | undefined;
+        const newValue = (change.newValue as Settings)?.[SettingsOptions.filters] as
+            | FilterGroupSettings
+            | undefined;
+        if (!deepEqual(oldValue, newValue)) {
+            void onChange();
+        }
+    };
 export const useFilterStorage = (
     filter: FiltersStrategy,
     filterCategory: FilterCategories,
     onChange: () => void | Promise<void>
 ) => {
     useEffect(() => {
-        const handleStorageChange = (
-            changes: { [key: string]: chrome.storage.StorageChange },
-            areaName: string
-        ) => {
-            if (areaName !== 'local') return;
-
-            const change = changes[Stores.settings];
-            if (!change) return;
-
-            const oldValue = (change.oldValue as Settings)?.[SettingsOptions.filters] as
-                | FilterGroupSettings
-                | undefined;
-            const newValue = (change.newValue as Settings)?.[SettingsOptions.filters] as
-                | FilterGroupSettings
-                | undefined;
-            if (!deepEqual(oldValue, newValue)) {
-                void onChange();
-            }
-        };
+        const handleStorageChange = handleFilterChange(onChange);
 
         chrome.storage.onChanged.addListener(handleStorageChange);
 

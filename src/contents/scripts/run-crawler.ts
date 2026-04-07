@@ -8,13 +8,17 @@ import { sendMessage } from '@utils/chrome/send-message';
 import { processJob } from '@utils/crawler/processJob/processJob';
 import { filterStorage } from '@stores/filter.store';
 import { FiltersStore } from '@interfaces/filters-store';
+import { handleFilterChange } from '@hooks/useStorage';
 
 const pageUrl = new URLSearchParams(window.location.search).get('pageUrl') ?? undefined;
 const engine = getSearchEngine(pageUrl).engine as SupportedEngines;
 const filters: FiltersStore = await filterStorage.get();
+chrome.storage.onChanged.addListener(handleFilterChange(() => {}));
+
 const crawler: EngineCrawler = await createCrawler({
     ...(await crawlerStorage.get(engine)),
     engine,
+    filters,
 });
 
 // Indeed's pagination is handled via separate page loads. If the crawler is in progress, keep it going
