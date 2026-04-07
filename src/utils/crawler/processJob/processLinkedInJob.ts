@@ -8,7 +8,7 @@ import {
     LI_TITLE_SELECTOR,
 } from '@constants/crawler/crawler';
 import { sleep } from '@utils/sleep';
-import { addJob, serializeCrawler } from '@utils/crawler/crawlerProgress';
+import { addJob, getCrawlerProgress, serializeCrawler } from '@utils/crawler/crawlerProgress';
 import { JobSummary } from '@interfaces/job-list';
 import { ChromeMessage } from '@interfaces/tab-messages';
 import { EngineCrawler } from '@interfaces/crawler/crawler';
@@ -19,6 +19,7 @@ import {
     getJobText,
     isCrawlerTerminated,
 } from '@utils/crawler/processJob/sharedCrawlerGetters';
+import { crawlerStorage } from '@stores/crawler.store';
 
 const MAX_JOB_COPY_ATTEMPTS = 5;
 const MAX_JOB_PROCESS_ATTEMPTS = 10;
@@ -194,7 +195,7 @@ export const processLinkedInJob = async (
         return reattemptLinkedInJob(iter, attempt, crawler);
     }
 
-    clickable.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    clickable.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
     click(clickable);
 
     // Wait to avoid Code 429 before copying code
@@ -218,15 +219,17 @@ export const processLinkedInJob = async (
     };
     const lastJobOnPage = jobsPerPage && iter === jobsPerPage;
 
-    const updatedCrawler = {
+    const updatedCrawler: EngineCrawler = await addJob(summary, text, {
         ...crawler,
-        index: lastJobOnPage ? 0 : crawler.index + 1,
+        index: crawler.index + 1,
         page: lastJobOnPage ? crawler.page + 1 : crawler.page,
         jobsPerPage,
         ttlCount,
-    };
+    });
+
+    await crawlerStorage.update(SearchEngine.indeed, serializeCrawler(updatedCrawler));
     await sendMessage(ChromeMessage.crawlerProgress, {
-        crawler: serializeCrawler(await addJob(summary, text, updatedCrawler)),
+        crawler: getCrawlerProgress(updatedCrawler),
     });
     if (lastJobOnPage) {
         // Go to next page

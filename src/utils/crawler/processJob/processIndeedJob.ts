@@ -20,7 +20,8 @@ import { ChromeMessage } from '@interfaces/tab-messages';
 import { SearchEngine } from '@interfaces/search-engine';
 import { click } from '@utils/crawler/click';
 import { JobSummary } from '@interfaces/job-list';
-import { addJob, serializeCrawler } from '@utils/crawler/crawlerProgress';
+import { addJob, getCrawlerProgress, serializeCrawler } from '@utils/crawler/crawlerProgress';
+import { crawlerStorage } from '@stores/crawler.store';
 
 const MAX_JOB_COPY_ATTEMPTS = 5;
 const MAX_JOB_PROCESS_ATTEMPTS = 10;
@@ -154,7 +155,6 @@ export const processIndeedJob = async (
     attempt = 0,
     crawler: EngineCrawler
 ): Promise<void> => {
-    console.log('processing indeed:', iter, attempt, crawler);
     const crawlerOutOfJobs = crawler.jobsPerPage && iter > crawler.jobsPerPage;
     if (isCrawlerTerminated(crawler) || crawlerOutOfJobs) {
         void sendMessage(ChromeMessage.crawlerFinished);
@@ -171,7 +171,7 @@ export const processIndeedJob = async (
     if (!clickable) {
         return reattemptIndeedJob(iter, attempt, crawler);
     }
-    clickable.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    clickable.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
     click(clickable);
 
     // Wait to avoid Code 429 before copying code
@@ -195,18 +195,19 @@ export const processIndeedJob = async (
         url,
     };
 
-    const lastJobOnPage = jobsPerPage && iter === jobsPerPage;
+    const lastJobOnPage = jobsPerPage && iter % jobsPerPage === jobsPerPage - 1;
 
-    const updatedCrawler = {
+    const updatedCrawler: EngineCrawler = await addJob(summary, text, {
         ...crawler,
-        index: lastJobOnPage ? 0 : crawler.index + 1,
+        index: crawler.index + 1,
         page: lastJobOnPage ? crawler.page + 1 : crawler.page,
         jobsPerPage,
         ttlCount,
-    };
+    });
 
+    await crawlerStorage.update(SearchEngine.indeed, serializeCrawler(updatedCrawler));
     await sendMessage(ChromeMessage.crawlerProgress, {
-        crawler: serializeCrawler(await addJob(summary, text, updatedCrawler)),
+        crawler: getCrawlerProgress(updatedCrawler),
     });
     if (lastJobOnPage) {
         // Go to next page
@@ -220,6 +221,7 @@ export const processIndeedJob = async (
             void toast('Moving to next page...');
         }
     } else {
+        await sleep(1500);
         return processIndeedJob(iter + 1, 0, crawler);
     }
 };

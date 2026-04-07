@@ -1,48 +1,90 @@
 import { dedupeStrings } from '@utils/dedupeStrings';
 import { storage } from '@stores/storage';
-import { FilterCategories } from '@interfaces/filter-store';
+import {
+    FilterCategories,
+    FiltersCategoryStore,
+    FiltersStore,
+    FiltersStrategy,
+} from '@interfaces/filters-store';
 import { Stores } from '@interfaces/store';
 
-export const filterStorage = {
-    async get(store: Stores.blackList | Stores.whiteList, category: FilterCategories) {
-        const filters = await storage.get(store);
-        return filters[category];
-    },
+async function storageGet(strategy: FiltersStrategy, category: FilterCategories): Promise<string[]>;
+async function storageGet(
+    strategy: FiltersStrategy,
+    category: undefined
+): Promise<FiltersCategoryStore>;
+async function storageGet(strategy: undefined, category?: FilterCategories): Promise<FiltersStore>;
+async function storageGet(): Promise<FiltersStore>;
+async function storageGet(
+    strategy?: FiltersStrategy,
+    category?: FilterCategories
+): Promise<FiltersStore | FiltersCategoryStore | string[]> {
+    const allFilters: FiltersStore = (await storage.get(Stores.filters)) as Record<
+        FiltersStrategy,
+        FiltersCategoryStore
+    >;
+    if (typeof strategy === 'undefined') {
+        return allFilters;
+    }
 
-    async add(
-        store: Stores.blackList | Stores.whiteList,
-        category: FilterCategories,
-        value: string
-    ) {
-        return storage.patch(store, (currentFilters) => ({
-            ...currentFilters,
-            [category]: dedupeStrings([...currentFilters[category], value]),
-        }));
-    },
+    const filter = allFilters[strategy];
 
-    async remove(
-        store: Stores.blackList | Stores.whiteList,
-        category: FilterCategories,
-        value: string
-    ) {
-        const normalizedToRemove = value?.trim().toLowerCase();
+    if (category !== undefined) {
+        return filter[category];
+    }
 
-        return storage.patch(store, (currentFilters) => ({
-            ...currentFilters,
-            [category]: currentFilters[category].filter(
+    return filter;
+}
+
+const storageAdd = (
+    strategy: FiltersStrategy,
+    category: FilterCategories,
+    value: string
+): Promise<FiltersStore> => {
+    return storage.patch(Stores.filters, (currentFilters) => ({
+        ...currentFilters,
+        [strategy]: {
+            ...currentFilters[strategy],
+            [category]: dedupeStrings([...currentFilters[strategy][category], value]),
+        },
+    }));
+};
+
+const storageRemove = (
+    strategy: FiltersStrategy,
+    category: FilterCategories,
+    value: string
+): Promise<FiltersStore> => {
+    const normalizedToRemove = value?.trim().toLowerCase();
+
+    return storage.patch(Stores.filters, (currentFilters) => ({
+        ...currentFilters,
+        [strategy]: {
+            ...currentFilters[strategy],
+            [category]: currentFilters[strategy][category].filter(
                 (item: string) => item.trim().toLowerCase() !== normalizedToRemove
             ),
-        }));
-    },
+        },
+    }));
+};
 
-    async replace(
-        store: Stores.blackList | Stores.whiteList,
-        category: FilterCategories,
-        values: string[]
-    ) {
-        return storage.patch(store, (currentFilters) => ({
-            ...currentFilters,
+const storageReplace = (
+    strategy: FiltersStrategy,
+    category: FilterCategories,
+    values: string[]
+): Promise<FiltersStore> => {
+    return storage.patch(Stores.filters, (currentFilters) => ({
+        ...currentFilters,
+        [strategy]: {
+            ...currentFilters[strategy],
             [category]: dedupeStrings(values),
-        }));
-    },
+        },
+    }));
+};
+
+export const filterStorage = {
+    get: storageGet,
+    add: storageAdd,
+    remove: storageRemove,
+    replace: storageReplace,
 };

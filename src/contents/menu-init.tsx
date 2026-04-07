@@ -41,4 +41,15 @@ chrome.runtime.onMessage.addListener((message: ChromeMessagePayload) => {
         opened = !opened;
         container.style.display = opened ? 'block' : 'none';
     }
+    if (message.type === ChromeMessage.startCrawler) {
+        opened = false;
+        container.style.display = 'none';
+    }
+    if (
+        message.type === ChromeMessage.stopCrawler ||
+        message.type === ChromeMessage.crawlerFinished
+    ) {
+        opened = true;
+        container.style.display = 'block';
+    }
 });

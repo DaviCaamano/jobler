@@ -1,4 +1,4 @@
-import { FilterCategories } from '@interfaces/filter-store';
+import { FilterCategories } from '@interfaces/filters-store';
 
 interface FilterCategoryButtonProps {
     category: FilterCategories;

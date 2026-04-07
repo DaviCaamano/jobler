@@ -20,7 +20,8 @@ import { ChromeMessage } from '@interfaces/tab-messages';
 import { SearchEngine } from '@interfaces/search-engine';
 import { click } from '@utils/crawler/click';
 import { JobSummary } from '@interfaces/job-list';
-import { addJob, serializeCrawler } from '@utils/crawler/crawlerProgress';
+import { addJob, getCrawlerProgress, serializeCrawler } from '@utils/crawler/crawlerProgress';
+import { crawlerStorage } from '@stores/crawler.store';
 
 const MAX_JOB_COPY_ATTEMPTS = 5;
 const MAX_JOB_PROCESS_ATTEMPTS = 10;
@@ -157,10 +158,8 @@ export const processZipRecruiterJob = async (
     if (!titleElement || !title) {
         return reattemptZipRecruiterJob(iter, attempt, crawler);
     }
-    titleElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-    });
+    titleElement.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+
     click(titleElement);
 
     // Wait to avoid Code 429 before copying code
@@ -188,18 +187,18 @@ export const processZipRecruiterJob = async (
         url,
     };
     const lastJobOnPage = jobsPerPage && iter === jobsPerPage;
-
-    const updatedCrawler = {
+    const updatedCrawler: EngineCrawler = await addJob(summary, text, {
         ...crawler,
-        index: lastJobOnPage ? 0 : crawler.index + 1,
+        index: crawler.index + 1,
         page: lastJobOnPage ? crawler.page + 1 : crawler.page,
         jobsPerPage,
         ttlCount,
-    };
-    await sendMessage(
-        ChromeMessage.crawlerProgress,
-        serializeCrawler(await addJob(summary, text, updatedCrawler))
-    );
+    });
+
+    await crawlerStorage.update(SearchEngine.indeed, serializeCrawler(updatedCrawler));
+    await sendMessage(ChromeMessage.crawlerProgress, {
+        crawler: getCrawlerProgress(updatedCrawler),
+    });
     if (lastJobOnPage) {
         // Go to next page
         const button: HTMLButtonElement | null = document.querySelector(

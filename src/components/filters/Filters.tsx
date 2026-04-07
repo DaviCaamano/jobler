@@ -5,19 +5,17 @@ import { FilterItem } from '@components/filters/FilterItem';
 import { FilterCategoryButton } from '@components/filters/FilterCategoryButton';
 import { AddFilterButton } from '@components/filters/AddFilterButton';
 import { Stores } from '@interfaces/store';
-import { FilterCategories } from '@interfaces/filter-store';
+import { FilterCategories, FiltersStrategy } from '@interfaces/filters-store';
 import { filterStorage } from '@stores/filter.store';
 import { useFilterStorage, useSettingStorage } from '@hooks/useStorage';
 import { FilterSettings, Settings, SettingsOptions } from '@interfaces/settings';
 import { storage } from '@stores/storage';
 
-type FilterType = Stores.blackList | Stores.whiteList;
-
 interface FiltersProps {
     show: boolean;
 }
 export const Filters = ({ show }: FiltersProps) => {
-    const [filter, setFilter] = useState<FilterType>(Stores.blackList);
+    const [filter, setFilter] = useState<FiltersStrategy>(FiltersStrategy.blackList);
     const [filterCategory, setFilterCategory] = useState<FilterCategories>(FilterCategories.text);
     const [filterList, setFilterList] = useState<string[]>([]);
 
@@ -61,7 +59,7 @@ export const Filters = ({ show }: FiltersProps) => {
         [filter, filterCategory, loadFilters]
     );
 
-    const onFilterChange = (newFilter: FilterType) => {
+    const onFilterChange = (newFilter: FiltersStrategy) => {
         void storage.patch(Stores.settings, (currentValue: Settings) => {
             return {
                 ...currentValue,
@@ -91,7 +89,7 @@ export const Filters = ({ show }: FiltersProps) => {
         <div className="filters_container" style={{ display: show ? 'flex' : 'none' }}>
             <AddFilterButton
                 onSubmit={onAdd}
-                placeholder={`New ${filterCategory} ${filter === Stores.blackList ? 'blacklist' : 'whitelist'} item`}
+                placeholder={`New ${filterCategory} ${filter === FiltersStrategy.blackList ? 'blacklist' : 'whitelist'} item`}
             />
 
             <div className="filters_job-list-container">
@@ -107,10 +105,10 @@ export const Filters = ({ show }: FiltersProps) => {
                     category={filterCategory}
                     setCategory={onFilterCategoryChange}
                 />
-                <Toggle<{ on: FilterType; off: FilterType }>
+                <Toggle
                     setValue={onFilterChange}
                     value={filter}
-                    values={{ on: Stores.whiteList, off: Stores.blackList }}
+                    values={{ on: FiltersStrategy.whiteList, off: FiltersStrategy.blackList }}
                     labels={{ on: 'White List', off: 'Black List' }}
                     widthRem={6}
                     heightRem={2.25}

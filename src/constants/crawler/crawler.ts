@@ -34,7 +34,7 @@ export const ZR_JOB_DESCRIPTION_SELECTOR = '.text-primary.whitespace-pre-line.wr
 
 // Indeed CSS Selectors
 export const IN_JOB_ITEM_SELECTOR =
-    '#mosaic-provider-jobcards > div:first-of-type > ul:first-of-type > li > div.result:not([aria-hidden="true"])';
+    ':is(#mosaic-provider-jobcards-1, #mosaic-provider-jobcards) > div:first-of-type > ul:first-of-type > li > div.result:not([aria-hidden="true"])';
 export const IN_JOB_ID_ELEMENT_SELECTOR = '.jcs-JobTitle > span';
 export const IN_JOB_SALARY_SELECTOR =
     'ul.metadataContainer > li.salary-snippet-container > div:first-of-type > div > span';

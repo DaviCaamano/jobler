@@ -30,10 +30,10 @@ export const Crawler = () => {
     useEffect(() => {
         const progressUpdateListener = (message: {
             type?: ChromeMessage;
-            data?: { progress: CrawlerProgress };
+            crawler?: CrawlerProgress;
         }) => {
-            if (message.type !== ChromeMessage.crawlerProgress || !message.data) return;
-            setProgress(message.data.progress);
+            if (message.type !== ChromeMessage.crawlerProgress || !message.crawler) return;
+            setProgress(message.crawler);
         };
 
         chrome.runtime.onMessage.addListener(progressUpdateListener);

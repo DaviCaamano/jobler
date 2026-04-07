@@ -36,7 +36,6 @@ container.appendChild(iframe);
 document.body.appendChild(container);
 
 chrome.runtime.onMessage.addListener((message: ChromeMessagePayload) => {
-    console.log('Received message in crawler-init:', message);
     if (message.type === ChromeMessage.startCrawler) {
         // Starting crawler
         container.style.display = 'block';

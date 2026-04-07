@@ -1,5 +1,4 @@
-import { Stores } from '@interfaces/store';
-import { FilterCategories } from '@interfaces/filter-store';
+import { FilterCategories, FiltersStrategy } from '@interfaces/filters-store';
 
 export enum SettingsOptions {
     filters = 'filters',
@@ -14,7 +13,7 @@ export enum FilterSettings {
     filterCategory = 'filterCategory',
 }
 export interface FilterGroupSettings {
-    [FilterSettings.filterList]: Stores.blackList | Stores.whiteList;
+    [FilterSettings.filterList]: FiltersStrategy;
     [FilterSettings.filterCategory]: FilterCategories;
 }
 

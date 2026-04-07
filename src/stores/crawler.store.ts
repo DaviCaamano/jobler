@@ -13,7 +13,10 @@ export const crawlerStorage = {
     async update(engine: SupportedEngines, state: EngineCrawlerState): Promise<SiteCrawlers> {
         return storage.patch(Stores.crawler, (currentCrawler: SiteCrawlers) => ({
             ...currentCrawler,
-            [engine]: state,
+            [engine]: {
+                ...currentCrawler[engine],
+                ...state,
+            },
         }));
     },
 

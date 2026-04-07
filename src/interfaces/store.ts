@@ -1,19 +1,17 @@
-import { FilterStore } from '@interfaces/filter-store';
 import { JobSummary } from '@interfaces/job-list';
 import { Settings } from '@interfaces/settings';
 import { SiteCrawlers } from '@interfaces/crawler/crawler';
+import { FiltersStore } from '@interfaces/filters-store';
 
 export enum Stores {
-    blackList = 'blackList',
-    whiteList = 'whiteList',
+    filters = 'filters',
     crawler = 'crawler',
     jobList = 'jobList',
     settings = 'settings',
 }
 
 export interface LocalStore {
-    [Stores.whiteList]: FilterStore;
-    [Stores.blackList]: FilterStore;
+    [Stores.filters]: FiltersStore;
     [Stores.crawler]: SiteCrawlers;
     [Stores.jobList]: JobSummary[];
     [Stores.settings]: Settings;

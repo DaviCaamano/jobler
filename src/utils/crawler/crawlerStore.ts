@@ -1,7 +1,7 @@
 import { LocalStore, Stores } from '@interfaces/store';
 import { SearchEngine } from '@interfaces/search-engine';
 import { FilterSettings, SettingsOptions, Tabs } from '@interfaces/settings';
-import { FilterCategories } from '@interfaces/filter-store';
+import { FilterCategories, FiltersStrategy } from '@interfaces/filters-store';
 import { createCrawler, serializeCrawler } from '@utils/crawler/crawlerProgress';
 import { SiteCrawlers } from '@interfaces/crawler/crawler';
 
@@ -24,20 +24,22 @@ export const getNewCrawlers = async (): Promise<SiteCrawlers> => ({
 });
 
 export const storageDefaults: LocalStore = {
-    [Stores.whiteList]: {
-        text: [],
-        title: [],
-        company: [],
-    },
-    [Stores.blackList]: {
-        text: [],
-        title: [],
-        company: [],
+    [Stores.filters]: {
+        [FiltersStrategy.blackList]: {
+            text: [],
+            title: [],
+            company: [],
+        },
+        [FiltersStrategy.whiteList]: {
+            text: [],
+            title: [],
+            company: [],
+        },
     },
     [Stores.jobList]: [],
     [Stores.settings]: {
         [SettingsOptions.filters]: {
-            [FilterSettings.filterList]: Stores.blackList,
+            [FilterSettings.filterList]: FiltersStrategy.blackList,
             [FilterSettings.filterCategory]: FilterCategories.text,
         },
         [SettingsOptions.tabs]: Tabs.jobList,

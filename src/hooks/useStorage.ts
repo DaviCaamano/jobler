@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { LocalStore, Stores } from '@interfaces/store';
-import { FilterCategories, FilterStore } from '@interfaces/filter-store';
-import { Settings, SettingsOptions } from '@interfaces/settings';
+import { FilterGroupSettings, Settings, SettingsOptions } from '@interfaces/settings';
 import { deepEqual } from '@utils/deepEqual';
 import { useSticky } from '@hooks/useSticky';
 import { settingsStore } from '@stores/settingsStore';
 import { storage } from '@stores/storage';
+import { FilterCategories, FiltersStrategy } from '@interfaces/filters-store';
 
 type UseStorage = <K extends Stores>(
     key: K,
@@ -47,7 +47,7 @@ export const useStorage: UseStorage = <K extends Stores>(
     }, [key, onChange]);
 };
 
-// Hook for running a callback when a specific settings changes.
+// Hook for running a callback when specific settings change.
 export const useSettingStorage = (
     keys: SettingsOptions,
     onChange: (changes: Partial<Settings>) => void | Promise<void>
@@ -85,7 +85,7 @@ export const useSettingStorage = (
 };
 
 export const useFilterStorage = (
-    filter: Stores.whiteList | Stores.blackList,
+    filter: FiltersStrategy,
     filterCategory: FilterCategories,
     onChange: () => void | Promise<void>
 ) => {
@@ -99,9 +99,12 @@ export const useFilterStorage = (
             const change = changes[Stores.settings];
             if (!change) return;
 
-            const oldValue = change.oldValue as FilterStore | undefined;
-            const newValue = change.newValue as FilterStore | undefined;
-
+            const oldValue = (change.oldValue as Settings)?.[SettingsOptions.filters] as
+                | FilterGroupSettings
+                | undefined;
+            const newValue = (change.newValue as Settings)?.[SettingsOptions.filters] as
+                | FilterGroupSettings
+                | undefined;
             if (!deepEqual(oldValue, newValue)) {
                 void onChange();
             }
