@@ -5,7 +5,7 @@ import { FilterItem } from '@components/filters/FilterItem';
 import { FilterCategoryButton } from '@components/filters/FilterCategoryButton';
 import { AddFilterButton } from '@components/filters/AddFilterButton';
 import { Stores } from '@interfaces/store';
-import { FilterCategories, FiltersStrategy } from '@interfaces/filters-store';
+import { FilterCategories, FilterEntry, FiltersStrategy } from '@interfaces/filters-store';
 import { filterStorage } from '@stores/filter.store';
 import { useFilterStorage, useSettingStorage } from '@hooks/useStorage';
 import { FilterSettings, Settings, SettingsOptions } from '@interfaces/settings';
@@ -17,11 +17,11 @@ interface FiltersProps {
 export const Filters = ({ show }: FiltersProps) => {
     const [filter, setFilter] = useState<FiltersStrategy>(FiltersStrategy.blackList);
     const [filterCategory, setFilterCategory] = useState<FilterCategories>(FilterCategories.text);
-    const [filterList, setFilterList] = useState<string[]>([]);
+    const [filterList, setFilterList] = useState<FilterEntry[]>([]);
 
     const loadFilters = useCallback(async () => {
-        const newFilterList = await filterStorage.get(filter, filterCategory);
-        setFilterList(newFilterList);
+        const result: unknown = await filterStorage.get(filter, filterCategory);
+        setFilterList(Array.isArray(result) ? (result as FilterEntry[]) : []);
     }, [filter, filterCategory]);
 
     // When either the filter or the filter category changes, reload the filters.
@@ -43,7 +43,7 @@ export const Filters = ({ show }: FiltersProps) => {
     });
 
     const onDelete = useCallback(
-        (deletedFilter: string) => {
+        (deletedFilter: FilterEntry) => {
             filterStorage
                 .remove(filter, filterCategory, deletedFilter)
                 .then(loadFilters)
@@ -94,7 +94,7 @@ export const Filters = ({ show }: FiltersProps) => {
 
             <div className="filters_job-list-container">
                 <div className="filters_job-table">
-                    {filterList.map((item: string, index: number) => (
+                    {filterList.map((item, index) => (
                         <FilterItem item={item} key={item + '-' + index} onDelete={onDelete} />
                     ))}
                 </div>

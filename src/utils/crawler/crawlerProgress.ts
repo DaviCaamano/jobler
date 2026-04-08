@@ -1,16 +1,11 @@
 import { SearchEngine } from '@interfaces/search-engine';
 import { JobSummary } from '@interfaces/job-list';
-import {
-    CrawlerProgress,
-    EngineCrawler,
-    EngineCrawlerState,
-    JobFilters,
-    PartialJobFilters,
-} from '@interfaces/crawler/crawler';
+import { CrawlerProgress, EngineCrawler, EngineCrawlerState } from '@interfaces/crawler/crawler';
 import { DEFAULT_JOB_FILTERS } from '@constants/crawler/crawler';
 import { csvToJsonArray } from '@utils/csvToJsonArray';
 import { toast } from '@utils/crawler/toast';
 import Papa from 'papaparse';
+import { FiltersStore, PartialFiltersStore } from '@interfaces/filters-store';
 
 export const wordExists = (word: string, text: string) =>
     new RegExp(
@@ -32,7 +27,7 @@ export const checkFilters = async ({
     text: string;
     title: string;
     companyName: string;
-    filters: JobFilters;
+    filters: FiltersStore;
 }) => {
     const reasons: string[] = [];
     for (const filter of filters.whiteList.text) {
@@ -86,7 +81,7 @@ export const createCrawler = async ({
     ttlCount,
 }: {
     engine: SearchEngine;
-    filters?: PartialJobFilters;
+    filters?: PartialFiltersStore;
     index?: number;
     isRunning?: boolean;
     jobList?: JobSummary[] | string;
@@ -189,7 +184,7 @@ export const addJob = async (
                 filters: updatedCrawler.filters || crawler.filters,
             })
         ) {
-            updateCrawler(
+            void updateCrawler(
                 {
                     ...updatedCrawler,
                     jobList: [...(updatedCrawler?.jobList ?? crawler?.jobList ?? []), job],
@@ -197,9 +192,10 @@ export const addJob = async (
                 },
                 crawler
             );
+            return;
         }
     }
-    updateCrawler(
+    void updateCrawler(
         {
             skippedCount: crawler.skippedCount + 1,
         },

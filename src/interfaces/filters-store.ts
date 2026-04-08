@@ -8,6 +8,10 @@ export enum FilterCategories {
     title = 'title',
     company = 'company',
 }
-
-export type FiltersCategoryStore = Record<FilterCategories, string[]>;
+export type FilterEntry = string | RegExp;
+export type FiltersCategoryStore = Record<FilterCategories, FilterEntry[]>;
 export type FiltersStore = Record<FiltersStrategy, FiltersCategoryStore>;
+export type PartialFiltersStore = {
+    [FiltersStrategy.blackList]?: Partial<FiltersCategoryStore>;
+    [FiltersStrategy.whiteList]?: Partial<FiltersCategoryStore>;
+};

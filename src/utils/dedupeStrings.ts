@@ -1,16 +1,26 @@
-export const dedupeStrings = (values: string[]) => {
+import { FilterEntry } from '@interfaces/filters-store';
+
+export const dedupeStrings = (values: FilterEntry[]): FilterEntry[] => {
     const seen = new Set<string>();
-    const result: string[] = [];
+    const result: FilterEntry[] = [];
 
-    values.forEach((value) => {
-        const normalized = value?.trim();
-        if (!normalized) return;
+    values.forEach((value: FilterEntry) => {
+        if (value instanceof RegExp) {
+            const key = value.toString();
+            if (seen.has(key)) return;
+            seen.add(key);
+            result.push(value);
+        } else {
+            const normalized = value.trim();
 
-        const compareKey = normalized.toLowerCase();
-        if (seen.has(compareKey)) return;
+            if (!normalized) return;
 
-        seen.add(compareKey);
-        result.push(normalized);
+            const compareKey = normalized.toLowerCase();
+
+            if (seen.has(compareKey)) return;
+            seen.add(compareKey);
+            result.push(normalized);
+        }
     });
 
     return result;

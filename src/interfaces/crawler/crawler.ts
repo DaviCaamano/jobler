@@ -1,5 +1,6 @@
 import { JobSummary } from '@interfaces/job-list';
 import { SearchEngine } from '@interfaces/search-engine';
+import { FiltersStore } from '@interfaces/filters-store';
 
 // State used to populate data on the crawler in-progress UI
 export interface CrawlerProgress {
@@ -16,7 +17,7 @@ export interface CrawlerProgress {
 // State used to record data used to run the crawler itself
 export interface EngineCrawler {
     engine: SearchEngine;
-    filters: JobFilters;
+    filters: FiltersStore;
     index: number;
     isRunning: boolean;
     jobList: JobSummary[];
@@ -31,7 +32,7 @@ export interface EngineCrawler {
 // Serialized version of EngineCrawler saved in Chrome Storage
 export interface EngineCrawlerState {
     engine: SearchEngine;
-    filters: JobFilters;
+    filters: FiltersStore;
     index: number;
     isRunning: boolean;
     jobList: string;
@@ -43,27 +44,9 @@ export interface EngineCrawlerState {
     ttlCount: number | undefined;
 }
 
-// Storage structure of crawler list saved to chrome storage
+// Storage structure of crawler job list saved to chrome storage
 export interface SiteCrawlers {
     [SearchEngine.linkedin]: EngineCrawlerState | undefined;
     [SearchEngine.ziprecruiter]: EngineCrawlerState | undefined;
     [SearchEngine.indeed]: EngineCrawlerState | undefined;
-}
-
-export type FilterEntry = (string | RegExp)[];
-
-export type JobFilter = {
-    text: FilterEntry;
-    title: FilterEntry;
-    company: FilterEntry;
-};
-
-export interface JobFilters {
-    blackList: JobFilter;
-    whiteList: JobFilter;
-}
-
-export interface PartialJobFilters {
-    blackList: Partial<JobFilter>;
-    whiteList: Partial<JobFilter>;
 }
