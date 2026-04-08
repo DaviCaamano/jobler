@@ -4,7 +4,7 @@ import '@components/crawler/crawler.css';
 import { ToastLog } from '@components/crawler/toast/ToastLog';
 import { Play } from '@components/play/Play';
 import { useEffect, useState } from 'react';
-import { SupportedEngines } from '@interfaces/search-engine';
+import { SearchEngine, SupportedEngines } from '@interfaces/search-engine';
 import { getSearchEngine } from '@utils/getSearchEngine';
 import { CrawlerProgress, EngineCrawlerState } from '@interfaces/crawler/crawler';
 import { crawlerStorage } from '@stores/crawler.store';
@@ -13,21 +13,28 @@ import { ChromeMessage } from '@interfaces/tab-messages';
 
 export const Crawler = () => {
     const pageUrl = new URLSearchParams(window.location.search).get('pageUrl') ?? undefined;
-    const [engine] = useState<SupportedEngines>(
-        () => getSearchEngine(pageUrl).engine as SupportedEngines
-    );
-
+    const [engine] = useState<SearchEngine>(() => getSearchEngine(pageUrl).engine);
+    const validEngine = engine && engine !== SearchEngine.none;
     const [progress, setProgress] = useState<CrawlerProgress | null>(null);
 
     // initialize crawler & synchronize with state
     useEffect(() => {
-        void crawlerStorage.get(engine).then((engineCrawlerState: EngineCrawlerState) => {
-            void createCrawler(engineCrawlerState).then(getCrawlerProgress).then(setProgress);
-        });
-    }, [engine]);
+        if (validEngine) {
+            void crawlerStorage
+                .get(engine as SupportedEngines)
+                .then((engineCrawlerState: EngineCrawlerState) => {
+                    void createCrawler(engineCrawlerState)
+                        .then(getCrawlerProgress)
+                        .then(setProgress);
+                });
+        }
+    }, [engine, validEngine]);
 
     // Update progress state whenever a progress message is emitted
     useEffect(() => {
+        if (!validEngine) {
+            return;
+        }
         const progressUpdateListener = (message: {
             type?: ChromeMessage;
             crawler?: CrawlerProgress;
@@ -41,7 +48,7 @@ export const Crawler = () => {
         return () => {
             chrome.runtime.onMessage.removeListener(progressUpdateListener);
         };
-    }, []);
+    }, [validEngine]);
 
     return (
         <div className="crawler_popup">

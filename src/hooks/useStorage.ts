@@ -55,10 +55,9 @@ export const useSettingStorage = (
     const handleStorageChange = useCallback(
         (changes: { [x: string]: chrome.storage.StorageChange }, areaName: string) => {
             if (areaName !== 'local') return;
-
-            const newSettings = changes[Stores.settings].newValue as Settings;
-            const oldSettings = changes[Stores.settings].oldValue as Settings;
-            if (!deepEqual(newSettings[keys], oldSettings[keys])) {
+            const newSettings = changes[Stores.settings]?.newValue as Settings;
+            const oldSettings = changes[Stores.settings]?.oldValue as Settings;
+            if (newSettings && oldSettings && !deepEqual(newSettings[keys], oldSettings[keys])) {
                 onChange(newSettings);
             }
         },

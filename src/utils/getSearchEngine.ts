@@ -15,9 +15,15 @@ function getDomainPath(url: string): { domain: string; pathname: string } {
 }
 
 export const getSearchEngine = (urlOverride?: string): { engine: SearchEngine; path: string } => {
-    const url = urlOverride ?? window.location.href;
+    const url = urlOverride ?? window?.location?.href;
 
     if (!url) {
+        if (import.meta.env.DEV && import.meta.env.VITE_DEV_MODE_SEARCH_ENGINE) {
+            return {
+                engine: import.meta.env.VITE_DEV_MODE_SEARCH_ENGINE as SearchEngine,
+                path: '',
+            };
+        }
         return { engine: SearchEngine.none, path: '' };
     }
 
@@ -31,6 +37,16 @@ export const getSearchEngine = (urlOverride?: string): { engine: SearchEngine; p
     };
 
     const engine = domainToEngine[domain] ?? SearchEngine.none;
-
+    // If in Dev Mode, run the app on every page
+    if (
+        engine === SearchEngine.none &&
+        import.meta.env.DEV &&
+        import.meta.env.VITE_DEV_MODE_SEARCH_ENGINE
+    ) {
+        return {
+            engine: import.meta.env.VITE_DEV_MODE_SEARCH_ENGINE as SearchEngine,
+            path: '',
+        };
+    }
     return { engine, path: pathname };
 };
