@@ -204,7 +204,7 @@ export const processZipRecruiterJob = async (
         crawler: getCrawlerProgress(crawler),
     });
     if (lastJobOnPage) {
-        // Go to next page
+        // Go to the next page
         const button: HTMLButtonElement | null = document.querySelector(
             ZR_NEXT_PAGE_BUTTON_SELECTOR
         );
