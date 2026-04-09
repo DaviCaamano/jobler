@@ -1,11 +1,19 @@
-import { SearchEngine } from '@interfaces/search-engine';
+import { SearchEngine, SupportedEngines } from '@interfaces/search-engine';
 import { JobSummary } from '@interfaces/job-list';
 import { CrawlerProgress, EngineCrawler, EngineCrawlerState } from '@interfaces/crawler/crawler';
 import { DEFAULT_JOB_FILTERS } from '@constants/crawler/crawler';
 import { csvToJsonArray } from '@utils/csvToJsonArray';
 import { toast } from '@utils/crawler/toast';
 import Papa from 'papaparse';
-import { FiltersStore, PartialFiltersStore } from '@interfaces/filters-store';
+import {
+    FilterCategories,
+    FiltersStore,
+    FiltersStrategy,
+    PartialFiltersStore,
+} from '@interfaces/filters-store';
+import { crawlerStorage } from '@stores/crawler.store';
+import { ChromeMessage } from '@interfaces/tab-messages';
+import { sendMessage } from '@utils/chrome/send-message';
 
 export const wordExists = (word: string, text: string) =>
     new RegExp(
@@ -30,32 +38,32 @@ export const checkFilters = async ({
     filters: FiltersStore;
 }) => {
     const reasons: string[] = [];
-    for (const filter of filters.whiteList.text) {
+    for (const filter of filters[FiltersStrategy.whiteList][FilterCategories.text]) {
         if (!passesWhiteList(filter, text)) {
             reasons.push(`Missing word: ${filter}`);
         }
     }
-    for (const filter of filters.whiteList.title) {
+    for (const filter of filters[FiltersStrategy.whiteList][FilterCategories.title]) {
         if (!passesWhiteList(filter, title)) {
             reasons.push(`Missing title: ${filter}`);
         }
     }
-    for (const filter of filters.whiteList.company) {
+    for (const filter of filters[FiltersStrategy.whiteList][FilterCategories.company]) {
         if (!passesWhiteList(filter, companyName)) {
             reasons.push(`Missing company name: ${filter}`);
         }
     }
-    for (const filter of filters.blackList.text) {
+    for (const filter of filters[FiltersStrategy.blackList][FilterCategories.text]) {
         if (!passesBlackList(filter, text)) {
             reasons.push(`Banned word: ${filter}`);
         }
     }
-    for (const filter of filters.blackList.title) {
+    for (const filter of filters[FiltersStrategy.blackList][FilterCategories.title]) {
         if (!passesBlackList(filter, title)) {
             reasons.push(`Banned title: ${filter}`);
         }
     }
-    for (const filter of filters.blackList.company) {
+    for (const filter of filters[FiltersStrategy.blackList][FilterCategories.company]) {
         if (!passesBlackList(filter, companyName)) {
             reasons.push(`Banned company name: ${filter}`);
         }
@@ -243,3 +251,13 @@ export const serializeCrawler = (progress: EngineCrawler): EngineCrawlerState =>
     jobList: jobListToCsv(progress.jobList),
     startTime: progress.startTime,
 });
+
+export const updateCrawlerProgress = async (
+    engine: SupportedEngines,
+    crawler: EngineCrawler
+): Promise<void> => {
+    await crawlerStorage.update(engine, serializeCrawler(crawler));
+    return sendMessage(ChromeMessage.crawlerProgress, {
+        crawler: getCrawlerProgress(crawler),
+    });
+};

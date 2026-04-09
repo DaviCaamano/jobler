@@ -8,7 +8,7 @@ import {
     LI_TITLE_SELECTOR,
 } from '@constants/crawler/crawler';
 import { sleep } from '@utils/sleep';
-import { addJob, getCrawlerProgress, serializeCrawler } from '@utils/crawler/crawlerProgress';
+import { addJob, updateCrawlerProgress } from '@utils/crawler/crawlerProgress';
 import { JobSummary } from '@interfaces/job-list';
 import { ChromeMessage } from '@interfaces/tab-messages';
 import { EngineCrawler } from '@interfaces/crawler/crawler';
@@ -19,7 +19,6 @@ import {
     getJobText,
     isCrawlerTerminated,
 } from '@utils/crawler/processJob/sharedCrawlerGetters';
-import { crawlerStorage } from '@stores/crawler.store';
 
 const MAX_JOB_COPY_ATTEMPTS = 5;
 const MAX_JOB_PROCESS_ATTEMPTS = 10;
@@ -173,6 +172,7 @@ export const processLinkedInJob = async (
         void sendMessage(ChromeMessage.crawlerFinished);
         return;
     }
+
     const jobList = getJobListElements(SearchEngine.linkedin);
     const jobsPerPage = jobList.length;
     // Which index on this page the iter pointing to
@@ -231,10 +231,7 @@ export const processLinkedInJob = async (
         crawler
     );
 
-    await crawlerStorage.update(SearchEngine.indeed, serializeCrawler(crawler));
-    await sendMessage(ChromeMessage.crawlerProgress, {
-        crawler: getCrawlerProgress(crawler),
-    });
+    await updateCrawlerProgress(SearchEngine.linkedin, crawler);
     if (lastJobOnPage) {
         // Go to next page
         const button: HTMLButtonElement | null = document.querySelector(

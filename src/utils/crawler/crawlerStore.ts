@@ -1,27 +1,9 @@
 import { LocalStore, Stores } from '@interfaces/store';
-import { SearchEngine } from '@interfaces/search-engine';
 import { FilterSettings, SettingsOptions, Tabs } from '@interfaces/settings';
 import { FilterCategories, FiltersStrategy } from '@interfaces/filters-store';
-import { createCrawler, serializeCrawler } from '@utils/crawler/crawlerProgress';
-import { SiteCrawlers } from '@interfaces/crawler/crawler';
+import { getNewCrawlers } from '@utils/crawler/defaultCrawlerState';
 
-export const getNewCrawlers = async (): Promise<SiteCrawlers> => ({
-    [SearchEngine.linkedin]: serializeCrawler(
-        await createCrawler({
-            engine: SearchEngine.linkedin,
-        })
-    ),
-    [SearchEngine.ziprecruiter]: serializeCrawler(
-        await createCrawler({
-            engine: SearchEngine.ziprecruiter,
-        })
-    ),
-    [SearchEngine.indeed]: serializeCrawler(
-        await createCrawler({
-            engine: SearchEngine.indeed,
-        })
-    ),
-});
+export { getNewCrawlers };
 
 export const storageDefaults: LocalStore = {
     [Stores.filters]: {
@@ -44,5 +26,5 @@ export const storageDefaults: LocalStore = {
         },
         [SettingsOptions.tabs]: Tabs.jobList,
     },
-    [Stores.crawler]: await getNewCrawlers(),
+    [Stores.crawler]: getNewCrawlers(),
 };

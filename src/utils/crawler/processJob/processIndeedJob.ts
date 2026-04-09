@@ -20,8 +20,7 @@ import { ChromeMessage } from '@interfaces/tab-messages';
 import { SearchEngine } from '@interfaces/search-engine';
 import { click } from '@utils/crawler/click';
 import { JobSummary } from '@interfaces/job-list';
-import { addJob, getCrawlerProgress, serializeCrawler } from '@utils/crawler/crawlerProgress';
-import { crawlerStorage } from '@stores/crawler.store';
+import { addJob, updateCrawlerProgress } from '@utils/crawler/crawlerProgress';
 
 const MAX_JOB_COPY_ATTEMPTS = 5;
 const MAX_JOB_PROCESS_ATTEMPTS = 10;
@@ -209,10 +208,7 @@ export const processIndeedJob = async (
         crawler
     );
 
-    await crawlerStorage.update(SearchEngine.indeed, serializeCrawler(crawler));
-    await sendMessage(ChromeMessage.crawlerProgress, {
-        crawler: getCrawlerProgress(crawler),
-    });
+    await updateCrawlerProgress(SearchEngine.indeed, crawler);
     if (lastJobOnPage) {
         // Go to next page
         const button: HTMLButtonElement | null = document.querySelector(

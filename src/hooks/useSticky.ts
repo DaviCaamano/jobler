@@ -1,12 +1,17 @@
 import { useEffect, useRef } from 'react';
 
-export const useSticky = <T>(value: T, callback: () => void | Promise<void>) => {
-    const previousValue = useRef(value);
+export const useSticky = <T>(value: T, callback: (stickyValue?: T) => void | Promise<void>) => {
+    const previousValue = useRef<T>(value);
 
     useEffect(() => {
-        if (!Object.is(previousValue.current, value)) {
+        const isDifferent =
+            typeof value !== 'object' && typeof value !== 'function'
+                ? previousValue.current !== value
+                : !Object.is(previousValue.current, value);
+
+        if (isDifferent) {
+            void callback(previousValue.current);
             previousValue.current = value;
-            void callback();
         }
     }, [value, callback]);
 };

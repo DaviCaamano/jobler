@@ -49,7 +49,9 @@ const storageAdd = (
         ...currentFilters,
         [strategy]: {
             ...currentFilters[strategy],
-            [category]: dedupeStrings([...currentFilters[strategy][category], value]),
+            [category]: dedupeStrings([...currentFilters[strategy][category], value]).map(
+                (entry: FilterEntry) => (typeof entry === 'string' ? entry.toLowerCase() : entry)
+            ),
         },
     }));
 };

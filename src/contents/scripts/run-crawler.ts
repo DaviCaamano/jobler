@@ -47,15 +47,7 @@ const crawlerStopListener = (message: { type?: ChromeMessage }) => {
 // Signal that the crawler has finished its crawl
 const crawlerFinishedListener = (message: { type?: ChromeMessage }) => {
     if (message.type !== ChromeMessage.crawlerFinished) return;
-    crawler.isRunning = false;
-    crawler.index = 0;
-    crawler.jobsPerPage = 0;
-    crawler.page = 0;
-    crawler.processedCount = 0;
-    crawler.skippedCount = 0;
-    crawler.startTime = undefined;
-    crawler.ttlCount = 0;
-    void crawlerStorage.update(engine, serializeCrawler(crawler));
+    crawlerStorage.clear(crawler);
 };
 
 // Listeners

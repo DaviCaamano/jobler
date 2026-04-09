@@ -13,6 +13,7 @@ export const AddFilterButton = ({ onSubmit, placeholder }: AddFilterButtonProps)
     const [showInput, setShowInput] = useState<boolean>(false);
     const [newFilter, setNewFilter] = useState<string>('');
     const inputRef = useRef<HTMLInputElement>(null);
+    const submitByClickRef = useRef<boolean>(false);
 
     useSticky(showInput, () => {
         if (showInput) {
@@ -33,8 +34,17 @@ export const AddFilterButton = ({ onSubmit, placeholder }: AddFilterButtonProps)
             return;
         }
 
+        const isEnterKey = !submitByClickRef.current;
+        submitByClickRef.current = false;
+
+        console.log('isEnterKey', isEnterKey, e.nativeEvent.submitter);
         onSubmit(value);
-        setShowInput(false);
+        if (isEnterKey) {
+            setNewFilter('');
+            inputRef.current?.focus();
+        } else {
+            setShowInput(false);
+        }
     };
 
     return (
@@ -52,7 +62,13 @@ export const AddFilterButton = ({ onSubmit, placeholder }: AddFilterButtonProps)
                         ref={inputRef}
                         value={newFilter}
                     />
-                    <button type="submit" onMouseDown={(e) => e.preventDefault()}>
+                    <button
+                        type="submit"
+                        onMouseDown={(e) => {
+                            submitByClickRef.current = true;
+                            e.preventDefault();
+                        }}
+                    >
                         <CirclePlus className="add-filter-button_submit-button" />
                     </button>
                 </form>
